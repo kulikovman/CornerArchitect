@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Corner Architect</string>
+
+    <string name="city">Город</string>
+    <string name="specialization">Специализация</string>
+    <string name="contact">Контакт</string>
+
+
+</resources>
