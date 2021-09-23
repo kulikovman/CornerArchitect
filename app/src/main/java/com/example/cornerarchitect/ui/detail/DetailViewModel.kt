@@ -1,9 +1,14 @@
 package com.example.cornerarchitect.ui.detail
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.cornerarchitect.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DetailViewModel : ViewModel() {
+@HiltViewModel
+class DetailViewModel @Inject constructor(
+
+) : BaseViewModel() {
 
     val name = MutableLiveData("")
 

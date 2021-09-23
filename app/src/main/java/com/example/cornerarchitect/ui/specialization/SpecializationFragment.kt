@@ -1,32 +1,37 @@
 package com.example.cornerarchitect.ui.specialization
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import com.example.cornerarchitect.BR
 import com.example.cornerarchitect.R
+import com.example.cornerarchitect.base.BaseFragment
+import com.example.cornerarchitect.databinding.ItemSpecializationBinding
+import com.example.cornerarchitect.databinding.SpecializationFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class SpecializationFragment : Fragment() {
+@AndroidEntryPoint
+class SpecializationFragment : BaseFragment<SpecializationFragmentBinding, SpecializationViewModel>() {
 
-    companion object {
-        fun newInstance() = SpecializationFragment()
+    override fun getLayoutId(): Int = R.layout.specialization_fragment
+
+    override val viewModel: SpecializationViewModel by viewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initList()
     }
 
-    private lateinit var viewModel: SpecializationViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.specialization_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SpecializationViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun initList() {
+        binding.let { layoutBinding ->
+            layoutBinding.rvConfig = initRecycleAdapterDataBinding<ItemSpecializationUi, ItemSpecializationBinding>(
+                layoutId = R.layout.item_specialization,
+                itemId = BR.item,
+                recyclerView = layoutBinding.rv,
+                items = viewModel.specializationItems,
+                onItemClick = viewModel::onClickItemPosition
+            )
+        }
     }
 
 }

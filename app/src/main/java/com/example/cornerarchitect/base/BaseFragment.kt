@@ -1,12 +1,9 @@
 package com.example.cornerarchitect.base
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -16,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cornerarchitect.BR
 import com.example.cornerarchitect.utility.databinding.DataBindingAdapter
 import com.example.cornerarchitect.utility.databinding.DataBindingRecyclerViewConfig
+import com.example.cornerarchitect.utility.extension.debounce
 
 abstract class BaseFragment<T : ViewDataBinding, S : BaseViewModel> : Fragment() {
 
@@ -39,26 +37,6 @@ abstract class BaseFragment<T : ViewDataBinding, S : BaseViewModel> : Fragment()
         }
     }
 
-    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initStatusBar()
-        initTopPadding()
-    }
-
-    protected open fun initStatusBar() {
-        transparentStatusBarWithBlackIcons(activity)
-    }
-
-    protected open fun initTopPadding() {
-        binding.root.apply {
-            setOnApplyWindowInsetsListener { _, insets ->
-                setPadding(0, insets.systemWindowInsetTop, 0, 0)
-                return@setOnApplyWindowInsetsListener insets
-            }
-        }
-    }*/
-
-
     protected open fun <Item : Any, T : ViewDataBinding> initRecycleAdapterDataBinding(
         @LayoutRes layoutId: Int,
         itemId: Int,
@@ -71,6 +49,7 @@ abstract class BaseFragment<T : ViewDataBinding, S : BaseViewModel> : Fragment()
         val debounce = debounce<Int> {
             onItemClick?.invoke(it)
         }
+
         return DataBindingRecyclerViewConfig(
             layoutId = layoutId,
             itemId = itemId,
@@ -89,7 +68,7 @@ abstract class BaseFragment<T : ViewDataBinding, S : BaseViewModel> : Fragment()
         )
     }
 
-    fun initDefaultImeDoneAction(editText: EditText, extraAction: (() -> Unit)? = null) {
+    /*fun initDefaultImeDoneAction(editText: EditText, extraAction: (() -> Unit)? = null) {
         editText.setOnEditorActionListener { _, _, _ ->
             hideKeyboard()
             extraAction?.invoke()
@@ -107,6 +86,6 @@ abstract class BaseFragment<T : ViewDataBinding, S : BaseViewModel> : Fragment()
         val imm = editText.context
             .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
-    }
+    }*/
 
 }

@@ -1,32 +1,37 @@
 package com.example.cornerarchitect.ui.contact
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import com.example.cornerarchitect.BR
 import com.example.cornerarchitect.R
+import com.example.cornerarchitect.base.BaseFragment
+import com.example.cornerarchitect.databinding.ContactFragmentBinding
+import com.example.cornerarchitect.databinding.ItemContactBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class ContactFragment : Fragment() {
+@AndroidEntryPoint
+class ContactFragment : BaseFragment<ContactFragmentBinding, ContactViewModel>() {
 
-    companion object {
-        fun newInstance() = ContactFragment()
+    override fun getLayoutId(): Int = R.layout.contact_fragment
+
+    override val viewModel: ContactViewModel by viewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initList()
     }
 
-    private lateinit var viewModel: ContactViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.contact_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ContactViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun initList() {
+        binding.let { layoutBinding ->
+            layoutBinding.rvConfig = initRecycleAdapterDataBinding<ItemContactUi, ItemContactBinding>(
+                layoutId = R.layout.item_contact,
+                itemId = BR.item,
+                recyclerView = layoutBinding.rv,
+                items = viewModel.contactItems,
+                onItemClick = viewModel::onClickItemPosition
+            )
+        }
     }
 
 }
