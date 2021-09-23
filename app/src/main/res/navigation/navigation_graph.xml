@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/cityFragment">
+
+    <fragment
+        android:id="@+id/cityFragment"
+        android:name="com.example.cornerarchitect.ui.city.CityFragment"
+        android:label="CityFragment"
+        tools:layout="@layout/city_fragment">
+        <action
+            android:id="@+id/action_cityFragment_to_specializationFragment"
+            app:destination="@id/specializationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/specializationFragment"
+        android:name="com.example.cornerarchitect.ui.specialization.SpecializationFragment"
+        android:label="SpecializationFragment"
+        tools:layout="@layout/specialization_fragment">
+        <action
+            android:id="@+id/action_specializationFragment_to_contactFragment"
+            app:destination="@id/contactFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="com.example.cornerarchitect.ui.contact.ContactFragment"
+        android:label="ContactFragment"
+        tools:layout="@layout/contact_fragment">
+        <action
+            android:id="@+id/action_contactFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.cornerarchitect.ui.detail.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/detail_fragment" />
+
+</navigation>
