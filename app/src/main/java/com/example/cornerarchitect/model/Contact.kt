@@ -1,6 +1,12 @@
 package com.example.cornerarchitect.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class Contact(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int? = null,
     val name: String,
     val surname: String,
     val city: List<String>,
@@ -8,7 +14,7 @@ data class Contact(
     val work: List<String>,
     val email: List<String>,
     val phone: List<String>,
-    val instagram: String,
-    val facebook: String,
-    val vk: String
+    val instagram: String? = null,
+    val facebook: String? = null,
+    val vk: String? = null
 )
