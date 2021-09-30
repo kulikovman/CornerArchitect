@@ -1,17 +1,13 @@
 package com.example.cornerarchitect.main
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cornerarchitect.manager.ContactManager
 import com.example.cornerarchitect.manager.IContactManager
-import com.example.cornerarchitect.repositiry.DatabaseRepository
 import com.example.cornerarchitect.repositiry.IDatabaseRepository
 import com.example.cornerarchitect.repositiry.INetworkRepository
-import com.example.cornerarchitect.repositiry.NetworkRepository
 import com.example.cornerarchitect.retrofit.Failure
-import com.example.cornerarchitect.utility.Logg
+import com.example.cornerarchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,33 +30,32 @@ class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            Logg.d { "Before request" }
-            /*network.getDataVersion().either(::handleFailure) { dataVersion ->
-                Logg.d { "dataVersion = $dataVersion" }
-            }*/
-
-            network.getContactList().either { result ->
-                Logg.d { "Contacts list size: ${result.size}" }
-                contactManager.contacts.value = result
+            log("Before request")
+            network.getDataVersion().either(::handleFailure) { dataVersion ->
+                log("dataVersion = $dataVersion")
             }
 
-            Logg.d { "After request" }
+            /*network.getContactList().either { result ->
+                Logg.d { "Contacts list size: ${result.size}" }
+                contactManager.contacts.value = result
+            }*/
+
+            log("After request")
         }
     }
 
     private fun handleFailure(failure: Failure) {
-        Logg.d { "$failure" }
+        log("$failure")
     }
 
 
     fun actionAfterPauseApp() {
-        Logg.d { "Application paused" }
+        log("Application paused")
 
     }
 
     fun actionAfterResumeApp() {
-        Logg.d { "Application resumed" }
-
+        log("Application resumed")
     }
 
 

@@ -1,6 +1,6 @@
 package com.example.cornerarchitect.model
 
-import com.example.cornerarchitect.utility.Logg
+import com.example.cornerarchitect.utility.log
 import com.google.gson.annotations.SerializedName
 
 data class GoogleSheetObject(
@@ -37,7 +37,7 @@ data class GoogleSheetObject(
                     ))
                 }
             } catch (e: Exception) {
-                Logg.d { "Exception in contact creating: $e" }
+                log("Exception in contact creating: $e")
             }
         }
 

@@ -12,7 +12,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cornerarchitect.utility.Logg
+import com.example.cornerarchitect.utility.log
 
 @BindingAdapter(value = ["rvItems", "rvConfig"])
 fun <ItemType, BindingType : ViewDataBinding> setupRecyclerView(
@@ -21,7 +21,7 @@ fun <ItemType, BindingType : ViewDataBinding> setupRecyclerView(
     dataBindingRecyclerViewConfig: DataBindingRecyclerViewConfig<BindingType>?
 ) {
 
-    Logg.i { "RecyclerView set ${items?.size} items" }
+    log("RecyclerView set ${items?.size} items")
 
     if (dataBindingRecyclerViewConfig == null) {
         return
