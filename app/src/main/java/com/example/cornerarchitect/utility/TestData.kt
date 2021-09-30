@@ -9,54 +9,78 @@ fun getTestData(): List<Contact> {
             surname = "Авдонина",
             city = listOf("Липецк", "Киров"),
             specialization = listOf("Архитектура", "Градостроительство и городское планирование"),
-            work = listOf("ООО Ахмадуллин-Аркитектс", "Архитектурное бюро ДАХА"),
-            email = listOf("adel.archic@gmail.com", "aslanbidov@yandex.ru"),
-            phone = listOf("+7 928 705-59-66", "+7 908 293-67-43")
+            work = "ООО Ахмадуллин-Аркитектс",
+            position = "Arch",
+            email = "adel.archic@gmail.com",
+            phone = "+7 928 705-59-66",
+            instagram = null,
+            facebook = null,
+            vk = null
         ),
         Contact(
             name = "Валерия",
             surname = "Авдонина",
             city = listOf("Москва", "Миасс"),
             specialization = listOf("Архитектура", "Градостроительство и городское планирование"),
-            work = listOf("ООО Ахмадуллин-Аркитектс", "Архитектурное бюро ДАХА"),
-            email = listOf("adel.archic@gmail.com", "aslanbidov@yandex.ru"),
-            phone = listOf("+7 928 705-59-66", "+7 908 293-67-43")
+            work = "ООО Ахмадуллин-Аркитектс",
+            position = "Arch",
+            email = "adel.archic@gmail.com",
+            phone = "+7 928 705-59-66",
+            instagram = null,
+            facebook = null,
+            vk = null
         ),
         Contact(
             name = "Валерия",
             surname = "Авдонина",
             city = listOf("Челябинск"),
             specialization = listOf("Архитектура", "Градостроительство и городское планирование"),
-            work = listOf("ООО Ахмадуллин-Аркитектс", "Архитектурное бюро ДАХА"),
-            email = listOf("adel.archic@gmail.com", "aslanbidov@yandex.ru"),
-            phone = listOf("+7 928 705-59-66", "+7 908 293-67-43")
+            work = "ООО Ахмадуллин-Аркитектс",
+            position = "Arch",
+            email = "adel.archic@gmail.com",
+            phone = "+7 928 705-59-66",
+            instagram = null,
+            facebook = null,
+            vk = null
         ),
         Contact(
             name = "Валерия",
             surname = "Авдонина",
             city = listOf("Челябинск"),
             specialization = listOf("Архитектура", "Градостроительство и городское планирование"),
-            work = listOf("ООО Ахмадуллин-Аркитектс", "Архитектурное бюро ДАХА"),
-            email = listOf("adel.archic@gmail.com", "aslanbidov@yandex.ru"),
-            phone = listOf("+7 928 705-59-66", "+7 908 293-67-43")
+            work = "ООО Ахмадуллин-Аркитектс",
+            position = "Arch",
+            email = "adel.archic@gmail.com",
+            phone = "+7 928 705-59-66",
+            instagram = null,
+            facebook = null,
+            vk = null
         ),
         Contact(
             name = "Валерия",
             surname = "Авдонина",
             city = listOf("Челябинск"),
             specialization = listOf("Архитектура", "Градостроительство и городское планирование"),
-            work = listOf("ООО Ахмадуллин-Аркитектс", "Архитектурное бюро ДАХА"),
-            email = listOf("adel.archic@gmail.com", "aslanbidov@yandex.ru"),
-            phone = listOf("+7 928 705-59-66", "+7 908 293-67-43")
+            work = "ООО Ахмадуллин-Аркитектс",
+            position = "Arch",
+            email = "adel.archic@gmail.com",
+            phone = "+7 928 705-59-66",
+            instagram = null,
+            facebook = null,
+            vk = null
         ),
         Contact(
             name = "Валерия",
             surname = "Авдонина",
             city = listOf("Миасс"),
             specialization = listOf("Архитектура", "Градостроительство и городское планирование"),
-            work = listOf("ООО Ахмадуллин-Аркитектс", "Архитектурное бюро ДАХА"),
-            email = listOf("adel.archic@gmail.com", "aslanbidov@yandex.ru"),
-            phone = listOf("+7 928 705-59-66", "+7 908 293-67-43")
+            work = "ООО Ахмадуллин-Аркитектс",
+            position = "Arch",
+            email = "adel.archic@gmail.com",
+            phone = "+7 928 705-59-66",
+            instagram = null,
+            facebook = null,
+            vk = null
         )
     )
 }

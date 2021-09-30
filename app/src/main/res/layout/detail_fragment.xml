@@ -45,17 +45,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="@{vm.work1}"
+            android:text="@{vm.work}"
             android:textSize="16sp"
-            tools:text="ИП Козак (индивидуальный предприниматель)" />
+            tools:text="ИП Козак / Агентство Развития Территорий Градостроительная школа" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="@{vm.work2}"
-            android:textSize="16sp"
-            tools:text="Агентство Развития Территорий Градостроительная школа (управляющий партнер)" />
+            android:text="@{vm.position}"
+            android:textSize="14sp"
+            tools:text="Индивидуальный предприниматель, управляющий партнер" />
 
         <TextView
             android:layout_width="match_parent"

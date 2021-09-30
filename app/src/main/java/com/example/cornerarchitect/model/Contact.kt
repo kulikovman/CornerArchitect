@@ -7,14 +7,15 @@ import androidx.room.PrimaryKey
 data class Contact(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
-    val name: String,
     val surname: String,
+    val name: String,
     val city: List<String>,
     val specialization: List<String>,
-    val work: List<String>,
-    val email: List<String>,
-    val phone: List<String>,
-    val instagram: String? = null,
-    val facebook: String? = null,
-    val vk: String? = null
+    val work: String?,
+    val position: String?,
+    val email: String?,
+    val phone: String?,
+    val instagram: String?,
+    val facebook: String?,
+    val vk: String?
 )

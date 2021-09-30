@@ -20,7 +20,7 @@ class ContactManager @Inject constructor(
 
 
     init {
-        contacts.value = getTestData()
+        //contacts.value = getTestData()
     }
 
 }

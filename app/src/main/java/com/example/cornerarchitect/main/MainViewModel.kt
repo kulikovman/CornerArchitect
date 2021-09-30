@@ -1,14 +1,26 @@
 package com.example.cornerarchitect.main
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.cornerarchitect.manager.ContactManager
+import com.example.cornerarchitect.manager.IContactManager
+import com.example.cornerarchitect.repositiry.DatabaseRepository
+import com.example.cornerarchitect.repositiry.IDatabaseRepository
+import com.example.cornerarchitect.repositiry.INetworkRepository
+import com.example.cornerarchitect.repositiry.NetworkRepository
+import com.example.cornerarchitect.retrofit.Failure
 import com.example.cornerarchitect.utility.Logg
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-
+    private val network: INetworkRepository,
+    private val database: IDatabaseRepository,
+    private val contactManager: IContactManager
 ) : ViewModel() {
 
     val isWhiteLoading = MutableLiveData(false)
@@ -18,6 +30,27 @@ class MainViewModel @Inject constructor(
     val isErrorVisibility = MutableLiveData(false)
 
     val errorMessage = MutableLiveData("")
+
+
+    init {
+        viewModelScope.launch {
+            Logg.d { "Before request" }
+            /*network.getDataVersion().either(::handleFailure) { dataVersion ->
+                Logg.d { "dataVersion = $dataVersion" }
+            }*/
+
+            network.getContactList().either { result ->
+                Logg.d { "Contacts list size: ${result.size}" }
+                contactManager.contacts.value = result
+            }
+
+            Logg.d { "After request" }
+        }
+    }
+
+    private fun handleFailure(failure: Failure) {
+        Logg.d { "$failure" }
+    }
 
 
     fun actionAfterPauseApp() {

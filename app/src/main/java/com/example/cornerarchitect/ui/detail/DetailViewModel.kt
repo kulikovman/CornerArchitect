@@ -16,9 +16,9 @@ class DetailViewModel @Inject constructor(
 
     val specialization = MutableLiveData("")
 
-    val work1 = MutableLiveData("")
+    val work = MutableLiveData("")
 
-    val work2 = MutableLiveData("")
+    val position = MutableLiveData("")
 
     val phone = MutableLiveData("")
 
