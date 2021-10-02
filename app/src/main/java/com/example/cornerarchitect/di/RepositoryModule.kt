@@ -1,9 +1,6 @@
 package com.example.cornerarchitect.di
 
-import com.example.cornerarchitect.repositiry.DatabaseRepository
-import com.example.cornerarchitect.repositiry.IDatabaseRepository
-import com.example.cornerarchitect.repositiry.INetworkRepository
-import com.example.cornerarchitect.repositiry.NetworkRepository
+import com.example.cornerarchitect.repositiry.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -21,5 +18,9 @@ abstract class RepositoryModule {
     @Binds
     @ActivityRetainedScoped
     abstract fun bindNetworkRepository(networkRepository: NetworkRepository): INetworkRepository
+
+    @Binds
+    @ActivityRetainedScoped
+    abstract fun bindDatastoreRepository(datastoreRepository: DatastoreRepository): IDatastoreRepository
 
 }

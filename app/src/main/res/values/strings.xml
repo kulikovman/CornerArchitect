@@ -5,6 +5,9 @@
     <string name="specialization">Специализация</string>
     <string name="contact">Контакт</string>
     <string name="search">Поиск</string>
+    <string name="check_update">Проверка обновлений</string>
+    <string name="data_loading">Загрузка данных</string>
+    <string name="preparation_for_launch">Подготовка к запуску</string>
 
 
 </resources>

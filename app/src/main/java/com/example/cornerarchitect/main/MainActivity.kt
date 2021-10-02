@@ -1,12 +1,17 @@
 package com.example.cornerarchitect.main
 
+import android.animation.ObjectAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.animation.doOnEnd
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import com.example.cornerarchitect.R
 import com.example.cornerarchitect.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -21,16 +26,20 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
         binding.vm = viewModel
+
+        viewModel.animateSplashFadeOut = ::animateSplashFadeOut
     }
 
-    override fun onPause() {
-        super.onPause()
-        viewModel.actionAfterPauseApp()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.actionAfterResumeApp()
+    private fun animateSplashFadeOut(splashShowingTime: Long, actionAfterEnd: () -> Unit) {
+        lifecycleScope.launch {
+            delay(splashShowingTime) // 900 - min time splash showing
+            ObjectAnimator.ofFloat(binding.splashLogo, "alpha", 0f).apply {
+                duration = 1400 // 1400 - alfa duration
+                start()
+            }.doOnEnd {
+                actionAfterEnd.invoke()
+            }
+        }
     }
 
 }

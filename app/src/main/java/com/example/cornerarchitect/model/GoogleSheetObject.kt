@@ -9,7 +9,8 @@ data class GoogleSheetObject(
     @SerializedName("majorDimension")
     var majorDimension: String,
     @SerializedName("values")
-    var values: Array<Array<String>>
+    //var values: Array<Array<String>>
+    var values: List<List<String>>
 ) {
 
     fun convertToDataVersion(): Int {
@@ -21,7 +22,8 @@ data class GoogleSheetObject(
 
         values.forEach { contactArray ->
             try {
-                contactArray.toList().let { list ->
+                //contactArray.toList().let { list ->
+                contactArray.let { list ->
                     contacts.add(Contact(
                         surname = list[0],
                         name = list[1],
