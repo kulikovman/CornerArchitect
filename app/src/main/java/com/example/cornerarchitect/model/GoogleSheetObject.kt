@@ -1,5 +1,6 @@
 package com.example.cornerarchitect.model
 
+import com.example.cornerarchitect.utility.extension.convertToList
 import com.example.cornerarchitect.utility.log
 import com.google.gson.annotations.SerializedName
 
@@ -9,7 +10,6 @@ data class GoogleSheetObject(
     @SerializedName("majorDimension")
     var majorDimension: String,
     @SerializedName("values")
-    //var values: Array<Array<String>>
     var values: List<List<String>>
 ) {
 
@@ -20,15 +20,14 @@ data class GoogleSheetObject(
     fun convertToContactList(): List<Contact> {
         val contacts = mutableListOf<Contact>()
 
-        values.forEach { contactArray ->
+        values.forEach { sourceContactList ->
             try {
-                //contactArray.toList().let { list ->
-                contactArray.let { list ->
+                sourceContactList.let { list ->
                     contacts.add(Contact(
                         surname = list[0],
                         name = list[1],
-                        city = list[2].fromStringToList(),
-                        specialization = list[3].fromStringToList(),
+                        city = list[2].convertToList(),
+                        specialization = list[3].convertToList(),
                         work = list.getOrNull(4),
                         position = list.getOrNull(5),
                         email = list.getOrNull(6),
@@ -46,10 +45,4 @@ data class GoogleSheetObject(
         return contacts
     }
 
-}
-
-private fun String?.fromStringToList(): List<String> {
-    return if (this != null) {
-        split("/").map { it.trim() }
-    } else emptyList()
 }

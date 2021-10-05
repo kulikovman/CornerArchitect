@@ -87,8 +87,15 @@ class SplashViewModel @Inject constructor(
     private fun getContactsFromDatabase() {
         viewModelScope.launch {
             showPreparation()
-            contact.contacts.value = database.getContacts()
-            log("Contacts in database: ${database.getNumberOfContacts()}")
+
+            database.getContacts().let { contacts ->
+                log("Contacts in database: ${contacts.size}")
+                contact.contacts.value = contacts
+
+                contacts.forEach { contact ->
+                    log(contact.toString())
+                }
+            }
 
             hidePreparation()
             hideSplash()

@@ -37,11 +37,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initNavigation() {
         lifecycleScope.launchWhenStarted {
-            val navHostFragment =
-                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-            val navController = navHostFragment.navController
+            val navHostFragment = supportFragmentManager
+                .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
-            navigator.setNavController(navController)
+            navigator.setNavController(navHostFragment.navController)
         }
     }
 
