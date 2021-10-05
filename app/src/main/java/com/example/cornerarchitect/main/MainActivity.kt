@@ -1,17 +1,17 @@
 package com.example.cornerarchitect.main
 
-import android.animation.ObjectAnimator
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.core.animation.doOnEnd
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
 import com.example.cornerarchitect.R
 import com.example.cornerarchitect.databinding.ActivityMainBinding
+import com.example.cornerarchitect.navigation.INavigator
+import com.example.cornerarchitect.navigation.Navigator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -20,6 +20,11 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
+
+    @Inject
+    lateinit var navigator: INavigator
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,18 +32,16 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.vm = viewModel
 
-        viewModel.animateSplashFadeOut = ::animateSplashFadeOut
+        initNavigation()
     }
 
-    private fun animateSplashFadeOut(splashShowingTime: Long, actionAfterEnd: () -> Unit) {
-        lifecycleScope.launch {
-            delay(splashShowingTime) // 900 - min time splash showing
-            ObjectAnimator.ofFloat(binding.splashLogo, "alpha", 0f).apply {
-                duration = 1400 // 1400 - alfa duration
-                start()
-            }.doOnEnd {
-                actionAfterEnd.invoke()
-            }
+    private fun initNavigation() {
+        lifecycleScope.launchWhenStarted {
+            val navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            val navController = navHostFragment.navController
+
+            navigator.setNavController(navController)
         }
     }
 
