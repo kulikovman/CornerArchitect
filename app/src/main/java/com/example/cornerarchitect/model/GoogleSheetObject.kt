@@ -1,6 +1,7 @@
 package com.example.cornerarchitect.model
 
 import com.example.cornerarchitect.utility.extension.convertToList
+import com.example.cornerarchitect.utility.extension.getIfNotEmpty
 import com.example.cornerarchitect.utility.log
 import com.google.gson.annotations.SerializedName
 import java.util.*
@@ -30,13 +31,13 @@ data class GoogleSheetObject(
                         name = list[1],
                         city = list[2].convertToList(),
                         specialization = list[3].convertToList(),
-                        work = list.getOrNull(4),
-                        position = list.getOrNull(5),
-                        email = list.getOrNull(6),
-                        phone = list.getOrNull(7),
-                        instagram = list.getOrNull(8),
-                        facebook = list.getOrNull(9),
-                        vk = list.getOrNull(10),
+                        work = list.getIfNotEmpty(4),
+                        position = list.getIfNotEmpty(5),
+                        email = list.getIfNotEmpty(6),
+                        phone = list.getIfNotEmpty(7),
+                        instagram = list.getIfNotEmpty(8),
+                        facebook = list.getIfNotEmpty(9),
+                        vk = list.getIfNotEmpty(10),
                     ))
                 }
             } catch (e: Exception) {

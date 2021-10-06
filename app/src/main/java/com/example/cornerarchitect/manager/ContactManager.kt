@@ -13,7 +13,7 @@ interface IContactManager {
 
     var selectedCity: String?
     var selectedSpecialization: String?
-    var selectedContact: Contact?
+    var selectedContact: MutableLiveData<Contact>
 
 
 
@@ -33,7 +33,7 @@ class ContactManager @Inject constructor(
 
     override var selectedSpecialization: String? = null
 
-    override var selectedContact: Contact? = null
+    override var selectedContact = MutableLiveData<Contact>()
 
 
 }

@@ -24,7 +24,7 @@ class PeopleViewModel @Inject constructor(
         }.map {
             ItemPeopleUi(
                 id = it.id,
-                name = it.name,
+                name = "${it.name} ${it.surname}",
                 work = it.work.orEmpty(),
                 position = it.position.orEmpty()
             )
@@ -41,7 +41,7 @@ class PeopleViewModel @Inject constructor(
     fun onClickItemPosition(position: Int) {
         peopleItems.value?.getOrNull(position)?.let { peopleItems ->
             contactManager.contacts.value?.find { it.id == peopleItems.id }?.let { contact ->
-                contactManager.selectedContact = contact
+                contactManager.selectedContact.value = contact
                 navigator.actionPeopleToDetail()
             }
         }

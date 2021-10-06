@@ -1,27 +1,90 @@
 package com.example.cornerarchitect.ui.detail
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import com.example.cornerarchitect.base.BaseViewModel
+import com.example.cornerarchitect.manager.IContactManager
+import com.example.cornerarchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-
+    private val contactManager: IContactManager
 ) : BaseViewModel() {
 
-    val name = MutableLiveData("")
+    var callPhoneNumber: ((String) -> Unit)? = null
 
-    val surname = MutableLiveData("")
+    var sendEmail: ((String) -> Unit)? = null
 
-    val specialization = MutableLiveData("")
+    var openInstagram: ((String) -> Unit)? = null
 
-    val work = MutableLiveData("")
+    var openFacebook: ((String) -> Unit)? = null
 
-    val position = MutableLiveData("")
+    var openVk: ((String) -> Unit)? = null
 
-    val phone = MutableLiveData("")
 
-    val email = MutableLiveData("")
+    val contact = contactManager.selectedContact
+
+    val name = contact.map { it.name }
+
+    val surname = contact.map { it.surname }
+
+    val specialization = contact.map { contact ->
+        var text = ""
+        contact.specialization.forEach { item ->
+            text += if (text.isEmpty()) item else " / $item"
+        }
+        text
+    }
+
+    val work = contact.map { it.work }
+
+    val position = contact.map { it.position }
+
+    val phone = contact.map { it.phone }
+
+    val email = contact.map { it.email }
+
+    val instagram = contact.map { it.instagram }
+
+    val facebook = contact.map { it.facebook }
+
+    val vk = contact.map { it.vk }
+
+
+    init {
+        log("Selected contact: ${contact.value}")
+    }
+
+
+    fun onClickPhone() {
+        phone.value?.let { phone ->
+            callPhoneNumber?.invoke(phone)
+        }
+    }
+
+    fun onClickEmail() {
+        email.value?.let { email ->
+            sendEmail?.invoke(email)
+        }
+    }
+
+    fun onClickInstagram() {
+        instagram.value?.let { link ->
+            openInstagram?.invoke(link)
+        }
+    }
+
+    fun onClickFacebook() {
+        facebook.value?.let { link ->
+            openFacebook?.invoke(link)
+        }
+    }
+
+    fun onClickVk() {
+        vk.value?.let { link ->
+            openVk?.invoke(link)
+        }
+    }
 
 }
