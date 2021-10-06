@@ -24,7 +24,7 @@ class SplashViewModel @Inject constructor(
     private val contact: IContactManager,
 ) : BaseViewModel() {
 
-    var startSplashTime = 0L
+    private var startSplashTime = 0L
 
     var animateSplashFadeOut: ((Long, () -> Unit) -> Unit)? = null
 
@@ -38,11 +38,11 @@ class SplashViewModel @Inject constructor(
 
     init {
         startSplashTime = getCurrentTime()
-        loadContacts()
+        getContacts()
     }
 
 
-    private fun loadContacts() {
+    private fun getContacts() {
         viewModelScope.launch {
             showUpdateChecking()
             network.getDataVersion().either(::handleCheckUpdateFailure) { dataVersion ->
@@ -91,10 +91,6 @@ class SplashViewModel @Inject constructor(
             database.getContacts().let { contacts ->
                 log("Contacts in database: ${contacts.size}")
                 contact.contacts.value = contacts
-
-                contacts.forEach { contact ->
-                    log(contact.toString())
-                }
             }
 
             hidePreparation()

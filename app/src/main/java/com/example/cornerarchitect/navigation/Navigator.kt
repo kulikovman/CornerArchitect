@@ -8,7 +8,12 @@ interface INavigator {
 
     fun setNavController(navController: NavController)
 
+    fun goBack()
+
     fun actionSplashToCity()
+    fun actionCityToSpecialization()
+    fun actionSpecializationToContact()
+    fun actionContactToDetail()
 
 }
 
@@ -23,8 +28,25 @@ class Navigator @Inject constructor(
         this.navController = navController
     }
 
+
+    override fun goBack() {
+        navController?.navigateUp()
+    }
+
     override fun actionSplashToCity() {
         navController?.navigate(R.id.action_splashFragment_to_cityFragment)
+    }
+
+    override fun actionCityToSpecialization() {
+        navController?.navigate(R.id.action_cityFragment_to_specializationFragment)
+    }
+
+    override fun actionSpecializationToContact() {
+        navController?.navigate(R.id.action_specializationFragment_to_contactFragment)
+    }
+
+    override fun actionContactToDetail() {
+        navController?.navigate(R.id.action_contactFragment_to_detailFragment)
     }
 
 }

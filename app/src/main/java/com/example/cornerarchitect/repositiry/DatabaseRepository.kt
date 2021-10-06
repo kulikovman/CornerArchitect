@@ -1,7 +1,5 @@
 package com.example.cornerarchitect.repositiry
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import com.example.cornerarchitect.database.dao.IContactDao
 import com.example.cornerarchitect.model.Contact
 import kotlinx.coroutines.Dispatchers
