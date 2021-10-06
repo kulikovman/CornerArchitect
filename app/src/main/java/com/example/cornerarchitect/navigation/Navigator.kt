@@ -12,8 +12,8 @@ interface INavigator {
 
     fun actionSplashToCity()
     fun actionCityToSpecialization()
-    fun actionSpecializationToContact()
-    fun actionContactToDetail()
+    fun actionSpecializationToPeople()
+    fun actionPeopleToDetail()
 
 }
 
@@ -41,12 +41,12 @@ class Navigator @Inject constructor(
         navController?.navigate(R.id.action_cityFragment_to_specializationFragment)
     }
 
-    override fun actionSpecializationToContact() {
-        navController?.navigate(R.id.action_specializationFragment_to_contactFragment)
+    override fun actionSpecializationToPeople() {
+        navController?.navigate(R.id.action_specializationFragment_to_peopleFragment)
     }
 
-    override fun actionContactToDetail() {
-        navController?.navigate(R.id.action_contactFragment_to_detailFragment)
+    override fun actionPeopleToDetail() {
+        navController?.navigate(R.id.action_peopleFragment_to_detailFragment)
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.cornerarchitect.model
 import com.example.cornerarchitect.utility.extension.convertToList
 import com.example.cornerarchitect.utility.log
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class GoogleSheetObject(
     @SerializedName("range")
@@ -24,6 +25,7 @@ data class GoogleSheetObject(
             try {
                 sourceContactList.let { list ->
                     contacts.add(Contact(
+                        id = UUID.randomUUID().toString(),
                         surname = list[0],
                         name = list[1],
                         city = list[2].convertToList(),

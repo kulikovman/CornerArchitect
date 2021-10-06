@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.example.cornerarchitect.ui.contact.ContactViewModel" />
+            type="com.example.cornerarchitect.ui.person.PeopleViewModel" />
 
         <variable
             name="rvConfig"
@@ -41,8 +41,9 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_search_24"
                 android:drawablePadding="10dp"
-                android:hint="Поиск"
+                android:hint="@string/search"
                 android:paddingEnd="44dp"
+                android:text="@={vm.search}"
                 tools:ignore="RtlSymmetry" />
 
             <ImageView
@@ -62,8 +63,8 @@
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:rvConfig="@{rvConfig}"
-            app:rvItems="@{vm.contactItems}"
-            tools:listitem="@layout/item_contact" />
+            app:rvItems="@{vm.peopleItems}"
+            tools:listitem="@layout/item_people" />
 
     </LinearLayout>
 

@@ -1,4 +1,4 @@
-package com.example.cornerarchitect.ui.contact
+package com.example.cornerarchitect.ui.person
 
 import android.os.Bundle
 import android.view.View
@@ -6,16 +6,16 @@ import androidx.fragment.app.viewModels
 import com.example.cornerarchitect.BR
 import com.example.cornerarchitect.R
 import com.example.cornerarchitect.base.BaseFragment
-import com.example.cornerarchitect.databinding.ContactFragmentBinding
-import com.example.cornerarchitect.databinding.ItemContactBinding
+import com.example.cornerarchitect.databinding.ItemPeopleBinding
+import com.example.cornerarchitect.databinding.PeopleFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ContactFragment : BaseFragment<ContactFragmentBinding, ContactViewModel>() {
+class PeopleFragment : BaseFragment<PeopleFragmentBinding, PeopleViewModel>() {
 
-    override fun getLayoutId(): Int = R.layout.contact_fragment
+    override fun getLayoutId(): Int = R.layout.people_fragment
 
-    override val viewModel: ContactViewModel by viewModels()
+    override val viewModel: PeopleViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,11 +24,11 @@ class ContactFragment : BaseFragment<ContactFragmentBinding, ContactViewModel>()
 
     private fun initList() {
         binding.let { layoutBinding ->
-            layoutBinding.rvConfig = initRecycleAdapterDataBinding<ItemContactUi, ItemContactBinding>(
-                layoutId = R.layout.item_contact,
+            layoutBinding.rvConfig = initRecycleAdapterDataBinding<ItemPeopleUi, ItemPeopleBinding>(
+                layoutId = R.layout.item_people,
                 itemId = BR.item,
                 recyclerView = layoutBinding.rv,
-                items = viewModel.contactItems,
+                items = viewModel.peopleItems,
                 onItemClick = viewModel::onClickItemPosition
             )
         }

@@ -2,17 +2,17 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "990895f6649f2adc9622d89dbcd8ed21",
+    "identityHash": "9879eb65b23e037deb6142f64a51bf65",
     "entities": [
       {
         "tableName": "Contact",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `surname` TEXT NOT NULL, `name` TEXT NOT NULL, `city` TEXT NOT NULL, `specialization` TEXT NOT NULL, `work` TEXT, `position` TEXT, `email` TEXT, `phone` TEXT, `instagram` TEXT, `facebook` TEXT, `vk` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `surname` TEXT NOT NULL, `name` TEXT NOT NULL, `city` TEXT NOT NULL, `specialization` TEXT NOT NULL, `work` TEXT, `position` TEXT, `email` TEXT, `phone` TEXT, `instagram` TEXT, `facebook` TEXT, `vk` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": false
+            "affinity": "TEXT",
+            "notNull": true
           },
           {
             "fieldPath": "surname",
@@ -85,7 +85,7 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -94,7 +94,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '990895f6649f2adc9622d89dbcd8ed21')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9879eb65b23e037deb6142f64a51bf65')"
     ]
   }
 }

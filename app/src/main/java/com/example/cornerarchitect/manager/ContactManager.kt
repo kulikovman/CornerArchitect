@@ -5,10 +5,6 @@ import com.example.cornerarchitect.model.Contact
 import com.example.cornerarchitect.repositiry.IDatabaseRepository
 import com.example.cornerarchitect.repositiry.IDatastoreRepository
 import com.example.cornerarchitect.repositiry.INetworkRepository
-import com.example.cornerarchitect.retrofit.Failure
-import com.example.cornerarchitect.utility.Either
-import com.example.cornerarchitect.utility.getTestData
-import com.example.cornerarchitect.utility.log
 import javax.inject.Inject
 
 interface IContactManager {
@@ -17,6 +13,7 @@ interface IContactManager {
 
     var selectedCity: String?
     var selectedSpecialization: String?
+    var selectedContact: Contact?
 
 
 
@@ -35,6 +32,8 @@ class ContactManager @Inject constructor(
     override var selectedCity: String? = null
 
     override var selectedSpecialization: String? = null
+
+    override var selectedContact: Contact? = null
 
 
 }

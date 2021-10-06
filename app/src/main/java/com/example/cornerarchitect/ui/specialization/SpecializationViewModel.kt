@@ -5,7 +5,6 @@ import androidx.lifecycle.map
 import com.example.cornerarchitect.base.BaseViewModel
 import com.example.cornerarchitect.manager.IContactManager
 import com.example.cornerarchitect.navigation.INavigator
-import com.example.cornerarchitect.ui.city.ItemCityUi
 import com.example.cornerarchitect.utility.extension.combine
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -51,7 +50,7 @@ class SpecializationViewModel @Inject constructor(
     fun onClickItemPosition(position: Int) {
         specializationItems.value?.getOrNull(position)?.let { specializationItem ->
             contactManager.selectedSpecialization = specializationItem.name
-            navigator.actionSpecializationToContact()
+            navigator.actionSpecializationToPeople()
         }
     }
 
