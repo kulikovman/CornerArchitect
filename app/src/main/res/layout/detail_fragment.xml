@@ -14,20 +14,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="20dp"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:onClick="@{(v) -> vm.onClickBack()}"
-            android:src="@drawable/ic_baseline_arrow_back_32"
-            app:tint="@color/back_button_dark_gray" />
+            android:src="@drawable/ic_baseline_arrow_back_32" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
             android:text="@{vm.name}"
             android:textColor="@color/black"
@@ -37,6 +37,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:text="@{vm.surname}"
             android:textColor="@color/black"
             android:textSize="32sp"
@@ -45,6 +46,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="15dp"
             android:text="@{vm.specialization}"
             android:textSize="18sp"
@@ -53,6 +55,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="15dp"
             android:text="@{vm.work}"
             android:textSize="16sp"
@@ -62,6 +65,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="15dp"
             android:text="@{vm.position}"
             android:textSize="14sp"
@@ -71,6 +75,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
             android:onClick="@{(v) -> vm.onClickPhone()}"
             android:text="@{vm.phone}"
@@ -81,6 +86,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:onClick="@{(v) -> vm.onClickEmail()}"
             android:text="@{vm.email}"
@@ -91,6 +97,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
             android:onClick="@{(v) -> vm.onClickLink()}"
             android:text="@{vm.link}"
@@ -102,6 +109,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="40dp"
             android:orientation="horizontal">
 
@@ -133,6 +141,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
             android:layout_marginTop="40dp"
             android:orientation="horizontal"
             app:goneIfNull="@{vm.note}">
@@ -140,9 +149,9 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
                 android:layout_marginEnd="12dp"
-                android:src="@drawable/ic_baseline_note_24" />
+                android:src="@drawable/ic_baseline_notes_24"
+                app:tint="@color/note_icon" />
 
             <TextView
                 android:layout_width="match_parent"
