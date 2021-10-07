@@ -17,6 +17,8 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
 
     override fun getLayoutId(): Int = R.layout.detail_fragment
 
+    // todo Добавить в макет прокрутку, ниже стрелки
+
     override val viewModel: DetailViewModel by viewModels()
 
 
@@ -28,6 +30,7 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
         viewModel.openInstagram = ::openInstagram
         viewModel.openFacebook = ::openFacebook
         viewModel.openVk = ::openVk
+        viewModel.openLink = ::openLink
     }
 
     private fun callPhoneNumber(phone: String) {
@@ -72,6 +75,17 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
 
     private fun openVk(profileId: String) {
         val uri = Uri.parse("http://vk.com/$profileId")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+
+        startActivity(intent)
+    }
+
+    private fun openLink(link: String) {
+        val correctLink = if (!link.startsWith("http://")
+            || !link.startsWith("https://")
+        ) "http://$link" else link
+
+        val uri = Uri.parse(correctLink)
         val intent = Intent(Intent.ACTION_VIEW, uri)
 
         startActivity(intent)

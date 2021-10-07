@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "9879eb65b23e037deb6142f64a51bf65",
+    "identityHash": "0366b21ba66314beb0a1d012a5842dbe",
     "entities": [
       {
         "tableName": "Contact",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `surname` TEXT NOT NULL, `name` TEXT NOT NULL, `city` TEXT NOT NULL, `specialization` TEXT NOT NULL, `work` TEXT, `position` TEXT, `email` TEXT, `phone` TEXT, `instagram` TEXT, `facebook` TEXT, `vk` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `surname` TEXT NOT NULL, `name` TEXT NOT NULL, `city` TEXT NOT NULL, `specialization` TEXT NOT NULL, `work` TEXT, `position` TEXT, `email` TEXT NOT NULL, `phone` TEXT NOT NULL, `instagram` TEXT, `facebook` TEXT, `vk` TEXT, `link` TEXT, `note` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -54,13 +54,13 @@
             "fieldPath": "email",
             "columnName": "email",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "phone",
             "columnName": "phone",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "instagram",
@@ -79,6 +79,18 @@
             "columnName": "vk",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "link",
+            "columnName": "link",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "note",
+            "columnName": "note",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -94,7 +106,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9879eb65b23e037deb6142f64a51bf65')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0366b21ba66314beb0a1d012a5842dbe')"
     ]
   }
 }

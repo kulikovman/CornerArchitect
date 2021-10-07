@@ -3,12 +3,14 @@ package com.example.cornerarchitect.ui.detail
 import androidx.lifecycle.map
 import com.example.cornerarchitect.base.BaseViewModel
 import com.example.cornerarchitect.manager.IContactManager
+import com.example.cornerarchitect.navigation.INavigator
 import com.example.cornerarchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
+    private val navigator: INavigator,
     private val contactManager: IContactManager
 ) : BaseViewModel() {
 
@@ -21,6 +23,8 @@ class DetailViewModel @Inject constructor(
     var openFacebook: ((String) -> Unit)? = null
 
     var openVk: ((String) -> Unit)? = null
+
+    var openLink: ((String) -> Unit)? = null
 
 
     val contact = contactManager.selectedContact
@@ -51,6 +55,14 @@ class DetailViewModel @Inject constructor(
 
     val vk = contact.map { it.vk }
 
+    val link = contact.map { it.link }
+
+    val note = contact.map { it.note }
+
+
+    fun onClickBack() {
+        navigator.goBack()
+    }
 
     fun onClickPhone() {
         phone.value?.let { phone ->
@@ -79,6 +91,13 @@ class DetailViewModel @Inject constructor(
     fun onClickVk() {
         vk.value?.let { profileId ->
             openVk?.invoke(profileId)
+        }
+    }
+
+    fun onClickLink() {
+        link.value?.let { link ->
+            log(link)
+            openLink?.invoke(link)
         }
     }
 

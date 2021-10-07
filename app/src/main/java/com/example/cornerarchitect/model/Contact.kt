@@ -13,9 +13,11 @@ data class Contact(
     val specialization: List<String>,
     val work: String?,
     val position: String?,
-    val email: String?,
-    val phone: String?,
+    val email: String,
+    val phone: String,
     val instagram: String?,
     val facebook: String?,
-    val vk: String?
+    val vk: String?,
+    val link: String?,
+    val note: String?
 )

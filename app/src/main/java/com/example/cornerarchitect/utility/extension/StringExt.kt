@@ -1,9 +1,15 @@
 package com.example.cornerarchitect.utility.extension
 
-import com.example.cornerarchitect.utility.Constant
+import android.util.Patterns
 
-fun String?.convertToList(): List<String> {
-    return if (!this.isNullOrEmpty()) {
-        split(Constant.DELIMITER).map { it.trim() }
-    } else emptyList()
+fun String.containsLink(): Boolean {
+    var result = false
+    val parts = split("\\s+").toTypedArray()
+    for (item in parts) {
+        if (Patterns.WEB_URL.matcher(item).matches()) {
+            result = true
+            break
+        }
+    }
+    return result
 }

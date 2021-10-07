@@ -1,7 +1,8 @@
 package com.example.cornerarchitect.model
 
-import com.example.cornerarchitect.utility.extension.convertToList
-import com.example.cornerarchitect.utility.extension.getIfNotEmpty
+import com.example.cornerarchitect.utility.extension.getAsList
+import com.example.cornerarchitect.utility.extension.getIfExist
+import com.example.cornerarchitect.utility.extension.getWithTrim
 import com.example.cornerarchitect.utility.log
 import com.google.gson.annotations.SerializedName
 import java.util.*
@@ -25,20 +26,24 @@ data class GoogleSheetObject(
         values.forEach { sourceContactList ->
             try {
                 sourceContactList.let { list ->
-                    contacts.add(Contact(
-                        id = UUID.randomUUID().toString(),
-                        surname = list[0],
-                        name = list[1],
-                        city = list[2].convertToList(),
-                        specialization = list[3].convertToList(),
-                        work = list.getIfNotEmpty(4),
-                        position = list.getIfNotEmpty(5),
-                        email = list.getIfNotEmpty(6),
-                        phone = list.getIfNotEmpty(7),
-                        instagram = list.getIfNotEmpty(8),
-                        facebook = list.getIfNotEmpty(9),
-                        vk = list.getIfNotEmpty(10),
-                    ))
+                    contacts.add(
+                        Contact(
+                            id = UUID.randomUUID().toString(),
+                            surname = list.getWithTrim(0),
+                            name = list.getWithTrim(1),
+                            city = list.getAsList(2),
+                            specialization = list.getAsList(3),
+                            work = list.getIfExist(4),
+                            position = list.getIfExist(5),
+                            email = list.getWithTrim(6),
+                            phone = list.getWithTrim(7),
+                            instagram = list.getIfExist(8),
+                            facebook = list.getIfExist(9),
+                            vk = list.getIfExist(10),
+                            link = list.getIfExist(11),
+                            note = list.getIfExist(12)
+                        )
+                    )
                 }
             } catch (e: Exception) {
                 log("Exception in contact creating: $e")
