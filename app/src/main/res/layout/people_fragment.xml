@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.example.cornerarchitect.ui.person.PeopleViewModel" />
+            type="com.example.cornerarchitect.ui.people.PeopleViewModel" />
 
         <variable
             name="rvConfig"

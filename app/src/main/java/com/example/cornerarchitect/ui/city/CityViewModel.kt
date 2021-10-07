@@ -41,6 +41,8 @@ class CityViewModel @Inject constructor(
         cities?.filter { city ->
             city.name.contains(search.orEmpty())
         } ?: emptyList()
+
+        // todo При поиске не учитывать регистр
     }
 
 

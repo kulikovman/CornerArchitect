@@ -40,7 +40,7 @@
 
     <fragment
         android:id="@+id/peopleFragment"
-        android:name="com.example.cornerarchitect.ui.person.PeopleFragment"
+        android:name="com.example.cornerarchitect.ui.people.PeopleFragment"
         android:label="PeopleFragment"
         tools:layout="@layout/people_fragment">
         <action

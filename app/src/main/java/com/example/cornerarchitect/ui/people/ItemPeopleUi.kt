@@ -1,4 +1,4 @@
-package com.example.cornerarchitect.ui.person
+package com.example.cornerarchitect.ui.people
 
 class ItemPeopleUi(
     val id: String,

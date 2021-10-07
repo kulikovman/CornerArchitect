@@ -1,4 +1,4 @@
-package com.example.cornerarchitect.ui.person
+package com.example.cornerarchitect.ui.people
 
 import android.os.Bundle
 import android.view.View

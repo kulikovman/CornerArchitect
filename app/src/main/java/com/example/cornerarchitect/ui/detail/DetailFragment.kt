@@ -1,5 +1,7 @@
 package com.example.cornerarchitect.ui.detail
 
+import android.content.ActivityNotFoundException
+import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -31,23 +33,48 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
     private fun callPhoneNumber(phone: String) {
         val uri: Uri = Uri.parse("tel:$phone")
         val callIntent = Intent(Intent.ACTION_DIAL, uri)
+
         requireContext().startActivity(callIntent)
     }
 
     private fun sendEmail(email: String) {
+        val uri = Uri.parse("mailto:$email")
+        val intent = Intent(Intent.ACTION_SENDTO, uri)
 
+        startActivity(Intent.createChooser(intent, null))
     }
 
-    private fun openInstagram(link: String) {
+    private fun openInstagram(profileId: String) {
+        val appUri = Uri.parse("http://instagram.com/_u/$profileId")
+        val appIntent = Intent(Intent.ACTION_VIEW, appUri).apply {
+            component = ComponentName(
+                "com.instagram.android",
+                "com.instagram.android.activity.UrlHandlerActivity"
+            )
+        }
 
+        val browserUri = Uri.parse("http://instagram.com/$profileId")
+        val browserIntent = Intent(Intent.ACTION_VIEW, browserUri)
+
+        try {
+            startActivity(appIntent)
+        } catch (e: ActivityNotFoundException) {
+            startActivity(browserIntent)
+        }
     }
 
-    private fun openFacebook(link: String) {
+    private fun openFacebook(profileId: String) {
+        val uri = Uri.parse("https://www.facebook.com/n/?$profileId")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
 
+        startActivity(intent)
     }
 
-    private fun openVk(link: String) {
+    private fun openVk(profileId: String) {
+        val uri = Uri.parse("http://vk.com/$profileId")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
 
+        startActivity(intent)
     }
 
 }

@@ -52,11 +52,6 @@ class DetailViewModel @Inject constructor(
     val vk = contact.map { it.vk }
 
 
-    init {
-        log("Selected contact: ${contact.value}")
-    }
-
-
     fun onClickPhone() {
         phone.value?.let { phone ->
             callPhoneNumber?.invoke(phone)
@@ -70,20 +65,20 @@ class DetailViewModel @Inject constructor(
     }
 
     fun onClickInstagram() {
-        instagram.value?.let { link ->
-            openInstagram?.invoke(link)
+        instagram.value?.let { profileId ->
+            openInstagram?.invoke(profileId)
         }
     }
 
     fun onClickFacebook() {
-        facebook.value?.let { link ->
-            openFacebook?.invoke(link)
+        facebook.value?.let { profileId ->
+            openFacebook?.invoke(profileId)
         }
     }
 
     fun onClickVk() {
-        vk.value?.let { link ->
-            openVk?.invoke(link)
+        vk.value?.let { profileId ->
+            openVk?.invoke(profileId)
         }
     }
 

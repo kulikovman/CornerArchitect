@@ -1,4 +1,4 @@
-package com.example.cornerarchitect.ui.person
+package com.example.cornerarchitect.ui.people
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
@@ -6,6 +6,7 @@ import com.example.cornerarchitect.base.BaseViewModel
 import com.example.cornerarchitect.manager.IContactManager
 import com.example.cornerarchitect.navigation.INavigator
 import com.example.cornerarchitect.utility.extension.combine
+import com.example.cornerarchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -41,6 +42,7 @@ class PeopleViewModel @Inject constructor(
     fun onClickItemPosition(position: Int) {
         peopleItems.value?.getOrNull(position)?.let { peopleItems ->
             contactManager.contacts.value?.find { it.id == peopleItems.id }?.let { contact ->
+                log("Selected contact: $contact")
                 contactManager.selectedContact.value = contact
                 navigator.actionPeopleToDetail()
             }
