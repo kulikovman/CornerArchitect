@@ -46,6 +46,12 @@ class SpecializationViewModel @Inject constructor(
         } ?: emptyList()
     }
 
+    val isSearchVisibility = MutableLiveData(false)
+
+
+    fun onClickBack() {
+        navigator.goBack()
+    }
 
     fun onClickItemPosition(position: Int) {
         specializationItems.value?.getOrNull(position)?.let { specializationItem ->

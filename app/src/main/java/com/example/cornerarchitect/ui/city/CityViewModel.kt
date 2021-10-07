@@ -32,7 +32,7 @@ class CityViewModel @Inject constructor(
                 name = city,
                 quantity = count.toString()
             )
-        }.sortedByDescending { it.quantity }
+        }.sortedByDescending { it.quantity.toIntOrNull() }
 
         // todo Сделать двойную сортировку -> количество -> город
     }
@@ -44,6 +44,8 @@ class CityViewModel @Inject constructor(
 
         // todo При поиске не учитывать регистр
     }
+
+    val isSearchVisibility = MutableLiveData(true)
 
 
     fun onClickItemPosition(position: Int) {

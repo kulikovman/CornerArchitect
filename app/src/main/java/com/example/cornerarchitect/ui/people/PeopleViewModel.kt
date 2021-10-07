@@ -38,6 +38,12 @@ class PeopleViewModel @Inject constructor(
         } ?: emptyList()
     }
 
+    val isSearchVisibility = MutableLiveData(false)
+
+
+    fun onClickBack() {
+        navigator.goBack()
+    }
 
     fun onClickItemPosition(position: Int) {
         peopleItems.value?.getOrNull(position)?.let { peopleItems ->
