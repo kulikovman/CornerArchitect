@@ -15,4 +15,9 @@
     <color name="note_icon">#FF9800</color>
     <color name="info_icon">#2196F3</color>
 
+    <color name="edittext_gray_color">#F6F6F6</color>
+    <color name="edittext_gray_disabled_color">#CCCCCC</color>
+    <color name="edittext_gray_border_color">#009688</color>
+    <color name="error_color">#CC292B</color>
+
 </resources>

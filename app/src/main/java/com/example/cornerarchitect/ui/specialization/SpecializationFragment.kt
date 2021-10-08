@@ -47,6 +47,7 @@ class SpecializationFragment : BaseFragment<SpecializationFragmentBinding, Speci
                 val layoutManager = binding.rv.layoutManager as LinearLayoutManager
                 val lastVisiblePosition = layoutManager.findLastVisibleItemPosition() + 1
 
+                log("lastVisiblePosition = $lastVisiblePosition / items = ${items.size}")
                 viewModel.isSearchVisibility.value = lastVisiblePosition < items.size
             }
         }

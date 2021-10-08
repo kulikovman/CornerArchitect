@@ -10,6 +10,7 @@ import com.example.cornerarchitect.R
 import com.example.cornerarchitect.base.BaseFragment
 import com.example.cornerarchitect.databinding.CityFragmentBinding
 import com.example.cornerarchitect.databinding.ItemCityBinding
+import com.example.cornerarchitect.utility.log
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -46,6 +47,7 @@ class CityFragment : BaseFragment<CityFragmentBinding, CityViewModel>() {
                 val layoutManager = binding.rv.layoutManager as LinearLayoutManager
                 val lastVisiblePosition = layoutManager.findLastVisibleItemPosition() + 1
 
+                log("lastVisiblePosition = $lastVisiblePosition / items = ${items.size}")
                 viewModel.isSearchVisibility.value = lastVisiblePosition < items.size
             }
         }

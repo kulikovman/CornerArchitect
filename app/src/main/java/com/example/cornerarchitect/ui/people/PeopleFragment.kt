@@ -2,6 +2,7 @@ package com.example.cornerarchitect.ui.people
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AbsListView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.cornerarchitect.BR
@@ -11,6 +12,7 @@ import com.example.cornerarchitect.databinding.ItemPeopleBinding
 import com.example.cornerarchitect.databinding.PeopleFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.cornerarchitect.utility.log
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -45,6 +47,7 @@ class PeopleFragment : BaseFragment<PeopleFragmentBinding, PeopleViewModel>() {
                 val layoutManager = binding.rv.layoutManager as LinearLayoutManager
                 val lastVisiblePosition = layoutManager.findLastVisibleItemPosition() + 1
 
+                log("lastVisiblePosition = $lastVisiblePosition / items = ${items.size}")
                 viewModel.isSearchVisibility.value = lastVisiblePosition < items.size
             }
         }

@@ -34,7 +34,7 @@ class PeopleViewModel @Inject constructor(
 
     val peopleItems = combine(people, search) { people, search ->
         people?.filter { person ->
-            person.name.contains(search.orEmpty())
+            person.name.contains(search.orEmpty(), true)
         } ?: emptyList()
     }
 
@@ -43,6 +43,10 @@ class PeopleViewModel @Inject constructor(
 
     fun onClickBack() {
         navigator.goBack()
+    }
+
+    fun onClickClearSearch() {
+        search.value = ""
     }
 
     fun onClickItemPosition(position: Int) {

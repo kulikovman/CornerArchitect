@@ -42,7 +42,7 @@ class SpecializationViewModel @Inject constructor(
 
     val specializationItems = combine(specializations, search) { specializations, search ->
         specializations?.filter { specialization ->
-            specialization.name.contains(search.orEmpty())
+            specialization.name.contains(search.orEmpty(), true)
         } ?: emptyList()
     }
 
@@ -51,6 +51,10 @@ class SpecializationViewModel @Inject constructor(
 
     fun onClickBack() {
         navigator.goBack()
+    }
+
+    fun onClickClearSearch() {
+        search.value = ""
     }
 
     fun onClickItemPosition(position: Int) {

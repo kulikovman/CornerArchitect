@@ -39,7 +39,7 @@ class CityViewModel @Inject constructor(
 
     val cityItems = combine(cities, search) { cities, search ->
         cities?.filter { city ->
-            city.name.contains(search.orEmpty())
+            city.name.contains(search.orEmpty(), true)
         } ?: emptyList()
 
         // todo При поиске не учитывать регистр
@@ -47,6 +47,10 @@ class CityViewModel @Inject constructor(
 
     val isSearchVisibility = MutableLiveData(true)
 
+
+    fun onClickClearSearch() {
+        search.value = ""
+    }
 
     fun onClickItemPosition(position: Int) {
         cityItems.value?.getOrNull(position)?.let { cityItem ->
