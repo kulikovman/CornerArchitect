@@ -25,7 +25,6 @@ class CityFragment : BaseFragment<CityFragmentBinding, CityViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initList()
-        initSearchVisibility()
     }
 
     private fun initList() {
@@ -37,19 +36,6 @@ class CityFragment : BaseFragment<CityFragmentBinding, CityViewModel>() {
                 items = viewModel.cityItems,
                 onItemClick = viewModel::onClickItemPosition
             )
-        }
-    }
-
-    private fun initSearchVisibility() {
-        lifecycleScope.launch {
-            delay(50)
-            viewModel.cityItems.value?.let { items ->
-                val layoutManager = binding.rv.layoutManager as LinearLayoutManager
-                val lastVisiblePosition = layoutManager.findLastVisibleItemPosition() + 1
-
-                log("lastVisiblePosition = $lastVisiblePosition / items = ${items.size}")
-                viewModel.isSearchVisibility.value = lastVisiblePosition < items.size
-            }
         }
     }
 

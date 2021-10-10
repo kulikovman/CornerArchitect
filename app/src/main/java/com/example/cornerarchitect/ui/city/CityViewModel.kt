@@ -45,7 +45,7 @@ class CityViewModel @Inject constructor(
         // todo При поиске не учитывать регистр
     }
 
-    val isSearchVisibility = MutableLiveData(true)
+
 
 
     fun onClickClearSearch() {

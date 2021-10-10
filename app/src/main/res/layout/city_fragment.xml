@@ -51,7 +51,6 @@
                 android:hint="@string/search"
                 android:paddingEnd="44dp"
                 android:text="@={vm.search}"
-                app:goneIfFalse="@{vm.isSearchVisibility}"
                 tools:ignore="RtlSymmetry" />
 
             <ImageView
