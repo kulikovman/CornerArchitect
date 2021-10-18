@@ -127,7 +127,7 @@ class SplashViewModel @Inject constructor(
         val remainingTime = (MIN_SPLASH_TIME_DURATION - timePassed).takeIf { it > 0 } ?: 0
 
         animateSplashFadeOut?.invoke(remainingTime) {
-            navigator.actionSplashToCity()
+            navigator.actionSplashToSearch()
         }
     }
 

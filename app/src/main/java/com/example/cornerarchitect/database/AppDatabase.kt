@@ -8,7 +8,7 @@ import com.example.cornerarchitect.model.Contact
 
 @Database(
     entities = [Contact::class],
-    version = 2
+    version = 3
 )
 @TypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {

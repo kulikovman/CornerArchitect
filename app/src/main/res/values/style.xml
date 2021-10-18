@@ -13,4 +13,10 @@
         <item name="android:background">@drawable/edittext_gray</item>
     </style>
 
+    <style name="ClickableLayout">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
 </resources>

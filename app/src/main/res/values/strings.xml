@@ -9,6 +9,8 @@
     <string name="check_update">Проверка обновлений</string>
     <string name="data_loading">Загрузка данных</string>
     <string name="preparation_for_launch">Подготовка к запуску</string>
+    <string name="search_architect">Поиск архитектора</string>
+    <string name="name">Имя</string>
 
 
 </resources>

@@ -11,40 +11,20 @@
         android:label="SplashFragment"
         tools:layout="@layout/splash_fragment">
         <action
-            android:id="@+id/action_splashFragment_to_cityFragment"
-            app:destination="@id/cityFragment"
+            android:id="@+id/action_splashFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
             app:launchSingleTop="true"
             app:popUpTo="@+id/navigation_graph"
             app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
-        android:id="@+id/cityFragment"
-        android:name="com.example.cornerarchitect.ui.city.CityFragment"
+        android:id="@+id/searchFragment"
+        android:name="com.example.cornerarchitect.ui.search.SearchFragment"
         android:label="CityFragment"
-        tools:layout="@layout/city_fragment">
+        tools:layout="@layout/search_fragment">
         <action
-            android:id="@+id/action_cityFragment_to_specializationFragment"
-            app:destination="@id/specializationFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/specializationFragment"
-        android:name="com.example.cornerarchitect.ui.specialization.SpecializationFragment"
-        android:label="SpecializationFragment"
-        tools:layout="@layout/specialization_fragment">
-        <action
-            android:id="@+id/action_specializationFragment_to_peopleFragment"
-            app:destination="@id/peopleFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/peopleFragment"
-        android:name="com.example.cornerarchitect.ui.people.PeopleFragment"
-        android:label="PeopleFragment"
-        tools:layout="@layout/people_fragment">
-        <action
-            android:id="@+id/action_peopleFragment_to_detailFragment"
+            android:id="@+id/action_searchFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
 

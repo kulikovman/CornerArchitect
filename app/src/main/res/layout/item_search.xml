@@ -7,11 +7,12 @@
 
         <variable
             name="item"
-            type="com.example.cornerarchitect.ui.people.ItemPeopleUi" />
+            type="com.example.cornerarchitect.ui.search.ItemSearchUi" />
 
     </data>
 
     <LinearLayout
+        style="@style/ClickableLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

@@ -10,10 +10,8 @@ interface INavigator {
 
     fun goBack()
 
-    fun actionSplashToCity()
-    fun actionCityToSpecialization()
-    fun actionSpecializationToPeople()
-    fun actionPeopleToDetail()
+    fun actionSplashToSearch()
+    fun actionSearchToDetail()
 
 }
 
@@ -33,20 +31,12 @@ class Navigator @Inject constructor(
         navController?.navigateUp()
     }
 
-    override fun actionSplashToCity() {
-        navController?.navigate(R.id.action_splashFragment_to_cityFragment)
+    override fun actionSplashToSearch() {
+        navController?.navigate(R.id.action_splashFragment_to_searchFragment)
     }
 
-    override fun actionCityToSpecialization() {
-        navController?.navigate(R.id.action_cityFragment_to_specializationFragment)
-    }
-
-    override fun actionSpecializationToPeople() {
-        navController?.navigate(R.id.action_specializationFragment_to_peopleFragment)
-    }
-
-    override fun actionPeopleToDetail() {
-        navController?.navigate(R.id.action_peopleFragment_to_detailFragment)
+    override fun actionSearchToDetail() {
+        navController?.navigate(R.id.action_searchFragment_to_detailFragment)
     }
 
 }
