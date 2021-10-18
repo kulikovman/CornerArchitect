@@ -43,14 +43,9 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        val json = Json {
-            ignoreUnknownKeys = true
-        }
-
         return Retrofit.Builder()
             .baseUrl("https://sheets.googleapis.com")
             .client(okHttpClient)
-            //.addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .addConverterFactory(GsonConverterFactory.create())
             .addConverterFactory(ScalarsConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
