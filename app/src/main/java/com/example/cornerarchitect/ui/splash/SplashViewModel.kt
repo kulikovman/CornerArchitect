@@ -24,11 +24,6 @@ class SplashViewModel @Inject constructor(
     private val contact: IContactManager,
 ) : BaseViewModel() {
 
-    private var startSplashTime = 0L
-
-    var animateSplashFadeOut: ((Long, () -> Unit) -> Unit)? = null
-
-
     val isUpdateChecking = MutableLiveData(false)
 
     val isDataLoading = MutableLiveData(false)
@@ -37,7 +32,6 @@ class SplashViewModel @Inject constructor(
 
 
     init {
-        startSplashTime = getCurrentTime()
         getContacts()
     }
 
@@ -123,19 +117,7 @@ class SplashViewModel @Inject constructor(
     }
 
     private fun hideSplash() {
-        val timePassed = getCurrentTime() - startSplashTime
-        val remainingTime = (MIN_SPLASH_TIME_DURATION - timePassed).takeIf { it > 0 } ?: 0
-
-        animateSplashFadeOut?.invoke(remainingTime) {
-            navigator.actionSplashToSearch()
-        }
-    }
-
-
-    companion object {
-
-        const val MIN_SPLASH_TIME_DURATION = 900L
-
+        navigator.actionSplashToSearch()
     }
 
 }

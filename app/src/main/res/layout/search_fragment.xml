@@ -23,7 +23,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/search_bg"
+            android:background="@color/search_title_bg"
             android:elevation="2dp"
             android:paddingBottom="20dp">
 

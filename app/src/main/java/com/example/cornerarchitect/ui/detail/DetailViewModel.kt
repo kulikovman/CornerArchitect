@@ -33,13 +33,9 @@ class DetailViewModel @Inject constructor(
 
     val surname = contact.map { it.surname }
 
-    val specialization = contact.map { contact ->
-        var text = ""
-        contact.specialization.forEach { item ->
-            text += if (text.isEmpty()) item else " / $item"
-        }
-        text
-    }
+    val city = contact.map { it.city }
+
+    val specialization = contact.map { it.specialization }
 
     val work = contact.map { it.work }
 
