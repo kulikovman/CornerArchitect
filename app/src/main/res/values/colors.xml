@@ -9,15 +9,16 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="transparent">#00FFFFFF</color>
+    <color name="search_bg">#A8DDD8</color>
 
     <color name="status_bar">#009688</color>
     <color name="link_blue">#2196F3</color>
     <color name="note_icon">#FF9800</color>
     <color name="info_icon">#2196F3</color>
 
-    <color name="edittext_gray_color">#F6F6F6</color>
-    <color name="edittext_gray_disabled_color">#CCCCCC</color>
-    <color name="edittext_gray_border_color">#009688</color>
+    <color name="edittext_common_color">#F6F6F6</color>
+    <color name="edittext_common_disabled_color">#CCCCCC</color>
+    <color name="edittext_common_border_color">#2196F3</color>
     <color name="error_color">#CC292B</color>
 
 </resources>

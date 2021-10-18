@@ -15,162 +15,175 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/content_margin_start"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="15dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/content_margin_end"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="15dp" />
-
-        <ImageView
-            android:id="@+id/info_icon"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ic_baseline_info_32"
-            app:layout_constraintStart_toStartOf="@id/content_margin_start"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/info_icon" />
+            android:background="@color/search_bg"
+            android:elevation="2dp"
+            android:paddingBottom="20dp">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/search_architect"
-            android:textColor="@color/black"
-            android:textSize="28sp"
-            app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-            app:layout_constraintStart_toStartOf="@id/content_margin_start"
-            app:layout_constraintTop_toBottomOf="@id/info_icon" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/content_margin_start"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="15dp" />
 
-        <ImageView
-            android:id="@+id/city_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ic_baseline_location_city_24"
-            app:layout_constraintStart_toStartOf="@id/content_margin_start"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/content_margin_end"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="15dp" />
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:hint="@string/city"
-            android:paddingEnd="44dp"
-            android:text="@={vm.city}"
-            app:layout_constraintBottom_toBottomOf="@id/city_icon"
-            app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-            app:layout_constraintStart_toEndOf="@id/city_icon"
-            app:layout_constraintTop_toTopOf="@id/city_icon"
-            tools:ignore="RtlSymmetry" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/search_architect"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                app:layout_constraintStart_toStartOf="@id/content_margin_start"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{(v) -> vm.onClickClearCity()}"
-            android:padding="5dp"
-            android:src="@drawable/ic_baseline_clear_24"
-            app:goneIfFalse="@{vm.isCityClearButtonVisibility}"
-            app:layout_constraintBottom_toBottomOf="@id/city_icon"
-            app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-            app:layout_constraintTop_toTopOf="@id/city_icon"
-            app:layout_constraintVertical_bias="1.0" />
+            <ImageView
+                android:id="@+id/info_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_baseline_info_24"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/title"
+                app:layout_constraintBottom_toBottomOf="@id/title"
+                app:layout_constraintTop_toTopOf="@id/title"
+                app:tint="@color/info_icon" />
 
-        <ImageView
-            android:id="@+id/specialization_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/ic_baseline_work_24"
-            app:layout_constraintStart_toStartOf="@id/content_margin_start"
-            app:layout_constraintTop_toBottomOf="@id/city_icon" />
+            <ImageView
+                android:id="@+id/city_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_location_city_24"
+                app:layout_constraintBottom_toBottomOf="@id/city_edittext"
+                app:layout_constraintStart_toStartOf="@id/content_margin_start"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintTop_toTopOf="@id/city_edittext" />
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:hint="@string/specialization"
-            android:paddingEnd="44dp"
-            android:text="@={vm.specialization}"
-            app:layout_constraintBottom_toBottomOf="@id/specialization_icon"
-            app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-            app:layout_constraintStart_toEndOf="@id/specialization_icon"
-            app:layout_constraintTop_toTopOf="@id/specialization_icon"
-            tools:ignore="RtlSymmetry" />
+            <EditText
+                android:id="@+id/city_edittext"
+                style="@style/CommonEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:hint="@string/city"
+                android:paddingEnd="44dp"
+                android:text="@={vm.city}"
+                app:layout_constraintEnd_toEndOf="@id/content_margin_end"
+                app:layout_constraintStart_toEndOf="@id/city_icon"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:ignore="RtlSymmetry" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{(v) -> vm.onClickClearSpecialization()}"
-            android:padding="5dp"
-            android:src="@drawable/ic_baseline_clear_24"
-            app:goneIfFalse="@{vm.isSpecializationClearButtonVisibility}"
-            app:layout_constraintBottom_toBottomOf="@id/specialization_icon"
-            app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-            app:layout_constraintTop_toTopOf="@id/specialization_icon" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{(v) -> vm.onClickClearCity()}"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_clear_24"
+                app:goneIfFalse="@{vm.isCityClearButtonVisibility}"
+                app:layout_constraintBottom_toBottomOf="@id/city_edittext"
+                app:layout_constraintEnd_toEndOf="@id/content_margin_end"
+                app:layout_constraintTop_toTopOf="@id/city_edittext" />
 
-        <ImageView
-            android:id="@+id/name_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/ic_baseline_person_24"
-            app:layout_constraintStart_toStartOf="@id/content_margin_start"
-            app:layout_constraintTop_toBottomOf="@id/specialization_icon" />
+            <ImageView
+                android:id="@+id/specialization_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_work_24"
+                app:layout_constraintBottom_toBottomOf="@id/specialization_edittext"
+                app:layout_constraintStart_toStartOf="@id/content_margin_start"
+                app:layout_constraintTop_toTopOf="@id/specialization_edittext" />
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:hint="@string/name"
-            android:paddingEnd="44dp"
-            android:text="@={vm.name}"
-            app:layout_constraintBottom_toBottomOf="@id/name_icon"
-            app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-            app:layout_constraintStart_toEndOf="@id/name_icon"
-            app:layout_constraintTop_toTopOf="@id/name_icon"
-            tools:ignore="RtlSymmetry" />
+            <EditText
+                android:id="@+id/specialization_edittext"
+                style="@style/CommonEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:hint="@string/specialization"
+                android:paddingEnd="44dp"
+                android:text="@={vm.specialization}"
+                app:layout_constraintEnd_toEndOf="@id/content_margin_end"
+                app:layout_constraintStart_toEndOf="@id/specialization_icon"
+                app:layout_constraintTop_toBottomOf="@id/city_edittext"
+                tools:ignore="RtlSymmetry" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{(v) -> vm.onClickClearName()}"
-            android:padding="5dp"
-            android:src="@drawable/ic_baseline_clear_24"
-            app:goneIfFalse="@{vm.isNameClearButtonVisibility}"
-            app:layout_constraintBottom_toBottomOf="@id/name_icon"
-            app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-            app:layout_constraintTop_toTopOf="@id/name_icon" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{(v) -> vm.onClickClearSpecialization()}"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_clear_24"
+                app:goneIfFalse="@{vm.isSpecializationClearButtonVisibility}"
+                app:layout_constraintBottom_toBottomOf="@id/specialization_edittext"
+                app:layout_constraintEnd_toEndOf="@id/content_margin_end"
+                app:layout_constraintTop_toTopOf="@id/specialization_edittext" />
+
+            <ImageView
+                android:id="@+id/name_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_person_24"
+                app:layout_constraintBottom_toBottomOf="@id/name_edittext"
+                app:layout_constraintStart_toStartOf="@id/content_margin_start"
+                app:layout_constraintTop_toTopOf="@id/name_edittext" />
+
+            <EditText
+                android:id="@+id/name_edittext"
+                style="@style/CommonEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:hint="@string/name"
+                android:paddingEnd="44dp"
+                android:text="@={vm.name}"
+                app:layout_constraintEnd_toEndOf="@id/content_margin_end"
+                app:layout_constraintStart_toEndOf="@id/name_icon"
+                app:layout_constraintTop_toBottomOf="@id/specialization_edittext"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{(v) -> vm.onClickClearName()}"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_clear_24"
+                app:goneIfFalse="@{vm.isNameClearButtonVisibility}"
+                app:layout_constraintBottom_toBottomOf="@id/name_edittext"
+                app:layout_constraintEnd_toEndOf="@id/content_margin_end"
+                app:layout_constraintTop_toTopOf="@id/name_edittext" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="15dp"
+            android:layout_weight="1"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/name_icon"
             app:rvConfig="@{rvConfig}"
             app:rvItems="@{vm.searchItems}"
             tools:listitem="@layout/item_search"
             tools:visibility="visible" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>
