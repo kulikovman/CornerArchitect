@@ -22,13 +22,13 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:onClick="@{(v) -> vm.onClickBack()}"
-            android:src="@drawable/ic_baseline_arrow_back_32" />
+            android:src="@drawable/ic_baseline_arrow_back_24" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="@{vm.name}"
             android:textColor="@color/black"
             android:textSize="32sp"

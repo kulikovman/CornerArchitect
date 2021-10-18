@@ -29,7 +29,15 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
+            android:text="@{item.city}"
+            android:textSize="18sp"
+            tools:text="Якутия" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:text="@{item.work}"
             android:textSize="16sp"
             app:goneIfEmpty="@{item.work}"
@@ -38,7 +46,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:text="@{item.position}"
             android:textSize="14sp"
             app:goneIfEmpty="@{item.position}"
