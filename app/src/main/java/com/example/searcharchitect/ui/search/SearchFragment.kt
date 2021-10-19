@@ -39,15 +39,15 @@ class SearchFragment : BaseFragment<SearchFragmentBinding, SearchViewModel>() {
     private fun initSearch() {
         binding.apply {
             cityEdittext.doAfterTextChanged {
-                viewModel.updateSearchList()
+                viewModel.updateContactList()
             }
 
             specializationEdittext.doAfterTextChanged {
-                viewModel.updateSearchList()
+                viewModel.updateContactList()
             }
 
             nameEdittext.doAfterTextChanged {
-                viewModel.updateSearchList()
+                viewModel.updateContactList()
             }
         }
     }

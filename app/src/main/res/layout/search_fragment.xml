@@ -182,6 +182,8 @@
                 android:id="@+id/rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                app:goneIfTrue="@{vm.isLoading}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:rvConfig="@{rvConfig}"
                 app:rvItems="@{vm.searchItems}"
@@ -191,8 +193,9 @@
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:goneIfFalse="@{vm.isLoading}"
-                android:layout_gravity="center" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="35dp"
+                app:goneIfFalse="@{vm.isLoading}" />
 
         </FrameLayout>
 

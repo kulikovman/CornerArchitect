@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.searcharchitect.base.BaseViewModel
 import com.example.searcharchitect.manager.IContactManager
 import com.example.searcharchitect.navigation.INavigator
-import com.example.searcharchitect.utility.extension.combine
 import com.example.searcharchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Deferred
@@ -27,24 +26,8 @@ class SearchViewModel @Inject constructor(
     val name = MutableLiveData("")
 
 
-    // todo Сделать запрос списка через менеджер с показом лоадера
-    // todo При повторном запросе отменять предыдущий
-    val searchItems = combine(
-        contactManager.contacts, city, specialization, name
-    ) { contacts, city, specialization, name ->
-        contacts?.map { contact ->
-            ItemSearchUi(
-                id = contact.id,
-                name = "${contact.surname} ${contact.name}",
-                city = contact.city,
-                specialization = contact.specialization
-            )
-        }?.filter { contact ->
-            contact.city.contains(city.orEmpty(), true)
-                    && contact.specialization.contains(specialization.orEmpty(), true)
-                    && contact.name.contains(name.orEmpty(), true)
-        } ?: emptyList()
-    }
+    val searchItems = MutableLiveData(emptyList<ItemSearchUi>())
+
 
     val isCityClearButtonVisibility = city.map { it.isNotEmpty() }
 
@@ -53,6 +36,11 @@ class SearchViewModel @Inject constructor(
     val isNameClearButtonVisibility = name.map { it.isNotEmpty() }
 
     val isLoading = MutableLiveData(false)
+
+
+    init {
+        searchItems.value = contactManager.getContactList()
+    }
 
 
     fun onClickClearCity() {
@@ -79,29 +67,24 @@ class SearchViewModel @Inject constructor(
 
     var searchDeferred: Deferred<List<ItemSearchUi>>? = null
 
-    fun updateSearchList() {
+    fun updateContactList() {
         searchDeferred?.cancel()
+        isLoading.value = true
 
         viewModelScope.launch {
-            /*if (searchValue.length >= MIN_SEARCH_VALUE_LENGTH) {
-                isPlaceListLoading.value = true
-
-                searchDeferred = async { searchPlacesInDatabase(searchValue) }
-
-                val searchResult = searchDeferred!!.await()
-                Logg.d { "Search result: ${searchResult.size} items" }
-
-                searchItems.value = searchResult
-
-                if (searchResult.isEmpty()) {
-                    showNothingFoundError()
-                } else hideNothingFoundError()
-            } else {
-                hideNothingFoundError()
-                searchItems.value = emptyList()
+            searchDeferred = async {
+                contactManager.getContactList(
+                    city = city.value,
+                    specialization = specialization.value,
+                    name = name.value
+                )
             }
 
-            isPlaceListLoading.value = false*/
+            val searchResult = searchDeferred!!.await()
+            log("Search result: ${searchResult.size} items")
+
+            searchItems.value = searchResult
+            isLoading.value = false
         }
     }
 
