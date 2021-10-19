@@ -23,7 +23,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/search_title_bg"
+            android:background="@color/teal_200"
             android:elevation="2dp"
             android:paddingBottom="20dp">
 
@@ -63,7 +63,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/title"
                 app:layout_constraintStart_toEndOf="@id/title"
                 app:layout_constraintTop_toTopOf="@id/title"
-                app:tint="@color/info_icon" />
+                app:tint="@color/blue_500" />
 
             <ImageView
                 android:id="@+id/city_icon"
@@ -203,7 +203,8 @@
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                app:goneIfFalse="@{vm.isNothingFound}">
+                app:goneIfFalse="@{vm.isNothingFound}"
+                tools:visibility="gone">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -215,6 +216,35 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="@string/nothing_found" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:goneIfFalse="@{vm.isMissingData}"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_cloud_off_48" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/missing_data" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/download"
+                    android:onClick="@{(v) -> vm.onClickLoadData()}"
+                    android:layout_marginTop="15dp"/>
 
             </LinearLayout>
 

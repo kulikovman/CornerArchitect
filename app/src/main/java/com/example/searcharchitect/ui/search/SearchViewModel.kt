@@ -44,6 +44,12 @@ class SearchViewModel @Inject constructor(
         isLoading == false && contacts?.size ?: 0 > 0 && searchItems?.size ?: 0 == 0
     }
 
+    val isMissingData = combine(
+        contactManager.contacts, searchItems, isLoading
+    ) { contacts, searchItems, isLoading ->
+        isLoading == false && contacts?.size ?: 0 == 0 && searchItems?.size ?: 0 == 0
+    }
+
 
     init {
         searchItems.value = contactManager.getContactList()
@@ -93,6 +99,10 @@ class SearchViewModel @Inject constructor(
             searchItems.value = searchResult
             isLoading.value = false
         }
+    }
+
+    fun onClickLoadData() {
+
     }
 
 }

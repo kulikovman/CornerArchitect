@@ -12,6 +12,8 @@
     <string name="search_architect">Поиск архитектора</string>
     <string name="name">Имя</string>
     <string name="nothing_found">Ничего не найдено</string>
+    <string name="download">Загрузить</string>
+    <string name="missing_data">Отсутствуют данные</string>
 
 
 </resources>
