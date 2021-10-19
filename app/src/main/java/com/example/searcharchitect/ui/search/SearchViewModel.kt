@@ -2,12 +2,16 @@ package com.example.searcharchitect.ui.search
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.example.searcharchitect.base.BaseViewModel
 import com.example.searcharchitect.manager.IContactManager
 import com.example.searcharchitect.navigation.INavigator
 import com.example.searcharchitect.utility.extension.combine
 import com.example.searcharchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,9 +37,7 @@ class SearchViewModel @Inject constructor(
                 id = contact.id,
                 name = "${contact.surname} ${contact.name}",
                 city = contact.city,
-                specialization = contact.specialization,
-                work = contact.work.orEmpty(),
-                position = contact.position.orEmpty()
+                specialization = contact.specialization
             )
         }?.filter { contact ->
             contact.city.contains(city.orEmpty(), true)
@@ -49,6 +51,8 @@ class SearchViewModel @Inject constructor(
     val isSpecializationClearButtonVisibility = specialization.map { it.isNotEmpty() }
 
     val isNameClearButtonVisibility = name.map { it.isNotEmpty() }
+
+    val isLoading = MutableLiveData(false)
 
 
     fun onClickClearCity() {
@@ -70,6 +74,34 @@ class SearchViewModel @Inject constructor(
                 contactManager.selectedContact.value = contact
                 navigator.actionSearchToDetail()
             }
+        }
+    }
+
+    var searchDeferred: Deferred<List<ItemSearchUi>>? = null
+
+    fun updateSearchList() {
+        searchDeferred?.cancel()
+
+        viewModelScope.launch {
+            /*if (searchValue.length >= MIN_SEARCH_VALUE_LENGTH) {
+                isPlaceListLoading.value = true
+
+                searchDeferred = async { searchPlacesInDatabase(searchValue) }
+
+                val searchResult = searchDeferred!!.await()
+                Logg.d { "Search result: ${searchResult.size} items" }
+
+                searchItems.value = searchResult
+
+                if (searchResult.isEmpty()) {
+                    showNothingFoundError()
+                } else hideNothingFoundError()
+            } else {
+                hideNothingFoundError()
+                searchItems.value = emptyList()
+            }
+
+            isPlaceListLoading.value = false*/
         }
     }
 

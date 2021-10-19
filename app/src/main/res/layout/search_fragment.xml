@@ -57,11 +57,11 @@
                 android:id="@+id/info_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
                 android:src="@drawable/ic_baseline_info_24"
-                android:layout_marginStart="15dp"
-                app:layout_constraintStart_toEndOf="@id/title"
                 app:layout_constraintBottom_toBottomOf="@id/title"
+                app:layout_constraintStart_toEndOf="@id/title"
                 app:layout_constraintTop_toTopOf="@id/title"
                 app:tint="@color/info_icon" />
 
@@ -81,7 +81,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:hint="@string/city"
                 android:paddingEnd="44dp"
                 android:text="@={vm.city}"
@@ -173,16 +173,28 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:rvConfig="@{rvConfig}"
-            app:rvItems="@{vm.searchItems}"
-            tools:listitem="@layout/item_search"
-            tools:visibility="visible" />
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:rvConfig="@{rvConfig}"
+                app:rvItems="@{vm.searchItems}"
+                tools:listitem="@layout/item_search"
+                tools:visibility="visible" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:goneIfFalse="@{vm.isLoading}"
+                android:layout_gravity="center" />
+
+        </FrameLayout>
 
     </LinearLayout>
 

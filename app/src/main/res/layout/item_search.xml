@@ -30,27 +30,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="@{item.city}"
+            android:text="@{item.specialization}"
             android:textSize="18sp"
-            tools:text="Якутия" />
+            app:goneIfEmpty="@{item.specialization}"
+            tools:text="Дизайн городской среды" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="@{item.work}"
+            android:text="@{item.city}"
             android:textSize="16sp"
-            app:goneIfEmpty="@{item.work}"
-            tools:text="Центр компетенций по вопросам городской среды Республики Саха (Якутия)" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="@{item.position}"
-            android:textSize="14sp"
-            app:goneIfEmpty="@{item.position}"
-            tools:text="Главный архитектор проектов" />
+            tools:text="Якутия" />
 
     </LinearLayout>
 

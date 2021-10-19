@@ -2,6 +2,7 @@ package com.example.searcharchitect.ui.search
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import com.example.searcharchitect.BR
 import com.example.searcharchitect.R
@@ -20,17 +21,34 @@ class SearchFragment : BaseFragment<SearchFragmentBinding, SearchViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initList()
+        initSearch()
     }
 
     private fun initList() {
-        binding.let { layoutBinding ->
-            layoutBinding.rvConfig = initRecycleAdapterDataBinding<ItemSearchUi, ItemSearchBinding>(
+        binding.apply {
+            rvConfig = initRecycleAdapterDataBinding<ItemSearchUi, ItemSearchBinding>(
                 layoutId = R.layout.item_search,
                 itemId = BR.item,
-                recyclerView = layoutBinding.rv,
+                recyclerView = rv,
                 items = viewModel.searchItems,
                 onItemClick = viewModel::onClickItemPosition
             )
+        }
+    }
+
+    private fun initSearch() {
+        binding.apply {
+            cityEdittext.doAfterTextChanged {
+                viewModel.updateSearchList()
+            }
+
+            specializationEdittext.doAfterTextChanged {
+                viewModel.updateSearchList()
+            }
+
+            nameEdittext.doAfterTextChanged {
+                viewModel.updateSearchList()
+            }
         }
     }
 
