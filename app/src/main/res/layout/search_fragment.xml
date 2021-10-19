@@ -7,11 +7,11 @@
 
         <variable
             name="vm"
-            type="com.example.cornerarchitect.ui.search.SearchViewModel" />
+            type="com.example.searcharchitect.ui.search.SearchViewModel" />
 
         <variable
             name="rvConfig"
-            type="com.example.cornerarchitect.utility.databinding.DataBindingRecyclerViewConfig" />
+            type="com.example.searcharchitect.utility.databinding.DataBindingRecyclerViewConfig" />
 
     </data>
 
