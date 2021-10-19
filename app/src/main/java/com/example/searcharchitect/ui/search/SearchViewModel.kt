@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.searcharchitect.base.BaseViewModel
 import com.example.searcharchitect.manager.IContactManager
 import com.example.searcharchitect.navigation.INavigator
+import com.example.searcharchitect.utility.extension.combine
 import com.example.searcharchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Deferred
@@ -36,6 +37,12 @@ class SearchViewModel @Inject constructor(
     val isNameClearButtonVisibility = name.map { it.isNotEmpty() }
 
     val isLoading = MutableLiveData(false)
+
+    val isNothingFound = combine(
+        contactManager.contacts, searchItems, isLoading
+    ) { contacts, searchItems, isLoading ->
+        isLoading == false && contacts?.size ?: 0 > 0 && searchItems?.size ?: 0 == 0
+    }
 
 
     init {

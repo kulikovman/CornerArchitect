@@ -188,14 +188,35 @@
                 app:rvConfig="@{rvConfig}"
                 app:rvItems="@{vm.searchItems}"
                 tools:listitem="@layout/item_search"
-                tools:visibility="visible" />
+                tools:visibility="gone" />
 
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="35dp"
-                app:goneIfFalse="@{vm.isLoading}" />
+                android:layout_gravity="center"
+                app:goneIfFalse="@{vm.isLoading}"
+                tools:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:goneIfFalse="@{vm.isNothingFound}">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_search_off_48" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/nothing_found" />
+
+            </LinearLayout>
 
         </FrameLayout>
 

@@ -11,6 +11,7 @@
     <string name="preparation_for_launch">Подготовка к запуску</string>
     <string name="search_architect">Поиск архитектора</string>
     <string name="name">Имя</string>
+    <string name="nothing_found">Ничего не найдено</string>
 
 
 </resources>
