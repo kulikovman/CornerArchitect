@@ -10,8 +10,8 @@ import javax.inject.Inject
 
 interface ISettingsDataStore {
 
-    suspend fun getAppDataVersion(): Int
-    suspend fun updateAppDataVersion(dataVersion: Int)
+    suspend fun getCurrentDataVersion(): Int
+    suspend fun updateDataVersion(version: Int)
 
 }
 
@@ -38,12 +38,12 @@ class SettingsDataStore @Inject constructor(
         }
     }
 
-    override suspend fun getAppDataVersion(): Int {
+    override suspend fun getCurrentDataVersion(): Int {
         return readValue(DATA_VERSION) ?: 0
     }
 
-    override suspend fun updateAppDataVersion(dataVersion: Int) {
-        storeValue(DATA_VERSION, dataVersion)
+    override suspend fun updateDataVersion(version: Int) {
+        storeValue(DATA_VERSION, version)
     }
 
 

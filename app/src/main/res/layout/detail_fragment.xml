@@ -41,16 +41,7 @@
                     android:text="@{vm.name}"
                     android:textColor="@color/black"
                     android:textSize="32sp"
-                    tools:text="Олег" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:text="@{vm.surname}"
-                    android:textColor="@color/black"
-                    android:textSize="32sp"
-                    tools:text="Лукьяненко" />
+                    tools:text="Олег\nЛукьяненко" />
 
                 <TextView
                     android:layout_width="match_parent"

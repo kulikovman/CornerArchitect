@@ -27,11 +27,11 @@ class DetailViewModel @Inject constructor(
     var openLink: ((String) -> Unit)? = null
 
 
-    val contact = contactManager.selectedContact
+    val contact = contactManager.getSelectedContact()
 
-    val name = contact.map { it.name }
-
-    val surname = contact.map { it.surname }
+    val name = contact.map {
+        "${it.name}\n${it.surname}"
+    }
 
     val city = contact.map { it.city }
 
@@ -92,7 +92,6 @@ class DetailViewModel @Inject constructor(
 
     fun onClickLink() {
         link.value?.let { link ->
-            log(link)
             openLink?.invoke(link)
         }
     }

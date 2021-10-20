@@ -6,7 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.searcharchitect.base.BaseViewModel
 import com.example.searcharchitect.manager.IContactManager
 import com.example.searcharchitect.navigation.INavigator
+import com.example.searcharchitect.repositiry.INetworkRepository
+import com.example.searcharchitect.retrofit.Failure
 import com.example.searcharchitect.utility.extension.combine
+import com.example.searcharchitect.utility.helper.ITextHelper
+import com.example.searcharchitect.utility.helper.IToastHelper
 import com.example.searcharchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Deferred
@@ -17,7 +21,10 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val navigator: INavigator,
-    private val contactManager: IContactManager
+    private val contactManager: IContactManager,
+    private val network: INetworkRepository,
+    private val toast: IToastHelper,
+    private val text: ITextHelper
 ) : BaseViewModel() {
 
     val city = MutableLiveData("")
@@ -39,20 +46,20 @@ class SearchViewModel @Inject constructor(
     val isLoading = MutableLiveData(false)
 
     val isNothingFound = combine(
-        contactManager.contacts, searchItems, isLoading
+        contactManager.getContacts(), searchItems, isLoading
     ) { contacts, searchItems, isLoading ->
         isLoading == false && contacts?.size ?: 0 > 0 && searchItems?.size ?: 0 == 0
     }
 
     val isMissingData = combine(
-        contactManager.contacts, searchItems, isLoading
+        contactManager.getContacts(), searchItems, isLoading
     ) { contacts, searchItems, isLoading ->
         isLoading == false && contacts?.size ?: 0 == 0 && searchItems?.size ?: 0 == 0
     }
 
 
     init {
-        searchItems.value = contactManager.getContactList()
+        searchItems.value = contactManager.getFilteredContacts()
     }
 
 
@@ -70,9 +77,10 @@ class SearchViewModel @Inject constructor(
 
     fun onClickItemPosition(position: Int) {
         searchItems.value?.getOrNull(position)?.let { searchItems ->
-            contactManager.contacts.value?.find { it.id == searchItems.id }?.let { contact ->
+            contactManager.getContacts().value?.find { it.id == searchItems.id }?.let { contact ->
                 log("Selected contact: $contact")
-                contactManager.selectedContact.value = contact
+                contactManager.setSelectedContact(contact)
+
                 navigator.actionSearchToDetail()
             }
         }
@@ -86,7 +94,7 @@ class SearchViewModel @Inject constructor(
 
         viewModelScope.launch {
             searchDeferred = async {
-                contactManager.getContactList(
+                contactManager.getFilteredContacts(
                     city = city.value,
                     specialization = specialization.value,
                     name = name.value
@@ -102,7 +110,29 @@ class SearchViewModel @Inject constructor(
     }
 
     fun onClickLoadData() {
+        viewModelScope.launch {
+            isLoading.value = true
+            network.getDataVersion().either(::handleFailure) { version ->
+                viewModelScope.launch {
+                    network.getContactList().either(::handleFailure) { contactList ->
+                        viewModelScope.launch {
+                            contactManager.updateAppData(version, contactList)
+                            searchItems.value = contactManager.getFilteredContacts()
+                            isLoading.value = false
+                        }
+                    }
+                }
+            }
+        }
+    }
 
+    private fun handleFailure(failure: Failure) {
+        isLoading.value = false
+
+        when (failure) {
+            is Failure.ConnectionError -> toast.showLong(text.connectionError())
+            is Failure.UnknownError -> toast.showLong(text.unknownError())
+        }
     }
 
 }

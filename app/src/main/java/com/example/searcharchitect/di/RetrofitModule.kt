@@ -7,7 +7,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.serialization.ExperimentalSerializationApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -24,8 +23,8 @@ object RetrofitModule {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
-        builder.connectTimeout(30, TimeUnit.SECONDS)
-        builder.readTimeout(2, TimeUnit.MINUTES)
+        builder.connectTimeout(15, TimeUnit.SECONDS)
+        builder.readTimeout(15, TimeUnit.SECONDS)
 
         if (BuildConfig.DEBUG) {
             val myInterceptor = HttpLoggingInterceptor()
@@ -36,13 +35,16 @@ object RetrofitModule {
         return builder.build()
     }
 
-    @ExperimentalSerializationApi
+    //@ExperimentalSerializationApi
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        //val json = Json { ignoreUnknownKeys = true }
+
         return Retrofit.Builder()
             .baseUrl("https://sheets.googleapis.com")
             .client(okHttpClient)
+            //.addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .addConverterFactory(GsonConverterFactory.create())
             .addConverterFactory(ScalarsConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())

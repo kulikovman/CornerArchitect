@@ -1,22 +1,26 @@
 package com.example.searcharchitect.manager
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.searcharchitect.model.Contact
 import com.example.searcharchitect.repositiry.IDatabaseRepository
 import com.example.searcharchitect.repositiry.IDatastoreRepository
 import com.example.searcharchitect.repositiry.INetworkRepository
 import com.example.searcharchitect.ui.search.ItemSearchUi
+import com.example.searcharchitect.utility.log
 import javax.inject.Inject
 
 interface IContactManager {
 
-    val contacts: MutableLiveData<List<Contact>>
+    fun getContacts(): LiveData<List<Contact>>
+    fun getSelectedContact(): LiveData<Contact>
+    fun setSelectedContact(contact: Contact)
 
-    var selectedCity: String?
-    var selectedSpecialization: String?
-    var selectedContact: MutableLiveData<Contact>
+    suspend fun isNewVersion(version: Int): Boolean
+    suspend fun loadContactsFromDatabase()
+    suspend fun updateAppData(version: Int, contacts: List<Contact>)
 
-    fun getContactList(
+    fun getFilteredContacts(
         city: String? = null,
         specialization: String? = null,
         name: String? = null
@@ -25,26 +29,53 @@ interface IContactManager {
 }
 
 class ContactManager @Inject constructor(
-    private val network: INetworkRepository,
     private val database: IDatabaseRepository,
     private val datastore: IDatastoreRepository
 ) : IContactManager {
 
-    override val contacts = MutableLiveData(emptyList<Contact>())
+    private val allContacts = MutableLiveData(emptyList<Contact>())
 
-    override var selectedCity: String? = null
-
-    override var selectedSpecialization: String? = null
-
-    override var selectedContact = MutableLiveData<Contact>()
+    private var selectedContact = MutableLiveData<Contact>()
 
 
-    override fun getContactList(
+    override fun getContacts(): LiveData<List<Contact>> {
+        return allContacts
+    }
+
+    override fun getSelectedContact(): LiveData<Contact> {
+        return selectedContact
+    }
+
+    override fun setSelectedContact(contact: Contact) {
+        selectedContact.value = contact
+    }
+
+
+    override suspend fun isNewVersion(version: Int): Boolean {
+        return version > datastore.getCurrentDataVersion()
+    }
+
+    override suspend fun loadContactsFromDatabase() {
+        database.getContacts().let { contacts ->
+            log("Contacts in database: ${contacts.size}")
+            allContacts.value = contacts
+        }
+    }
+
+    override suspend fun updateAppData(version: Int, contacts: List<Contact>) {
+        database.removeAllContacts()
+        database.addContacts(contacts)
+        datastore.updateDataVersion(version)
+        allContacts.value = contacts
+    }
+
+
+    override fun getFilteredContacts(
         city: String?,
         specialization: String?,
         name: String?
     ): List<ItemSearchUi> {
-        var result = contacts.value?.map { contact ->
+        var result = allContacts.value?.map { contact ->
             ItemSearchUi(
                 id = contact.id,
                 name = "${contact.surname} ${contact.name}",

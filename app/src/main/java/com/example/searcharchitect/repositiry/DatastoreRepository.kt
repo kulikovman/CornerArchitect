@@ -5,8 +5,8 @@ import javax.inject.Inject
 
 interface IDatastoreRepository {
 
-    suspend fun getAppDataVersion(): Int
-    suspend fun updateAppDataVersion(dataVersion: Int)
+    suspend fun getCurrentDataVersion(): Int
+    suspend fun updateDataVersion(dataVersion: Int)
 
 }
 
@@ -14,12 +14,12 @@ class DatastoreRepository @Inject constructor(
     private val settings: ISettingsDataStore
 ) : IDatastoreRepository {
 
-    override suspend fun getAppDataVersion(): Int {
-        return settings.getAppDataVersion()
+    override suspend fun getCurrentDataVersion(): Int {
+        return settings.getCurrentDataVersion()
     }
 
-    override suspend fun updateAppDataVersion(dataVersion: Int) {
-        settings.updateAppDataVersion(dataVersion)
+    override suspend fun updateDataVersion(dataVersion: Int) {
+        settings.updateDataVersion(dataVersion)
     }
 
 }

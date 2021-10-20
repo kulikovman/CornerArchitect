@@ -5,8 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.searcharchitect.base.BaseViewModel
 import com.example.searcharchitect.manager.IContactManager
 import com.example.searcharchitect.navigation.INavigator
-import com.example.searcharchitect.repositiry.IDatabaseRepository
-import com.example.searcharchitect.repositiry.IDatastoreRepository
 import com.example.searcharchitect.repositiry.INetworkRepository
 import com.example.searcharchitect.retrofit.Failure
 import com.example.searcharchitect.utility.log
@@ -17,10 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val navigator: INavigator,
-    private val network: INetworkRepository,
-    private val database: IDatabaseRepository,
-    private val datastore: IDatastoreRepository,
-    private val contact: IContactManager,
+    private val contactManager: IContactManager,
+    private val network: INetworkRepository
 ) : BaseViewModel() {
 
     val isUpdateChecking = MutableLiveData(false)
@@ -37,27 +33,23 @@ class SplashViewModel @Inject constructor(
 
     private fun getContacts() {
         viewModelScope.launch {
-            showUpdateChecking()
-            network.getDataVersion().either(::handleCheckUpdateFailure) { dataVersion ->
-                log("Data version from sheets: $dataVersion")
+            isUpdateChecking.value = true
+            network.getDataVersion().either(::handleCheckUpdateFailure) { version ->
+                log("Data version from sheets: $version")
                 viewModelScope.launch {
-                    val appDataVersion = datastore.getAppDataVersion()
-                    hideUpdateChecking()
+                    val isExistNewVersion = contactManager.isNewVersion(version)
+                    isUpdateChecking.value = false
 
-                    if (dataVersion > appDataVersion) {
-                        showDataLoading()
+                    if (isExistNewVersion) {
+                        isDataLoading.value = true
                         network.getContactList().either(::handleLoadDataFailure) { contacts ->
                             log("Contacts in google sheets: ${contacts.size}")
-                            contact.contacts.value = contacts
-
                             viewModelScope.launch {
-                                database.removeAllContacts()
-                                database.addContacts(contacts)
-                                datastore.updateAppDataVersion(dataVersion)
-                            }
+                                contactManager.updateAppData(version, contacts)
+                                isDataLoading.value = false
 
-                            hideDataLoading()
-                            hideSplash()
+                                navigator.actionSplashToSearch()
+                            }
                         }
                     } else getContactsFromDatabase()
                 }
@@ -67,56 +59,24 @@ class SplashViewModel @Inject constructor(
 
     private fun handleCheckUpdateFailure(failure: Failure) {
         log("Failure update checking: $failure")
-        hideUpdateChecking()
+        isUpdateChecking.value = false
         getContactsFromDatabase()
     }
 
     private fun handleLoadDataFailure(failure: Failure) {
         log("Failure data loading: $failure")
-        hideDataLoading()
+        isDataLoading.value = false
         getContactsFromDatabase()
     }
 
     private fun getContactsFromDatabase() {
         viewModelScope.launch {
-            showPreparation()
+            isPreparation.value = true
+            contactManager.loadContactsFromDatabase()
+            isPreparation.value = false
 
-            database.getContacts().let { contacts ->
-                log("Contacts in database: ${contacts.size}")
-                contact.contacts.value = contacts
-            }
-
-            hidePreparation()
-            hideSplash()
+            navigator.actionSplashToSearch()
         }
-    }
-
-    private fun showUpdateChecking() {
-        isUpdateChecking.value = true
-    }
-
-    private fun showDataLoading() {
-        isDataLoading.value = true
-    }
-
-    private fun showPreparation() {
-        isPreparation.value = true
-    }
-
-    private fun hideUpdateChecking() {
-        isUpdateChecking.value = false
-    }
-
-    private fun hideDataLoading() {
-        isDataLoading.value = false
-    }
-
-    private fun hidePreparation() {
-        isPreparation.value = false
-    }
-
-    private fun hideSplash() {
-        navigator.actionSplashToSearch()
     }
 
 }

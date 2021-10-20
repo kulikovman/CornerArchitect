@@ -1,6 +1,6 @@
 package com.example.searcharchitect.retrofit
 
-import com.example.searcharchitect.helper.ITextHelper
+import com.example.searcharchitect.utility.helper.ITextHelper
 import com.example.searcharchitect.model.Contact
 import com.example.searcharchitect.retrofit.api.IGoogleSheetsApi
 import com.example.searcharchitect.utility.Either
