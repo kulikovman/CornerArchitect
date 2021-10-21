@@ -11,37 +11,51 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:fitsSystemWindows="true"
+        tools:context="com.example.searcharchitect.main.MainActivity">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:onClick="@{(v) -> vm.onClickBack()}"
-            android:src="@drawable/ic_baseline_arrow_back_24" />
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="145dp"
+                app:collapsedTitleTextAppearance="@style/DetailCollapsedTitle"
+                app:contentScrim="@color/teal_400"
+                app:expandedTitleGravity="top"
+                app:expandedTitleMarginEnd="15dp"
+                app:expandedTitleMarginStart="20dp"
+                app:expandedTitleMarginTop="55dp"
+                app:maxLines="2"
+                app:expandedTitleTextAppearance="@style/DetailExpandedTitle"
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    app:contentInsetStartWithNavigation="0dp"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:title="@{vm.name}"
+                    tools:title="Олег\nЛукьяненко" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:text="@{vm.name}"
-                    android:textColor="@color/black"
-                    android:textSize="32sp"
-                    tools:text="Олег\nЛукьяненко" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -175,6 +189,6 @@
 
         </androidx.core.widget.NestedScrollView>
 
-    </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

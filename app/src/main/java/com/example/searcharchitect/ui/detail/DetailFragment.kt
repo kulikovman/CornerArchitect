@@ -6,6 +6,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.example.searcharchitect.R
 import com.example.searcharchitect.base.BaseFragment
@@ -24,6 +26,7 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar()
 
         viewModel.callPhoneNumber = ::callPhoneNumber
         viewModel.sendEmail = ::sendEmail
@@ -31,6 +34,20 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
         viewModel.openFacebook = ::openFacebook
         viewModel.openVk = ::openVk
         viewModel.openLink = ::openLink
+    }
+
+    private fun initToolbar() {
+        (activity as? AppCompatActivity)?.apply {
+            setSupportActionBar(binding.toolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+
+        binding.toolbar.apply {
+            //navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_arrow_back_24)
+            setNavigationOnClickListener {
+                viewModel.onClickBack()
+            }
+        }
     }
 
     private fun callPhoneNumber(phone: String) {
