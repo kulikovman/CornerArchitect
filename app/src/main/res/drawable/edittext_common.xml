@@ -5,6 +5,8 @@
 
     <item android:drawable="@drawable/edittext_common_selected" android:state_selected="true" />
 
+    <item android:drawable="@drawable/edittext_common_disabled" android:state_enabled="false" />
+
     <item android:drawable="@drawable/edittext_common_default" />
 
 </selector>

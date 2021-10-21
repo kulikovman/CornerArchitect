@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="edittext_common_color">@color/white</color>
-    <color name="edittext_common_disabled_color">@color/gray_200</color>
-    <color name="edittext_common_border_color">@color/blue_500</color>
-    <color name="edittext_common_selected">@color/red_500</color>
+    <color name="edittext_common_default_bg">@color/white</color>
+    <color name="edittext_common_disabled_bg">@color/gray_400</color>
+    <color name="edittext_common_border_focused">@color/blue_500</color>
+    <color name="edittext_common_border_selected">@color/red_500</color>
 
 </resources>

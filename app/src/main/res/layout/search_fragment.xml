@@ -74,6 +74,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="80dp"
+                        android:enabled="@{vm.isSearchFieldsEnabled}"
                         android:hint="@string/city"
                         android:paddingEnd="44dp"
                         android:text="@={vm.city}"
@@ -109,6 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="15dp"
+                        android:enabled="@{vm.isSearchFieldsEnabled}"
                         android:hint="@string/specialization"
                         android:paddingEnd="44dp"
                         android:text="@={vm.specialization}"
@@ -144,6 +146,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="15dp"
+                        android:enabled="@{vm.isSearchFieldsEnabled}"
                         android:hint="@string/name"
                         android:paddingEnd="44dp"
                         android:text="@={vm.name}"
@@ -189,7 +192,7 @@
                 app:goneIfTrue="@{vm.isLoading}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:rvConfig="@{rvConfig}"
-                app:rvItems="@{vm.searchItems}"
+                app:rvItems="@{vm.items}"
                 tools:listitem="@layout/item_search"
                 tools:visibility="visible" />
 

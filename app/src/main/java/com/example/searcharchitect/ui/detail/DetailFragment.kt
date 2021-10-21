@@ -19,8 +19,6 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
 
     override fun getLayoutId(): Int = R.layout.detail_fragment
 
-    // todo Добавить в макет прокрутку, ниже стрелки
-
     override val viewModel: DetailViewModel by viewModels()
 
 
@@ -43,7 +41,6 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
         }
 
         binding.toolbar.apply {
-            //navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_arrow_back_24)
             setNavigationOnClickListener {
                 viewModel.onClickBack()
             }

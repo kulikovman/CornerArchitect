@@ -34,7 +34,7 @@ class SearchViewModel @Inject constructor(
     val name = MutableLiveData("")
 
 
-    val searchItems = MutableLiveData(emptyList<ItemSearchUi>())
+    val items = MutableLiveData(emptyList<ItemSearchUi>())
 
 
     val isCityClearButtonVisibility = city.map { it.isNotEmpty() }
@@ -43,23 +43,25 @@ class SearchViewModel @Inject constructor(
 
     val isNameClearButtonVisibility = name.map { it.isNotEmpty() }
 
+    val isSearchFieldsEnabled = contactManager.getContacts().map { it.isNotEmpty() }
+
     val isLoading = MutableLiveData(false)
 
     val isNothingFound = combine(
-        contactManager.getContacts(), searchItems, isLoading
-    ) { contacts, searchItems, isLoading ->
-        isLoading == false && contacts?.size ?: 0 > 0 && searchItems?.size ?: 0 == 0
+        contactManager.getContacts(), items, isLoading
+    ) { contacts, items, isLoading ->
+        isLoading == false && contacts?.isNotEmpty() == true && items?.isEmpty() == true
     }
 
     val isMissingData = combine(
-        contactManager.getContacts(), searchItems, isLoading
-    ) { contacts, searchItems, isLoading ->
-        isLoading == false && contacts?.size ?: 0 == 0 && searchItems?.size ?: 0 == 0
+        contactManager.getContacts(), items, isLoading
+    ) { contacts, items, isLoading ->
+        isLoading == false && contacts?.isEmpty() == true && items?.isEmpty() == true
     }
 
 
     init {
-        searchItems.value = contactManager.getFilteredContacts()
+        items.value = contactManager.getFilteredContacts()
     }
 
 
@@ -76,7 +78,7 @@ class SearchViewModel @Inject constructor(
     }
 
     fun onClickItemPosition(position: Int) {
-        searchItems.value?.getOrNull(position)?.let { searchItems ->
+        items.value?.getOrNull(position)?.let { searchItems ->
             contactManager.getContacts().value?.find { it.id == searchItems.id }?.let { contact ->
                 log("Selected contact: $contact")
                 contactManager.setSelectedContact(contact)
@@ -104,7 +106,7 @@ class SearchViewModel @Inject constructor(
             val searchResult = searchDeferred!!.await()
             log("Search result: ${searchResult.size} items")
 
-            searchItems.value = searchResult
+            items.value = searchResult
             isLoading.value = false
         }
     }
@@ -117,7 +119,7 @@ class SearchViewModel @Inject constructor(
                     network.getContactList().either(::handleFailure) { contactList ->
                         viewModelScope.launch {
                             contactManager.updateAppData(version, contactList)
-                            searchItems.value = contactManager.getFilteredContacts()
+                            items.value = contactManager.getFilteredContacts()
                             isLoading.value = false
                         }
                     }

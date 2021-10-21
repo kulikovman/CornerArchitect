@@ -30,7 +30,7 @@ class SearchFragment : BaseFragment<SearchFragmentBinding, SearchViewModel>() {
                 layoutId = R.layout.item_search,
                 itemId = BR.item,
                 recyclerView = rv,
-                items = viewModel.searchItems,
+                items = viewModel.items,
                 onItemClick = viewModel::onClickItemPosition
             )
         }

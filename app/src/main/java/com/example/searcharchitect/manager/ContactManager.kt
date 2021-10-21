@@ -96,7 +96,7 @@ class ContactManager @Inject constructor(
             result = result?.filter { it.name.contains(name, true) }
         }
 
-        return result ?: emptyList()
+        return result?.sortedBy { it.name } ?: emptyList()
     }
 
 }
