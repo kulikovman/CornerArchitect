@@ -14,6 +14,9 @@ class DetailViewModel @Inject constructor(
     private val contactManager: IContactManager
 ) : BaseViewModel() {
 
+    val facebookToken = contactManager.facebookToken
+
+
     var callPhoneNumber: ((String) -> Unit)? = null
 
     var sendEmail: ((String) -> Unit)? = null

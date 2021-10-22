@@ -1,6 +1,9 @@
 package com.example.searcharchitect.di
 
 import com.example.searcharchitect.BuildConfig
+import com.example.searcharchitect.di.qualifer.QFacebookRetrofit
+import com.example.searcharchitect.di.qualifer.QGoogleSheetsRetrofit
+import com.example.searcharchitect.retrofit.api.IFacebookApi
 import com.example.searcharchitect.retrofit.api.IGoogleSheetsApi
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
@@ -38,7 +41,8 @@ object RetrofitModule {
     //@ExperimentalSerializationApi
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    @QGoogleSheetsRetrofit
+    fun provideGoogleSheetsRetrofit(okHttpClient: OkHttpClient): Retrofit {
         //val json = Json { ignoreUnknownKeys = true }
 
         return Retrofit.Builder()
@@ -52,8 +56,26 @@ object RetrofitModule {
     }
 
     @Provides
-    fun provideGoogleSheetsApi(retrofit: Retrofit): IGoogleSheetsApi {
+    fun provideGoogleSheetsApi(@QGoogleSheetsRetrofit retrofit: Retrofit): IGoogleSheetsApi {
         return retrofit.create(IGoogleSheetsApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    @QFacebookRetrofit
+    fun provideFacebookRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://graph.facebook.com")
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .build()
+    }
+
+    @Provides
+    fun provideFacebookApi(@QFacebookRetrofit retrofit: Retrofit): IFacebookApi {
+        return retrofit.create(IFacebookApi::class.java)
     }
 
 }

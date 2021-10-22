@@ -7,11 +7,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.example.searcharchitect.R
 import com.example.searcharchitect.base.BaseFragment
 import com.example.searcharchitect.databinding.DetailFragmentBinding
+import com.example.searcharchitect.utility.log
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,6 +26,7 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
+        loadAvatar()
 
         viewModel.callPhoneNumber = ::callPhoneNumber
         viewModel.sendEmail = ::sendEmail
@@ -43,6 +45,20 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
         binding.toolbar.apply {
             setNavigationOnClickListener {
                 viewModel.onClickBack()
+            }
+        }
+    }
+
+    private fun loadAvatar() {
+        viewModel.facebookToken?.let { token ->
+            log("Facebook token: $token")
+            viewModel.facebook.observe(viewLifecycleOwner) { id ->
+                val imgUrl = "https://graph.facebook.com/$id/picture?type=large&access_token=$token"
+                log("Link: $imgUrl")
+
+                binding.avatar.apply {
+                    Glide.with(context).load(imgUrl).into(this);
+                }
             }
         }
     }

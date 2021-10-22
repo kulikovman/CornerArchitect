@@ -27,9 +27,18 @@ class SplashViewModel @Inject constructor(
 
 
     init {
+        getFacebookAccessToken()
         getContacts()
     }
 
+
+    private fun getFacebookAccessToken() {
+        viewModelScope.launch {
+            network.getFacebookAccessToken().either { token ->
+                contactManager.facebookToken = token
+            }
+        }
+    }
 
     private fun getContacts() {
         viewModelScope.launch {

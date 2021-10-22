@@ -12,6 +12,8 @@ import javax.inject.Inject
 
 interface IContactManager {
 
+    var facebookToken: String?
+
     fun getContacts(): LiveData<List<Contact>>
     fun getSelectedContact(): LiveData<Contact>
     fun setSelectedContact(contact: Contact)
@@ -32,6 +34,8 @@ class ContactManager @Inject constructor(
     private val database: IDatabaseRepository,
     private val datastore: IDatastoreRepository
 ) : IContactManager {
+
+    override var facebookToken: String? = null
 
     private val allContacts = MutableLiveData(emptyList<Contact>())
 

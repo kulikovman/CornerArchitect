@@ -68,24 +68,4 @@ abstract class BaseFragment<T : ViewDataBinding, S : BaseViewModel> : Fragment()
         )
     }
 
-    /*fun initDefaultImeDoneAction(editText: EditText, extraAction: (() -> Unit)? = null) {
-        editText.setOnEditorActionListener { _, _, _ ->
-            hideKeyboard()
-            extraAction?.invoke()
-            true
-        }
-    }
-
-    fun hideKeyboard() {
-        if (isAdded) {
-            activity?.hideKeyboard()
-        }
-    }
-
-    fun showKeyboard(editText: EditText) {
-        val imm = editText.context
-            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
-    }*/
-
 }

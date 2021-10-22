@@ -30,15 +30,15 @@
                 app:expandedTitleMarginEnd="15dp"
                 app:expandedTitleMarginStart="20dp"
                 app:expandedTitleMarginTop="55dp"
-                app:maxLines="2"
                 app:expandedTitleTextAppearance="@style/DetailExpandedTitle"
-                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+                app:maxLines="2">
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    app:contentInsetStartWithNavigation="0dp"
                     android:layout_height="?attr/actionBarSize"
+                    app:contentInsetStartWithNavigation="0dp"
                     app:layout_collapseMode="pin"
                     app:title="@{vm.name}"
                     tools:title="Олег\nЛукьяненко" />
@@ -48,15 +48,23 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="20dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="20dp">
+
+                <ImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/amber_500" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -110,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:onClick="@{(v) -> vm.onClickEmail()}"
                     android:text="@{vm.email}"
                     android:textSize="18sp"

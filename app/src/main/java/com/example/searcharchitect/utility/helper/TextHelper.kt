@@ -7,6 +7,8 @@ import javax.inject.Inject
 interface ITextHelper {
 
     fun googleSheetsApiKey(): String
+    fun facebookAppSecret(): String
+    fun facebookAppId(): String
 
     fun connectionError(): String
     fun unknownError(): String
@@ -18,6 +20,10 @@ class TextHelper @Inject constructor(
 ) : ITextHelper {
 
     override fun googleSheetsApiKey(): String = context.getString(R.string.google_sheets_api_key)
+
+    override fun facebookAppSecret(): String = context.getString(R.string.facebook_secret)
+
+    override fun facebookAppId(): String = context.getString(R.string.facebook_app_id)
 
     override fun connectionError(): String = context.getString(R.string.connection_error)
 
