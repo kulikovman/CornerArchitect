@@ -26,7 +26,7 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
-        loadAvatar()
+        //loadAvatar()
 
         viewModel.callPhoneNumber = ::callPhoneNumber
         viewModel.sendEmail = ::sendEmail
