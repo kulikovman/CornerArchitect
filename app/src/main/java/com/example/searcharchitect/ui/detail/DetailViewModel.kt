@@ -1,17 +1,26 @@
 package com.example.searcharchitect.ui.detail
 
 import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.example.searcharchitect.base.BaseViewModel
 import com.example.searcharchitect.manager.IContactManager
 import com.example.searcharchitect.navigation.INavigator
+import com.example.searcharchitect.repositiry.INetworkRepository
 import com.example.searcharchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+import android.os.Bundle
+import com.facebook.*
+
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val navigator: INavigator,
-    private val contactManager: IContactManager
+    private val contactManager: IContactManager,
+    private val network: INetworkRepository
 ) : BaseViewModel() {
 
     val facebookToken = contactManager.facebookToken
@@ -57,6 +66,40 @@ class DetailViewModel @Inject constructor(
     val link = contact.map { it.link }
 
     val note = contact.map { it.note }
+
+
+    /*init {
+        viewModelScope.launch {
+            log("Before try get facebook profile info...")
+            delay(100)
+            contactManager.apply {
+                facebook.value?.let { userId ->
+                    log("Facebook user id: $userId")
+
+                    val params = Bundle()
+                    params.putString("fields", "full_picture,message")
+
+                    GraphRequest(
+                        accessToken = AccessToken.getCurrentAccessToken(),
+                        graphPath = "$userId/feed",
+                        parameters = params,
+                        httpMethod = HttpMethod.GET,
+                        callback = { response ->
+                            log("Response: $response")
+                        }
+                    ).executeAsync()
+
+
+
+
+                    *//*facebookToken?.let { token ->
+                        log("Facebook token: $token")
+                        network.getFacebookProfileInfo(userId, token)
+                    }*//*
+                }
+            }
+        }
+    }*/
 
 
     fun onClickBack() {

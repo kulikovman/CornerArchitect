@@ -21,7 +21,7 @@ class TextHelper @Inject constructor(
 
     override fun googleSheetsApiKey(): String = context.getString(R.string.google_sheets_api_key)
 
-    override fun facebookAppSecret(): String = context.getString(R.string.facebook_secret)
+    override fun facebookAppSecret(): String = context.getString(R.string.facebook_client_token)
 
     override fun facebookAppId(): String = context.getString(R.string.facebook_app_id)
 

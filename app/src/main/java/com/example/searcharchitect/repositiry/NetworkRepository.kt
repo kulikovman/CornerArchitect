@@ -13,6 +13,7 @@ interface INetworkRepository {
     suspend fun getContactList(): Either<Failure, List<Contact>>
 
     suspend fun getFacebookAccessToken(): Either<Failure, String>
+    suspend fun getFacebookProfileInfo(userId: String, token: String)
 
 }
 
@@ -32,6 +33,10 @@ class NetworkRepository @Inject constructor(
 
     override suspend fun getFacebookAccessToken(): Either<Failure, String> {
         return facebook.getAccessToken()
+    }
+
+    override suspend fun getFacebookProfileInfo(userId: String, token: String) {
+        facebook.getProfileInfo(userId, token)
     }
 
 }

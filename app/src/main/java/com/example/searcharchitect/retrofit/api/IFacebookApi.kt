@@ -3,6 +3,7 @@ package com.example.searcharchitect.retrofit.api
 import com.example.searcharchitect.model.FacebookAccessTokenInfo
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface IFacebookApi {
@@ -13,5 +14,12 @@ interface IFacebookApi {
         @Query("client_secret") appSecret: String,
         @Query("grant_type") grantType: String,
     ) : Response<FacebookAccessTokenInfo>
+
+    @GET("/{userId}")
+    suspend fun getProfileInfo(
+        @Path("userId") userId: String,
+        @Query("fields") fields: String,
+        @Query("access_token") token: String
+    ) : Response<Unit>
 
 }
