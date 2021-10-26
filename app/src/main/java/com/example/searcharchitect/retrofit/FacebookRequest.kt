@@ -46,10 +46,7 @@ class FacebookRequest @Inject constructor(
 
             if (request.isSuccessful) {
                 log(request.body().toString())
-                /*request.body()?.token?.let { token ->
-                    Either.Result(token)
-                } ?: Either.Failure(Failure.UnknownError())*/
-            } //else Either.Failure(Failure.UnknownError())
+            }
         } catch (e: Exception) {
             //Either.Failure(Failure.ConnectionError(e.toString()))
         }

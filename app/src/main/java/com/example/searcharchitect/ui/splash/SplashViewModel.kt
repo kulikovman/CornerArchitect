@@ -9,8 +9,10 @@ import com.example.searcharchitect.repositiry.INetworkRepository
 import com.example.searcharchitect.retrofit.Failure
 import com.example.searcharchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
@@ -27,16 +29,16 @@ class SplashViewModel @Inject constructor(
 
 
     init {
-        getFacebookAccessToken()
+        testLoadProfilePhoto()
         getContacts()
     }
 
 
-    private fun getFacebookAccessToken() {
+    private fun testLoadProfilePhoto() {
         viewModelScope.launch {
-            network.getFacebookAccessToken().either { token ->
-                contactManager.facebookToken = token
-            }
+            delay(100)
+            log("Send response from vk...")
+            network.getVkProfileInfo("valera_andreevna")
         }
     }
 

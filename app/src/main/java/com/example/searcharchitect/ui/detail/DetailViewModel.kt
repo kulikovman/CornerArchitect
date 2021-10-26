@@ -1,19 +1,12 @@
 package com.example.searcharchitect.ui.detail
 
 import androidx.lifecycle.map
-import androidx.lifecycle.viewModelScope
 import com.example.searcharchitect.base.BaseViewModel
 import com.example.searcharchitect.manager.IContactManager
 import com.example.searcharchitect.navigation.INavigator
 import com.example.searcharchitect.repositiry.INetworkRepository
-import com.example.searcharchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-import android.os.Bundle
-import com.facebook.*
 
 
 @HiltViewModel

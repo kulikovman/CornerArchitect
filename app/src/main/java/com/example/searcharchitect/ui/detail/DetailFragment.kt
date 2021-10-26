@@ -8,11 +8,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
 import com.example.searcharchitect.R
 import com.example.searcharchitect.base.BaseFragment
 import com.example.searcharchitect.databinding.DetailFragmentBinding
-import com.example.searcharchitect.utility.log
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -50,7 +48,28 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
     }
 
     private fun loadAvatar() {
-        viewModel.facebookToken?.let { token ->
+
+
+
+        /*VK.execute(FriendsService().friendsGet(
+            userId = "valera_andreevna"
+        ), object: VKApiCallback<FriendsGetFieldsResponse> {
+            override fun success(result: FriendsGetFieldsResponse) {
+                // you stuff is here
+            }
+            override fun fail(error: Exception) {
+
+            }
+        })*/
+
+        /*VK.execute(UsersGetNameCase(), object: VKApiCallback<List<UsersUserXtrCounters>> {
+            override fun success(result: List<UsersUserXtrCounters>) {
+            }
+            override fun fail(error: VKApiExecutionException) {
+            }
+        })*/
+
+    /*viewModel.facebookToken?.let { token ->
             log("Facebook token: $token")
             viewModel.facebook.observe(viewLifecycleOwner) { id ->
                 val imgUrl = "https://graph.facebook.com/$id/picture?type=large&access_token=$token"
@@ -60,7 +79,7 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
                     Glide.with(context).load(imgUrl).into(this);
                 }
             }
-        }
+        }*/
     }
 
     private fun callPhoneNumber(phone: String) {
