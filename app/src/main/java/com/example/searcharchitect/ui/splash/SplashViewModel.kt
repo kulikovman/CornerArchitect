@@ -4,8 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.searcharchitect.base.BaseViewModel
 import com.example.searcharchitect.manager.IContactManager
-import com.example.searcharchitect.model.Contact
-import com.example.searcharchitect.model.VkProfileInfo
 import com.example.searcharchitect.navigation.INavigator
 import com.example.searcharchitect.repositiry.INetworkRepository
 import com.example.searcharchitect.retrofit.Failure
@@ -49,9 +47,10 @@ class SplashViewModel @Inject constructor(
                             viewModelScope.launch {
 
                                 // todo Обновлять ссылки на фото при каждом запуске
+                                // Если окажется, что ссылки временные...
 
                                 val domains = contacts.mapNotNull { it.vk }
-                                network.getVkPhotoPreviewList(domains).either { profileInfoList ->
+                                network.getVkProfileInfoList(domains).either { profileInfoList ->
                                     log("Profile info list size: ${profileInfoList.size}")
                                     viewModelScope.launch {
                                         profileInfoList.forEach { profileInfo ->

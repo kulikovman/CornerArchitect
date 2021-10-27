@@ -24,7 +24,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="15dp"
             app:invisibleIfNull="@{item.previewLink}"
-            app:preview="@{item.previewLink}"
+            app:profilePreview="@{item.previewLink}"
             tools:background="@drawable/circle_bg" />
 
         <LinearLayout

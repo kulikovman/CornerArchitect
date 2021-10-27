@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface IVkApi {
 
     @GET("/method/users.get")
-    suspend fun getUserInfo(
+    suspend fun getProfileInfo(
         @Query("user_ids") userIds: String,
         @Query("fields") fields: String,
         @Query("access_token") accessToken: String,

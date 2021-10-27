@@ -39,6 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:background="@color/teal_400"
+                    app:profilePhoto="@{vm.photoLink}"
                     android:scaleType="centerCrop" />
 
                 <androidx.appcompat.widget.Toolbar

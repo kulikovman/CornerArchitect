@@ -65,6 +65,8 @@ class DetailViewModel @Inject constructor(
 
     val note = contact.map { it.note }
 
+    val photoLink = contact.map { it.photoLink }
+
 
     init {
         viewModelScope.launch {
