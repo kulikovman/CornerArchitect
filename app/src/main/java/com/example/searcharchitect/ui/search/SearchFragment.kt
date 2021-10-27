@@ -10,6 +10,8 @@ import com.example.searcharchitect.base.BaseFragment
 import com.example.searcharchitect.databinding.ItemSearchBinding
 import com.example.searcharchitect.databinding.SearchFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import android.content.Intent
+import com.example.searcharchitect.main.MainActivity
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<SearchFragmentBinding, SearchViewModel>() {
@@ -22,6 +24,8 @@ class SearchFragment : BaseFragment<SearchFragmentBinding, SearchViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         initList()
         initSearch()
+
+        viewModel.restartApp = ::restartApp
     }
 
     private fun initList() {
@@ -49,6 +53,14 @@ class SearchFragment : BaseFragment<SearchFragmentBinding, SearchViewModel>() {
             nameEdittext.doAfterTextChanged {
                 viewModel.updateContactList()
             }
+        }
+    }
+
+    private fun restartApp() {
+        activity?.apply {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finishAffinity()
         }
     }
 

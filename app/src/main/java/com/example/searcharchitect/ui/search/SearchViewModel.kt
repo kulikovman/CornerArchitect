@@ -22,10 +22,9 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val navigator: INavigator,
     private val contactManager: IContactManager,
-    private val network: INetworkRepository,
-    private val toast: IToastHelper,
-    private val text: ITextHelper
 ) : BaseViewModel() {
+
+    var restartApp: (() -> Unit)? = null
 
     val city = MutableLiveData("")
 
@@ -33,9 +32,7 @@ class SearchViewModel @Inject constructor(
 
     val name = MutableLiveData("")
 
-
     val items = MutableLiveData(emptyList<ItemSearchUi>())
-
 
     val isCityClearButtonVisibility = city.map { it.isNotEmpty() }
 
@@ -112,29 +109,7 @@ class SearchViewModel @Inject constructor(
     }
 
     fun onClickLoadData() {
-        viewModelScope.launch {
-            isLoading.value = true
-            network.getDataVersion().either(::handleFailure) { version ->
-                viewModelScope.launch {
-                    network.getContactList().either(::handleFailure) { contactList ->
-                        viewModelScope.launch {
-                            contactManager.updateAppData(version, contactList)
-                            items.value = contactManager.getFilteredContacts()
-                            isLoading.value = false
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private fun handleFailure(failure: Failure) {
-        isLoading.value = false
-
-        when (failure) {
-            is Failure.ConnectionError -> toast.showLong(text.connectionError())
-            is Failure.UnknownError -> toast.showLong(text.unknownError())
-        }
+        restartApp?.invoke()
     }
 
 }
