@@ -6,4 +6,6 @@
     <color name="edittext_common_border_focused">@color/blue_500</color>
     <color name="edittext_common_border_selected">@color/red_500</color>
 
+    <color name="detail_title_bg">#33000000</color>
+
 </resources>

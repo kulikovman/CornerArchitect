@@ -21,7 +21,6 @@ class DetailViewModel @Inject constructor(
 
     //val facebookToken = contactManager.facebookToken
 
-
     var setProfilePhoto: ((String) -> Unit)? = null
 
     var callPhoneNumber: ((String) -> Unit)? = null
@@ -96,9 +95,6 @@ class DetailViewModel @Inject constructor(
                             log("Response: $response")
                         }
                     ).executeAsync()
-
-
-
 
                     facebookToken?.let { token ->
                         log("Facebook token: $token")

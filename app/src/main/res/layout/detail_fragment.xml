@@ -23,7 +23,7 @@
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 app:collapsedTitleTextAppearance="@style/DetailCollapsedTitle"
                 app:contentScrim="@color/teal_400"
                 app:expandedTitleGravity="top"
@@ -37,10 +37,35 @@
                 <ImageView
                     android:id="@+id/avatar"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="match_parent"
                     android:background="@color/teal_400"
-                    app:profilePhoto="@{vm.photoLink}"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.5"
+                    app:profilePhoto="@{vm.photoLink}" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/detail_title_bg"
+                    android:paddingVertical="10dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="25dp"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.7">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:text="@{vm.name}"
+                        android:textColor="@color/transparent"
+                        android:textSize="32sp"
+                        tools:text="Олег\nЛукьяненко" />
+
+                </FrameLayout>
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"

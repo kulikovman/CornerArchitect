@@ -2,5 +2,6 @@
 <resources>
 
     <dimen name="edittext_corner_radius">8dp</dimen>
+    <dimen name="detail_title_bg_radius">15dp</dimen>
 
 </resources>
