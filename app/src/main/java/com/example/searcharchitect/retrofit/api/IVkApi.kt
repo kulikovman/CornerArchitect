@@ -1,5 +1,6 @@
 package com.example.searcharchitect.retrofit.api
 
+import com.example.searcharchitect.model.VkContainerRes
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,6 +13,6 @@ interface IVkApi {
         @Query("fields") fields: String,
         @Query("access_token") accessToken: String,
         @Query("v") apiVersion: String,
-    ) : Response<Unit>
+    ) : Response<VkContainerRes>
 
 }

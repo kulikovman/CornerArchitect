@@ -6,7 +6,7 @@ import com.example.searcharchitect.utility.log
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-data class GoogleSheetObject(
+data class GoogleSheetRes(
     @SerializedName("range")
     var range: String,
     @SerializedName("majorDimension")

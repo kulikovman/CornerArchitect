@@ -1,6 +1,7 @@
 package com.example.searcharchitect.repositiry
 
 import com.example.searcharchitect.model.Contact
+import com.example.searcharchitect.model.VkProfileInfo
 import com.example.searcharchitect.retrofit.Failure
 import com.example.searcharchitect.retrofit.IFacebookRequest
 import com.example.searcharchitect.retrofit.IGoogleSheetsRequest
@@ -16,7 +17,8 @@ interface INetworkRepository {
     suspend fun getFacebookAccessToken(): Either<Failure, String>
     suspend fun getFacebookProfileInfo(userId: String, token: String)
 
-    suspend fun getVkProfileInfo(userId: String)
+    suspend fun getVkProfileInfo(userId: String): Either<Failure, String>
+    suspend fun getVkPhotoPreviewList(domains: List<String>): Either<Failure, List<VkProfileInfo>>
 
 }
 
@@ -44,8 +46,12 @@ class NetworkRepository @Inject constructor(
     }
 
 
-    override suspend fun getVkProfileInfo(userId: String) {
-        vk.getProfileInfo(userId)
+    override suspend fun getVkProfileInfo(userId: String): Either<Failure, String> {
+        return vk.getProfileInfo(userId)
+    }
+
+    override suspend fun getVkPhotoPreviewList(domains: List<String>): Either<Failure, List<VkProfileInfo>> {
+        return vk.getPhotoPreviewList(domains)
     }
 
 }

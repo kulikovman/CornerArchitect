@@ -19,5 +19,7 @@ data class Contact(
     val facebook: String?,
     val vk: String?,
     val link: String?,
-    val note: String?
+    val note: String?,
+    var previewLink: String? = null,
+    var photoLink: String? = null
 )

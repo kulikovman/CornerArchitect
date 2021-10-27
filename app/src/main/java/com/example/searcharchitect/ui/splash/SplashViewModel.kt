@@ -4,15 +4,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.searcharchitect.base.BaseViewModel
 import com.example.searcharchitect.manager.IContactManager
+import com.example.searcharchitect.model.Contact
+import com.example.searcharchitect.model.VkProfileInfo
 import com.example.searcharchitect.navigation.INavigator
 import com.example.searcharchitect.repositiry.INetworkRepository
 import com.example.searcharchitect.retrofit.Failure
 import com.example.searcharchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
@@ -29,18 +29,9 @@ class SplashViewModel @Inject constructor(
 
 
     init {
-        testLoadProfilePhoto()
         getContacts()
     }
 
-
-    private fun testLoadProfilePhoto() {
-        viewModelScope.launch {
-            delay(100)
-            log("Send response from vk...")
-            network.getVkProfileInfo("valera_andreevna")
-        }
-    }
 
     private fun getContacts() {
         viewModelScope.launch {
@@ -56,6 +47,24 @@ class SplashViewModel @Inject constructor(
                         network.getContactList().either(::handleLoadDataFailure) { contacts ->
                             log("Contacts in google sheets: ${contacts.size}")
                             viewModelScope.launch {
+
+                                // todo Обновлять ссылки на фото при каждом запуске
+
+                                val domains = contacts.mapNotNull { it.vk }
+                                network.getVkPhotoPreviewList(domains).either { profileInfoList ->
+                                    log("Profile info list size: ${profileInfoList.size}")
+                                    viewModelScope.launch {
+                                        profileInfoList.forEach { profileInfo ->
+                                            contacts.find { it.vk == profileInfo.domain }?.apply {
+                                                previewLink = profileInfo.previewLink
+                                                photoLink = profileInfo.photoLink
+                                            }
+                                        }
+                                    }
+                                }
+
+                                log("Contacts with preview links: ${contacts.filter { it.previewLink != null }.size}")
+
                                 contactManager.updateAppData(version, contacts)
                                 isDataLoading.value = false
 

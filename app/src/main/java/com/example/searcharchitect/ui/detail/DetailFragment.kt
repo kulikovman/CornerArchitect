@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.example.searcharchitect.R
 import com.example.searcharchitect.base.BaseFragment
 import com.example.searcharchitect.databinding.DetailFragmentBinding
@@ -26,6 +27,7 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
         initToolbar()
         //loadAvatar()
 
+        viewModel.setProfilePhoto = ::setProfilePhoto
         viewModel.callPhoneNumber = ::callPhoneNumber
         viewModel.sendEmail = ::sendEmail
         viewModel.openInstagram = ::openInstagram
@@ -48,9 +50,6 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
     }
 
     private fun loadAvatar() {
-
-
-
         /*VK.execute(FriendsService().friendsGet(
             userId = "valera_andreevna"
         ), object: VKApiCallback<FriendsGetFieldsResponse> {
@@ -80,6 +79,12 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
                 }
             }
         }*/
+    }
+
+    private fun setProfilePhoto(imgUrl: String) {
+        binding.avatar.apply {
+            Glide.with(context).load(imgUrl).into(this)
+        }
     }
 
     private fun callPhoneNumber(phone: String) {

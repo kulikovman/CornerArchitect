@@ -4,5 +4,6 @@ class ItemSearchUi(
     val id: String,
     val name: String,
     val city: String,
-    val specialization: String
+    val specialization: String,
+    val previewLink: String?
 )

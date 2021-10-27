@@ -84,7 +84,8 @@ class ContactManager @Inject constructor(
                 id = contact.id,
                 name = "${contact.surname} ${contact.name}",
                 city = contact.city,
-                specialization = contact.specialization
+                specialization = contact.specialization,
+                previewLink = contact.previewLink
             )
         }
 

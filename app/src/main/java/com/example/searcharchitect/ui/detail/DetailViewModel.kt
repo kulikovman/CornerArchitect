@@ -1,13 +1,16 @@
 package com.example.searcharchitect.ui.detail
 
 import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.example.searcharchitect.base.BaseViewModel
 import com.example.searcharchitect.manager.IContactManager
 import com.example.searcharchitect.navigation.INavigator
 import com.example.searcharchitect.repositiry.INetworkRepository
+import com.example.searcharchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
@@ -16,8 +19,10 @@ class DetailViewModel @Inject constructor(
     private val network: INetworkRepository
 ) : BaseViewModel() {
 
-    val facebookToken = contactManager.facebookToken
+    //val facebookToken = contactManager.facebookToken
 
+
+    var setProfilePhoto: ((String) -> Unit)? = null
 
     var callPhoneNumber: ((String) -> Unit)? = null
 
@@ -61,11 +66,19 @@ class DetailViewModel @Inject constructor(
     val note = contact.map { it.note }
 
 
-    /*init {
+    init {
         viewModelScope.launch {
-            log("Before try get facebook profile info...")
-            delay(100)
-            contactManager.apply {
+            //log("Before try get facebook profile info...")
+            //delay(100)
+
+            /*viewModelScope.launch {
+                delay(100)
+                network.getVkProfileInfo("valera_andreevna").either { link ->
+                    setProfilePhoto?.invoke(link)
+                }
+            }*/
+
+            /*contactManager.apply {
                 facebook.value?.let { userId ->
                     log("Facebook user id: $userId")
 
@@ -85,14 +98,14 @@ class DetailViewModel @Inject constructor(
 
 
 
-                    *//*facebookToken?.let { token ->
+                    facebookToken?.let { token ->
                         log("Facebook token: $token")
                         network.getFacebookProfileInfo(userId, token)
-                    }*//*
+                    }
                 }
-            }
+            }*/
         }
-    }*/
+    }
 
 
     fun onClickBack() {
