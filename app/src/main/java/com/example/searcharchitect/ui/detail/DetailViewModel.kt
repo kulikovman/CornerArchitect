@@ -27,6 +27,8 @@ class DetailViewModel @Inject constructor(
 
     var sendEmail: ((String) -> Unit)? = null
 
+    var openTelegram: ((String) -> Unit)? = null
+
     var openInstagram: ((String) -> Unit)? = null
 
     var openFacebook: ((String) -> Unit)? = null
@@ -53,6 +55,8 @@ class DetailViewModel @Inject constructor(
     val phone = contact.map { it.phone }
 
     val email = contact.map { it.email }
+
+    val telegram = contact.map { it.telegram }
 
     val instagram = contact.map { it.instagram }
 
@@ -119,6 +123,12 @@ class DetailViewModel @Inject constructor(
     fun onClickEmail() {
         email.value?.let { email ->
             sendEmail?.invoke(email)
+        }
+    }
+
+    fun onClickTelegram() {
+        telegram.value?.let { profileId ->
+            openTelegram?.invoke(profileId)
         }
     }
 

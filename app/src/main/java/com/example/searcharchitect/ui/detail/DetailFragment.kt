@@ -29,6 +29,7 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
         viewModel.setProfilePhoto = ::setProfilePhoto
         viewModel.callPhoneNumber = ::callPhoneNumber
         viewModel.sendEmail = ::sendEmail
+        viewModel.openTelegram = ::openTelegram
         viewModel.openInstagram = ::openInstagram
         viewModel.openFacebook = ::openFacebook
         viewModel.openVk = ::openVk
@@ -98,6 +99,22 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
         val intent = Intent(Intent.ACTION_SENDTO, uri)
 
         startActivity(Intent.createChooser(intent, null))
+    }
+
+    private fun openTelegram(profileId: String) {
+        val appUri = Uri.parse("https://t.me/$profileId")
+        val appIntent = Intent(Intent.ACTION_VIEW, appUri).apply {
+            `package` = "org.telegram.messenger"
+        }
+
+        val browserUri = Uri.parse("https://t.me/$profileId")
+        val browserIntent = Intent(Intent.ACTION_VIEW, browserUri)
+
+        try {
+            startActivity(appIntent)
+        } catch (e: ActivityNotFoundException) {
+            startActivity(browserIntent)
+        }
     }
 
     private fun openInstagram(profileId: String) {

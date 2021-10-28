@@ -172,8 +172,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
+                        android:onClick="@{(v) -> vm.onClickTelegram()}"
+                        android:src="@drawable/ic_telegram_48"
+                        app:goneIfNull="@{vm.telegram}" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
                         android:onClick="@{(v) -> vm.onClickInstagram()}"
-                        android:src="@drawable/ic_instagram"
+                        android:src="@drawable/ic_instagram_48"
                         app:goneIfNull="@{vm.instagram}" />
 
                     <ImageView
@@ -181,14 +189,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
                         android:onClick="@{(v) -> vm.onClickFacebook()}"
-                        android:src="@drawable/ic_facebook"
+                        android:src="@drawable/ic_facebook_48"
                         app:goneIfNull="@{vm.facebook}" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="@{(v) -> vm.onClickVk()}"
-                        android:src="@drawable/ic_vk"
+                        android:src="@drawable/ic_vk_48"
                         app:goneIfNull="@{vm.vk}" />
 
                 </LinearLayout>
