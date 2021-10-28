@@ -31,17 +31,20 @@ data class GoogleSheetRes(
                                 id = UUID.randomUUID().toString(),
                                 surname = list.getWithTrim(0),
                                 name = list.getWithTrim(1),
-                                city = list.getWithTrim(2),
-                                specialization = list.getWithTrim(3),
-                                work = list.getIfExist(4),
-                                position = list.getIfExist(5),
-                                email = list.getWithTrim(6),
-                                phone = list.getWithTrim(7),
-                                instagram = list.getIfExist(8),
-                                facebook = list.getIfExist(9),
-                                vk = list.getIfExist(10),
-                                link = list.getIfExist(11),
-                                note = list.getIfExist(12)
+                                patronymic = list.getIfExist(2),
+                                region = list.getWithTrim(3),
+                                city = list.getWithTrim(4),
+                                specialization = list.getWithTrim(5),
+                                work = list.getIfExist(6),
+                                position = list.getIfExist(7),
+                                email = list.getIfExist(8),
+                                phone = list.getIfExist(9),
+                                telegram = list.getIfExist(10),
+                                instagram = list.getIfExist(11),
+                                facebook = list.getIfExist(12),
+                                vk = list.getIfExist(13),
+                                link = list.getIfExist(14),
+                                note = list.getIfExist(15)
                             )
                         )
                     }

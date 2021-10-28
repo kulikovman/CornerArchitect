@@ -44,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{item.specialization}"
                 android:textSize="18sp"
+                android:maxLines="2"
                 app:goneIfEmpty="@{item.specialization}"
                 tools:text="Дизайн городской среды" />
 

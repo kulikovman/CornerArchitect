@@ -245,7 +245,7 @@
                     android:gravity="center_horizontal"
                     android:orientation="vertical"
                     app:goneIfFalse="@{vm.isMissingData}"
-                    tools:visibility="visible">
+                    tools:visibility="gone">
 
                     <ImageView
                         android:layout_width="wrap_content"
