@@ -44,7 +44,9 @@ class DetailViewModel @Inject constructor(
         "${it.name}\n${it.surname}"
     }
 
-    val city = contact.map { it.city }
+    val location = contact.map {
+        "${it.city} / ${it.region}"
+    }
 
     val specialization = contact.map { it.specialization }
 

@@ -10,6 +10,7 @@ import com.example.searcharchitect.retrofit.Failure
 import com.example.searcharchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.lang.IllegalStateException
 import javax.inject.Inject
 
 @HiltViewModel
