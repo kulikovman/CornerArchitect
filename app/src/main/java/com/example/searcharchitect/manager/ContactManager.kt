@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.example.searcharchitect.model.Contact
 import com.example.searcharchitect.repositiry.IDatabaseRepository
 import com.example.searcharchitect.repositiry.IDatastoreRepository
-import com.example.searcharchitect.repositiry.INetworkRepository
 import com.example.searcharchitect.ui.search.ItemSearchUi
 import com.example.searcharchitect.utility.log
 import javax.inject.Inject
@@ -82,15 +81,15 @@ class ContactManager @Inject constructor(
         var result = allContacts.value?.map { contact ->
             ItemSearchUi(
                 id = contact.id,
-                name = "${contact.surname} ${contact.name}",
-                city = contact.city,
+                name = "${contact.surname} ${contact.name} ${contact.patronymic.orEmpty()}".trim(),
+                location = "${contact.city} / ${contact.region}",
                 specialization = contact.specialization,
                 previewLink = contact.previewLink
             )
         }
 
         if (!city.isNullOrEmpty()) {
-            result = result?.filter { it.city.contains(city, true) }
+            result = result?.filter { it.location.contains(city, true) }
         }
 
         if (!specialization.isNullOrEmpty()) {

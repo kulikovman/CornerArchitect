@@ -79,7 +79,7 @@
                         android:enabled="@{vm.isSearchFieldsEnabled}"
                         android:hint="@string/city"
                         android:paddingEnd="44dp"
-                        android:text="@={vm.city}"
+                        android:text="@={vm.location}"
                         app:layout_constraintEnd_toEndOf="@id/content_margin_end"
                         app:layout_constraintStart_toEndOf="@id/city_icon"
                         app:layout_constraintTop_toTopOf="parent"

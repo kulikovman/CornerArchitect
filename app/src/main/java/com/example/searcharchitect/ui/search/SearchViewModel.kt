@@ -6,11 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.searcharchitect.base.BaseViewModel
 import com.example.searcharchitect.manager.IContactManager
 import com.example.searcharchitect.navigation.INavigator
-import com.example.searcharchitect.repositiry.INetworkRepository
-import com.example.searcharchitect.retrofit.Failure
 import com.example.searcharchitect.utility.extension.combine
-import com.example.searcharchitect.utility.helper.ITextHelper
-import com.example.searcharchitect.utility.helper.IToastHelper
 import com.example.searcharchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Deferred
@@ -26,7 +22,7 @@ class SearchViewModel @Inject constructor(
 
     var restartApp: (() -> Unit)? = null
 
-    val city = MutableLiveData("")
+    val location = MutableLiveData("")
 
     val specialization = MutableLiveData("")
 
@@ -34,7 +30,7 @@ class SearchViewModel @Inject constructor(
 
     val items = MutableLiveData(emptyList<ItemSearchUi>())
 
-    val isCityClearButtonVisibility = city.map { it.isNotEmpty() }
+    val isCityClearButtonVisibility = location.map { it.isNotEmpty() }
 
     val isSpecializationClearButtonVisibility = specialization.map { it.isNotEmpty() }
 
@@ -63,7 +59,7 @@ class SearchViewModel @Inject constructor(
 
 
     fun onClickClearCity() {
-        city.value = ""
+        location.value = ""
     }
 
     fun onClickClearSpecialization() {
@@ -94,7 +90,7 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             searchDeferred = async {
                 contactManager.getFilteredContacts(
-                    city = city.value,
+                    city = location.value,
                     specialization = specialization.value,
                     name = name.value
                 )

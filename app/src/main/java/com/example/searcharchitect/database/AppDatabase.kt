@@ -8,7 +8,7 @@ import com.example.searcharchitect.model.Contact
 
 @Database(
     entities = [Contact::class],
-    version = 3
+    version = 1
 )
 @TypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {
