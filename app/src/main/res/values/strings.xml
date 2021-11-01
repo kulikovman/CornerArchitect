@@ -6,6 +6,7 @@
     <string name="unknown_error">Неизвестная ошибка</string>
 
     <string name="city">Город</string>
+    <string name="place">Место</string>
     <string name="specialization">Специализация</string>
     <string name="contact">Контакт</string>
     <string name="search">Поиск</string>

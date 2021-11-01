@@ -23,8 +23,8 @@ data class VkProfileInfoRes(
     var has_photo: Int?, // Есть ли фото профиля (1 - да, 0 - нет)
     @SerializedName("photo_100")
     var photo_100: String?, // Квадратное фото 100х100
-    @SerializedName("photo_max_orig")
-    var photo_max_orig: String? // Фото максимального размера
+    @SerializedName("photo_max")
+    var photo_max: String? // Квадратное фото максимального размера
 ) {
 
     fun convertToVkProfileInfo(): VkProfileInfo {
@@ -32,7 +32,7 @@ data class VkProfileInfoRes(
             domain = domain.orEmpty(),
             isPhoto = has_photo.toBoolean(),
             previewLink = photo_100,
-            photoLink = photo_max_orig
+            photoLink = photo_max
         )
     }
 
