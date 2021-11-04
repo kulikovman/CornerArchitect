@@ -28,25 +28,20 @@ class InfoDialogFragment : DialogFragment() {
         viewModel = ViewModelProvider(this).get(InfoViewModel::class.java)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.info_dialog_fragment, container, false)
-        binding.lifecycleOwner = this
-        binding.vm = viewModel
-        return binding.root
-    }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let { fragmentActivity ->
             val builder = AlertDialog.Builder(fragmentActivity)
             val inflater = fragmentActivity.layoutInflater
 
-            builder.setView(inflater.inflate(R.layout.info_dialog_fragment, null))
-                .setPositiveButton("Okk") { dialog, id ->
+            binding = DataBindingUtil.inflate(inflater, R.layout.info_dialog_fragment, null, false)
+            binding.lifecycleOwner = this
+            binding.vm = viewModel
+
+            builder.setView(binding.root)
+                .setPositiveButton(getString(R.string.ok)) { dialog, id ->
                     dismiss()
                 }
+
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }

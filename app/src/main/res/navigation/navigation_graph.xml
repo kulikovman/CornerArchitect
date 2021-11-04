@@ -30,6 +30,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_searchFragment_to_infoDialogFragment"
+            app:destination="@id/infoDialogFragment" />
     </fragment>
 
     <fragment
@@ -37,5 +40,11 @@
         android:name="com.example.searcharchitect.ui.detail.DetailFragment"
         android:label="DetailFragment"
         tools:layout="@layout/detail_fragment" />
+
+    <dialog
+        android:id="@+id/infoDialogFragment"
+        android:name="com.example.searcharchitect.ui.info.InfoDialogFragment"
+        android:label="InfoDialogFragment"
+        tools:layout="@layout/info_dialog_fragment" />
 
 </navigation>

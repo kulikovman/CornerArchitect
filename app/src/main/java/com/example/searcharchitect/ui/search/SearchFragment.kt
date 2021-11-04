@@ -24,6 +24,7 @@ class SearchFragment : BaseFragment<SearchFragmentBinding, SearchViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         initList()
         initSearch()
+        initToolbar()
 
         viewModel.restartApp = ::restartApp
     }
@@ -52,6 +53,19 @@ class SearchFragment : BaseFragment<SearchFragmentBinding, SearchViewModel>() {
 
             nameEdittext.doAfterTextChanged {
                 viewModel.updateContactList()
+            }
+        }
+    }
+
+    private fun initToolbar() {
+        binding.toolbar.apply {
+            inflateMenu(R.menu.search_menu)
+
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.info -> viewModel.onClickInfo()
+                }
+                true
             }
         }
     }

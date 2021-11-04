@@ -108,4 +108,8 @@ class SearchViewModel @Inject constructor(
         restartApp?.invoke()
     }
 
+    fun onClickInfo() {
+        navigator.actionSearchToIndoDialog()
+    }
+
 }

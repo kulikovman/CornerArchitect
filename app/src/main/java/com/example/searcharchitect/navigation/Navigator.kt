@@ -12,6 +12,7 @@ interface INavigator {
 
     fun actionSplashToSearch()
     fun actionSearchToDetail()
+    fun actionSearchToIndoDialog()
 
 }
 
@@ -37,6 +38,10 @@ class Navigator @Inject constructor(
 
     override fun actionSearchToDetail() {
         navController?.navigate(R.id.action_searchFragment_to_detailFragment)
+    }
+
+    override fun actionSearchToIndoDialog() {
+        navController?.navigate(R.id.action_searchFragment_to_infoDialogFragment)
     }
 
 }

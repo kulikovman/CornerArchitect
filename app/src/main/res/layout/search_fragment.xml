@@ -179,6 +179,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
+                    android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
                     app:layout_collapseMode="pin"
                     app:title="@string/search_architect" />
 
