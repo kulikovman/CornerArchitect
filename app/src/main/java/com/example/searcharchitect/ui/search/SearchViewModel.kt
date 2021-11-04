@@ -90,9 +90,9 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             searchDeferred = async {
                 contactManager.getFilteredContacts(
-                    city = location.value,
-                    specialization = specialization.value,
-                    name = name.value
+                    city = location.value?.trim(),
+                    specialization = specialization.value?.trim(),
+                    name = name.value?.trim()
                 )
             }
 

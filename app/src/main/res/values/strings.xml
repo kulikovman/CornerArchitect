@@ -18,6 +18,8 @@
     <string name="nothing_found">Ничего не найдено</string>
     <string name="download">Загрузить</string>
     <string name="missing_data">Отсутствуют данные</string>
+    <string name="if_you_want_add_data">Если вы хотите добавить/изменить/удалить данные - обратитесь по адресу:</string>
+    <string name="psthv_email">alexey.psthv@gmail.com</string>
 
 
 </resources>

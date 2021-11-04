@@ -17,6 +17,8 @@ interface ITextHelper {
     fun connectionError(): String
     fun unknownError(): String
 
+    fun psthvEmail(): String
+
 }
 
 class TextHelper @Inject constructor(
@@ -39,5 +41,8 @@ class TextHelper @Inject constructor(
     override fun connectionError(): String = context.getString(R.string.connection_error)
 
     override fun unknownError(): String = context.getString(R.string.unknown_error)
+
+
+    override fun psthvEmail(): String = context.getString(R.string.psthv_email)
 
 }
