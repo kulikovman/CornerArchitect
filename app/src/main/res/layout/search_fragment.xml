@@ -7,11 +7,11 @@
 
         <variable
             name="vm"
-            type="com.example.searcharchitect.ui.search.SearchViewModel" />
+            type="com.corner.searcharchitect.ui.search.SearchViewModel" />
 
         <variable
             name="rvConfig"
-            type="com.example.searcharchitect.utility.databinding.DataBindingRecyclerViewConfig" />
+            type="com.corner.searcharchitect.utility.databinding.DataBindingRecyclerViewConfig" />
 
     </data>
 
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="com.example.searcharchitect.main.MainActivity">
+        tools:context="com.corner.searcharchitect.main.MainActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"

@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.example.searcharchitect.main.MainViewModel" />
+            type="com.corner.searcharchitect.main.MainViewModel" />
 
     </data>
 
