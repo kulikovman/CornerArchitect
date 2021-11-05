@@ -77,7 +77,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="80dp"
                         android:enabled="@{vm.isSearchFieldsEnabled}"
-                        android:hint="@string/place"
+                        android:hint="@string/location"
                         android:imeOptions="actionDone"
                         android:paddingEnd="44dp"
                         android:text="@={vm.location}"

@@ -2,26 +2,23 @@
 
     <string name="app_name">Architect</string>
 
-    <string name="connection_error">Ошибка подключения</string>
-    <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="connection_error">Connection error</string>
+    <string name="unknown_error">Unknown error</string>
 
-    <string name="city">Город</string>
-    <string name="place">Место</string>
-    <string name="specialization">Специализация</string>
-    <string name="contact">Контакт</string>
-    <string name="search">Поиск</string>
-    <string name="check_update">Проверка обновлений</string>
-    <string name="data_loading">Загрузка данных</string>
-    <string name="preparation_for_launch">Подготовка к запуску</string>
-    <string name="search_architect">Поиск архитектора</string>
-    <string name="name">Имя</string>
-    <string name="nothing_found">Ничего не найдено</string>
-    <string name="download">Загрузить</string>
-    <string name="missing_data">Отсутствуют данные</string>
-    <string name="if_you_want_add_data">Если вы хотите добавить/изменить/удалить данные - обратитесь по адресу:</string>
-    <string name="psthv_email">alexey.psthv@gmail.com</string>
-    <string name="info">Info</string>
-    <string name="ok">Ok</string>
+    <string name="psthv_email" translatable="false">alexey.psthv@gmail.com</string>
+    <string name="ok" translatable="false">OK</string>
 
+    <string name="city">City</string>
+    <string name="location">Location</string>
+    <string name="specialization">Specialization</string>
+    <string name="check_update">Check update</string>
+    <string name="data_loading">Data loading</string>
+    <string name="preparation_for_launch">Launch preparation</string>
+    <string name="search_architect">Search architect</string>
+    <string name="name">Name</string>
+    <string name="nothing_found">Nothing found</string>
+    <string name="download">Download</string>
+    <string name="missing_data">Missing data</string>
+    <string name="if_you_want_change_data">If you have any questions / suggestions or want to add / change / delete data - please contact:</string>
 
 </resources>
