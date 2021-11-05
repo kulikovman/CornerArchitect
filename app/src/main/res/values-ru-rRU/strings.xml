@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Architect</string>
+    <string name="if_you_want_change_data">Если у вас есть какие либо вопросы / предложения или вы хотите добавить / изменить / удалить данные - обратитесь по адресу:</string>
+    <string name="missing_data">Отсутствуют данные</string>
+    <string name="download">Загрузить</string>
+    <string name="nothing_found">Ничего не найдено</string>
+    <string name="name">Имя</string>
+    <string name="search_architect">Поиск архитектора</string>
+    <string name="preparation_for_launch">Подготовка к запуску</string>
+    <string name="data_loading">Загрузка данных</string>
+    <string name="check_update">Проверка обновлений</string>
+    <string name="specialization">Специализация</string>
+    <string name="location">Место</string>
+    <string name="city">Город</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="connection_error">Ошибка подключения</string>
+</resources>
