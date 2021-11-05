@@ -13,6 +13,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.searcharchitect.R
 import com.example.searcharchitect.databinding.InfoDialogFragmentBinding
+import com.example.searcharchitect.utility.log
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +30,9 @@ class InfoDialogFragment : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        viewModel.dismissDialog = ::dismiss
+        viewModel.sendEmail = ::sendEmail
+
         return activity?.let { fragmentActivity ->
             val builder = AlertDialog.Builder(fragmentActivity)
             val inflater = fragmentActivity.layoutInflater
@@ -38,19 +42,12 @@ class InfoDialogFragment : DialogFragment() {
             binding.vm = viewModel
 
             builder.setView(binding.root)
-                .setPositiveButton(getString(R.string.ok)) { dialog, id ->
+                .setPositiveButton(getString(R.string.ok)) { _, _ ->
                     dismiss()
                 }
 
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewModel.dismissDialog = ::dismiss
-        viewModel.sendEmail = ::sendEmail
     }
 
     private fun sendEmail(email: String) {
