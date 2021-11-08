@@ -1,5 +1,5 @@
 plugins {
-    id 'kotlinx-serialization'
+    //id 'kotlinx-serialization'
     id 'com.android.application'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
@@ -76,7 +76,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1'
+    //implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1'
 
     // Google services
     implementation platform('com.google.firebase:firebase-bom:28.4.2')

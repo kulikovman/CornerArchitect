@@ -38,6 +38,7 @@ class SplashViewModel @Inject constructor(
     private fun getContacts() {
         viewModelScope.launch {
             isUpdateChecking.value = true
+
             network.getDataVersion().either(::handleCheckUpdateFailure) { version ->
                 log("Data version from sheets: $version")
                 viewModelScope.launch {
@@ -49,10 +50,6 @@ class SplashViewModel @Inject constructor(
                         network.getContactList().either(::handleLoadDataFailure) { contacts ->
                             log("Contacts in google sheets: ${contacts.size}")
                             viewModelScope.launch {
-
-                                // todo Обновлять ссылки на фото при каждом запуске
-                                // Если окажется, что ссылки временные...
-
                                 val domains = contacts.mapNotNull { it.vk }
                                 network.getVkProfileInfoList(domains).either { profileInfoList ->
                                     log("Profile info list size: ${profileInfoList.size}")
@@ -82,11 +79,7 @@ class SplashViewModel @Inject constructor(
 
     private fun handleCheckUpdateFailure(failure: Failure) {
         log("Failure update checking: $failure")
-
-        when (failure) {
-            is Failure.ConnectionError -> toast.showLong(text.connectionError())
-            else -> toast.showLong(text.unknownError())
-        }
+        showErrorMessage(failure)
 
         isUpdateChecking.value = false
         getContactsFromDatabase()
@@ -94,14 +87,17 @@ class SplashViewModel @Inject constructor(
 
     private fun handleLoadDataFailure(failure: Failure) {
         log("Failure data loading: $failure")
-
-        when (failure) {
-            is Failure.ConnectionError -> toast.showLong(text.connectionError())
-            else -> toast.showLong(text.unknownError())
-        }
+        showErrorMessage(failure)
 
         isDataLoading.value = false
         getContactsFromDatabase()
+    }
+
+    private fun showErrorMessage(failure: Failure) {
+        when (failure) {
+            is Failure.ConnectionError -> toast.showLong(text.connectionError())
+            is Failure.UnknownError -> toast.showLong(text.unknownError())
+        }
     }
 
     private fun getContactsFromDatabase() {
