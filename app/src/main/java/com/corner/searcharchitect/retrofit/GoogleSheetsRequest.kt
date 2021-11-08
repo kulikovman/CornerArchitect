@@ -31,7 +31,10 @@ class GoogleSheetsRequest @Inject constructor(
                 request.body()?.convertToDataVersion()?.let { version ->
                     Either.Result(version)
                 } ?: Either.Failure(Failure.UnknownError())
-            } else Either.Failure(Failure.UnknownError())
+            } else {
+                FirebaseCrashlytics.getInstance().log("Request body: ${request.body().toString()}")
+                Either.Failure(Failure.UnknownError())
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             FirebaseCrashlytics.getInstance().log(e.toString())
@@ -51,7 +54,10 @@ class GoogleSheetsRequest @Inject constructor(
                 request.body()?.convertToContactList()?.let { contacts ->
                     Either.Result(contacts)
                 } ?: Either.Failure(Failure.UnknownError())
-            } else Either.Failure(Failure.UnknownError())
+            } else {
+                FirebaseCrashlytics.getInstance().log("Request body: ${request.body().toString()}")
+                Either.Failure(Failure.UnknownError())
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             FirebaseCrashlytics.getInstance().log(e.toString())
