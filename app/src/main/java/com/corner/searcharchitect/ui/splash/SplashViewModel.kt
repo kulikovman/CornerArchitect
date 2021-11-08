@@ -10,8 +10,10 @@ import com.corner.searcharchitect.retrofit.Failure
 import com.corner.searcharchitect.utility.helper.ITextHelper
 import com.corner.searcharchitect.utility.helper.IToastHelper
 import com.corner.searcharchitect.utility.log
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.lang.IllegalStateException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -79,6 +81,7 @@ class SplashViewModel @Inject constructor(
 
     private fun handleCheckUpdateFailure(failure: Failure) {
         log("Failure update checking: $failure")
+        FirebaseCrashlytics.getInstance().log("handleCheckUpdateFailure")
         showErrorMessage(failure)
 
         isUpdateChecking.value = false
@@ -87,6 +90,7 @@ class SplashViewModel @Inject constructor(
 
     private fun handleLoadDataFailure(failure: Failure) {
         log("Failure data loading: $failure")
+        FirebaseCrashlytics.getInstance().log("handleLoadDataFailure")
         showErrorMessage(failure)
 
         isDataLoading.value = false

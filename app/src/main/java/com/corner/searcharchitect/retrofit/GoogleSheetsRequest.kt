@@ -34,7 +34,7 @@ class GoogleSheetsRequest @Inject constructor(
             } else Either.Failure(Failure.UnknownError())
         } catch (e: Exception) {
             e.printStackTrace()
-            FirebaseCrashlytics.getInstance().recordException(e)
+            FirebaseCrashlytics.getInstance().log(e.toString())
             Either.Failure(Failure.ConnectionError(e.toString()))
         }
     }
@@ -54,7 +54,7 @@ class GoogleSheetsRequest @Inject constructor(
             } else Either.Failure(Failure.UnknownError())
         } catch (e: Exception) {
             e.printStackTrace()
-            FirebaseCrashlytics.getInstance().recordException(e)
+            FirebaseCrashlytics.getInstance().log(e.toString())
             Either.Failure(Failure.ConnectionError(e.toString()))
         }
     }
