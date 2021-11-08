@@ -4,6 +4,7 @@ import com.corner.searcharchitect.utility.helper.ITextHelper
 import com.corner.searcharchitect.model.Contact
 import com.corner.searcharchitect.retrofit.api.IGoogleSheetsApi
 import com.corner.searcharchitect.utility.Either
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import javax.inject.Inject
 
 interface IGoogleSheetsRequest {
@@ -32,6 +33,8 @@ class GoogleSheetsRequest @Inject constructor(
                 } ?: Either.Failure(Failure.UnknownError())
             } else Either.Failure(Failure.UnknownError())
         } catch (e: Exception) {
+            e.printStackTrace()
+            FirebaseCrashlytics.getInstance().recordException(e)
             Either.Failure(Failure.ConnectionError(e.toString()))
         }
     }
@@ -50,6 +53,8 @@ class GoogleSheetsRequest @Inject constructor(
                 } ?: Either.Failure(Failure.UnknownError())
             } else Either.Failure(Failure.UnknownError())
         } catch (e: Exception) {
+            e.printStackTrace()
+            FirebaseCrashlytics.getInstance().recordException(e)
             Either.Failure(Failure.ConnectionError(e.toString()))
         }
     }

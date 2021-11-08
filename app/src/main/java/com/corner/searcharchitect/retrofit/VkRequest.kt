@@ -4,6 +4,7 @@ import com.corner.searcharchitect.model.VkProfileInfo
 import com.corner.searcharchitect.retrofit.api.IVkApi
 import com.corner.searcharchitect.utility.Either
 import com.corner.searcharchitect.utility.helper.ITextHelper
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import javax.inject.Inject
 
 interface IVkRequest {
@@ -33,6 +34,8 @@ class VkRequest @Inject constructor(
                     } ?: Either.Failure(Failure.UnknownError())
             } else Either.Failure(Failure.UnknownError())
         } catch (e: Exception) {
+            e.printStackTrace()
+            FirebaseCrashlytics.getInstance().recordException(e)
             Either.Failure(Failure.ConnectionError(e.toString()))
         }
     }

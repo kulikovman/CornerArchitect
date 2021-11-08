@@ -7,6 +7,8 @@ import com.corner.searcharchitect.manager.IContactManager
 import com.corner.searcharchitect.navigation.INavigator
 import com.corner.searcharchitect.repositiry.INetworkRepository
 import com.corner.searcharchitect.retrofit.Failure
+import com.corner.searcharchitect.utility.helper.ITextHelper
+import com.corner.searcharchitect.utility.helper.IToastHelper
 import com.corner.searcharchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,7 +18,9 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(
     private val navigator: INavigator,
     private val contactManager: IContactManager,
-    private val network: INetworkRepository
+    private val network: INetworkRepository,
+    private val toast: IToastHelper,
+    private val text: ITextHelper
 ) : BaseViewModel() {
 
     val isUpdateChecking = MutableLiveData(false)
@@ -78,12 +82,24 @@ class SplashViewModel @Inject constructor(
 
     private fun handleCheckUpdateFailure(failure: Failure) {
         log("Failure update checking: $failure")
+
+        when (failure) {
+            is Failure.ConnectionError -> toast.showLong(text.connectionError())
+            else -> toast.showLong(text.unknownError())
+        }
+
         isUpdateChecking.value = false
         getContactsFromDatabase()
     }
 
     private fun handleLoadDataFailure(failure: Failure) {
         log("Failure data loading: $failure")
+
+        when (failure) {
+            is Failure.ConnectionError -> toast.showLong(text.connectionError())
+            else -> toast.showLong(text.unknownError())
+        }
+
         isDataLoading.value = false
         getContactsFromDatabase()
     }
