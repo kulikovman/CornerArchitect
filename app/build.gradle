@@ -38,13 +38,6 @@ android {
         }
     }
 
-    applicationVariants.all { variant ->
-        variant.outputs.all {
-            def name = outputFileName.replace("app-", "search-architect-")
-            outputFileName = name.replace(".apk", "-${variant.versionName}.apk")
-        }
-    }
-
     buildFeatures {
         dataBinding true
         viewBinding true
