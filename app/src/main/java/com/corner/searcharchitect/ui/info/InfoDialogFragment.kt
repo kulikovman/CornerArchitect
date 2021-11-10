@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.corner.searcharchitect.R
 import com.corner.searcharchitect.databinding.InfoDialogFragmentBinding
+import com.corner.searcharchitect.utility.extension.getAppVersion
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +30,8 @@ class InfoDialogFragment : DialogFragment() {
         viewModel.dismissDialog = ::dismiss
         viewModel.sendEmail = ::sendEmail
 
+        initAppVersion()
+
         return activity?.let { fragmentActivity ->
             val builder = AlertDialog.Builder(fragmentActivity)
             val inflater = fragmentActivity.layoutInflater
@@ -44,6 +47,10 @@ class InfoDialogFragment : DialogFragment() {
 
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    private fun initAppVersion() {
+        viewModel.appVersion.value = "v ${context?.getAppVersion(true)}"
     }
 
     private fun sendEmail(email: String) {

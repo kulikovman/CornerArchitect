@@ -1,5 +1,6 @@
 package com.corner.searcharchitect.ui.info
 
+import androidx.lifecycle.MutableLiveData
 import com.corner.searcharchitect.base.BaseViewModel
 import com.corner.searcharchitect.utility.helper.ITextHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,6 +14,9 @@ class InfoViewModel @Inject constructor(
     var dismissDialog: (() -> Unit)? = null
 
     var sendEmail: ((String) -> Unit)? = null
+
+
+    val appVersion = MutableLiveData("")
 
 
     fun onClickEmail() {

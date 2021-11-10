@@ -9,6 +9,9 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
+apply from: '../functions.gradle'
+
+// При обновлении версии нужно добавить такой же тег в последний коммит
 def prefixAppVersion = "1.0"
 
 android {
@@ -132,58 +135,4 @@ dependencies {
     // Facebook
     //implementation 'com.facebook.android:facebook-android-sdk:latest.release'
 
-}
-
-
-def getCodeVersion() {
-    try {
-        def stdout = new ByteArrayOutputStream()
-        exec {
-            commandLine 'git', 'rev-list', 'HEAD', '--count'
-            standardOutput = stdout
-        }
-        return Integer.parseInt(stdout.toString().trim())
-    } catch (ignored) {
-        return 1
-    }
-}
-
-String getNameVersion(String prefixAppVersion) {
-    String lastTag = getLastTagOnCurrentBranch(prefixAppVersion)
-    if (lastTag == null || lastTag == "") {
-        return prefixAppVersion + "." + getCodeVersion()
-    }
-    return lastTag + "." + countCommitsSinceTag(lastTag)
-}
-
-// Для получения корректного значения:
-// Последний тег должен быть таким же как prefixAppVersion
-// При обновлении версии в prefixAppVersion нужно так же добавить новый тег
-// Подсчет третьего блока версии идет с последнего тега
-String getLastTagOnCurrentBranch(String prefixAppVersion) {
-    try {
-        def stdout = new ByteArrayOutputStream()
-        exec {
-            commandLine 'git', 'tag', '-l', prefixAppVersion
-            standardOutput = stdout
-        }
-        return stdout.toString().trim()
-    } catch (ignored) {
-        logger.error('getLastTag() error, ' + ignored)
-        return null
-    }
-}
-
-def countCommitsSinceTag(tag) {
-    try {
-        def stdout = new ByteArrayOutputStream()
-        exec {
-            commandLine 'git', 'rev-list', 'HEAD', '--count', "${tag}...HEAD"
-            standardOutput = stdout
-        }
-        return stdout.toString().trim()
-    } catch (ignored) {
-        logger.error('gitCommitsSinceTag() error, ' + ignored)
-        return null
-    }
 }

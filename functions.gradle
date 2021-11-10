@@ -1,0 +1,57 @@
+// Returns app version based on commit count
+def getNameVersion(prefixAppVersion) {
+    String lastTag = getLastTag(prefixAppVersion)
+    if (lastTag == null || lastTag == "") {
+        return prefixAppVersion + "." + getCodeVersion()
+    }
+    return lastTag + "." + countCommitsSinceTag(lastTag)
+}
+
+// Returns last tag on current branch
+def getLastTag(prefixAppVersion) {
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'tag', '-l', prefixAppVersion
+            standardOutput = stdout
+        }
+        return stdout.toString().trim()
+    } catch (ignored) {
+        logger.error('getLastTagOnCurrentBranch() error, ' + ignored)
+        return null
+    }
+}
+
+// Returns the number of all commits
+def getCodeVersion() {
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'rev-list', 'HEAD', '--count'
+            standardOutput = stdout
+        }
+        return Integer.parseInt(stdout.toString().trim())
+    } catch (ignored) {
+        return 1
+    }
+}
+
+// Returns the number of commits since specified tag
+def countCommitsSinceTag(tag) {
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'rev-list', 'HEAD', '--count', "${tag}...HEAD"
+            standardOutput = stdout
+        }
+        return stdout.toString().trim()
+    } catch (ignored) {
+        logger.error('countCommitsSinceTag() error, ' + ignored)
+        return null
+    }
+}
+
+ext {
+    getCodeVersion = this.&getCodeVersion
+    getNameVersion = this.&getNameVersion
+}
