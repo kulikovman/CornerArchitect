@@ -49,38 +49,6 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
         }
     }
 
-    private fun loadAvatar() {
-        /*VK.execute(FriendsService().friendsGet(
-            userId = "valera_andreevna"
-        ), object: VKApiCallback<FriendsGetFieldsResponse> {
-            override fun success(result: FriendsGetFieldsResponse) {
-                // you stuff is here
-            }
-            override fun fail(error: Exception) {
-
-            }
-        })*/
-
-        /*VK.execute(UsersGetNameCase(), object: VKApiCallback<List<UsersUserXtrCounters>> {
-            override fun success(result: List<UsersUserXtrCounters>) {
-            }
-            override fun fail(error: VKApiExecutionException) {
-            }
-        })*/
-
-    /*viewModel.facebookToken?.let { token ->
-            log("Facebook token: $token")
-            viewModel.facebook.observe(viewLifecycleOwner) { id ->
-                val imgUrl = "https://graph.facebook.com/$id/picture?type=large&access_token=$token"
-                log("Link: $imgUrl")
-
-                binding.avatar.apply {
-                    Glide.with(context).load(imgUrl).into(this);
-                }
-            }
-        }*/
-    }
-
     private fun setProfilePhoto(imgUrl: String) {
         binding.avatar.apply {
             Glide.with(context).load(imgUrl).into(this)
