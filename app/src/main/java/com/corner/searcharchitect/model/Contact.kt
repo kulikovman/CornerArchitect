@@ -7,6 +7,8 @@ import androidx.room.PrimaryKey
 data class Contact(
     @PrimaryKey
     val id: String,
+    val login: String,
+    val password: String,
     val surname: String,
     val name: String,
     val patronymic: String?,

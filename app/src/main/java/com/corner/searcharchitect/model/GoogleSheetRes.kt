@@ -29,22 +29,24 @@ data class GoogleSheetRes(
                         contacts.add(
                             Contact(
                                 id = UUID.randomUUID().toString(),
-                                surname = list.getWithTrim(0),
-                                name = list.getWithTrim(1),
-                                patronymic = list.getIfExist(2),
-                                region = list.getWithTrim(3),
-                                city = list.getWithTrim(4),
-                                specialization = list.getWithTrim(5),
-                                work = list.getIfExist(6),
-                                position = list.getIfExist(7),
-                                email = list.getIfExist(8),
-                                phone = list.getIfExist(9),
-                                telegram = list.getIfExist(10),
-                                instagram = list.getIfExist(11),
-                                facebook = list.getIfExist(12),
-                                vk = list.getIfExist(13),
-                                link = list.getIfExist(14),
-                                note = list.getIfExist(15)
+                                login = list.getWithTrim(0),
+                                password = list.getWithTrim(1),
+                                surname = list.getWithTrim(2),
+                                name = list.getWithTrim(3),
+                                patronymic = list.getIfExist(4),
+                                region = list.getWithTrim(5),
+                                city = list.getWithTrim(6),
+                                specialization = list.getWithTrim(7),
+                                work = list.getIfExist(8),
+                                position = list.getIfExist(9),
+                                email = list.getIfExist(10),
+                                phone = list.getIfExist(11),
+                                telegram = list.getIfExist(12),
+                                instagram = list.getIfExist(13),
+                                facebook = list.getIfExist(14),
+                                vk = list.getIfExist(15),
+                                link = list.getIfExist(16),
+                                note = list.getIfExist(17)
                             )
                         )
                     }
