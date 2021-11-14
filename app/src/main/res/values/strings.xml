@@ -17,8 +17,12 @@
     <string name="search_architect">Search architect</string>
     <string name="name">Name</string>
     <string name="nothing_found">Nothing found</string>
-    <string name="download">Download</string>
-    <string name="missing_data">Missing data</string>
+    <string name="try_again">Try again</string>
+    <string name="loading_error_text">An error occurred while loading data</string>
     <string name="if_you_want_change_data">If you have any questions / suggestions or want to add / change / delete data - please contact:</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="wrong_login_or_password">Wrong login or password</string>
+    <string name="sign_in">Sign in</string>
 
 </resources>

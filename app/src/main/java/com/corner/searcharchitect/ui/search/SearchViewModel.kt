@@ -20,8 +20,6 @@ class SearchViewModel @Inject constructor(
     private val contactManager: IContactManager,
 ) : BaseViewModel() {
 
-    var restartApp: (() -> Unit)? = null
-
     val location = MutableLiveData("")
 
     val specialization = MutableLiveData("")
@@ -30,7 +28,7 @@ class SearchViewModel @Inject constructor(
 
     val items = MutableLiveData(emptyList<ItemSearchUi>())
 
-    val isCityClearButtonVisibility = location.map { it.isNotEmpty() }
+    val isLocationClearButtonVisibility = location.map { it.isNotEmpty() }
 
     val isSpecializationClearButtonVisibility = specialization.map { it.isNotEmpty() }
 
@@ -46,19 +44,13 @@ class SearchViewModel @Inject constructor(
         isLoading == false && contacts?.isNotEmpty() == true && items?.isEmpty() == true
     }
 
-    val isMissingData = combine(
-        contactManager.getContacts(), items, isLoading
-    ) { contacts, items, isLoading ->
-        isLoading == false && contacts?.isEmpty() == true && items?.isEmpty() == true
-    }
-
 
     init {
         items.value = contactManager.getFilteredContacts()
     }
 
 
-    fun onClickClearCity() {
+    fun onClickClearLocation() {
         location.value = ""
     }
 
@@ -102,10 +94,6 @@ class SearchViewModel @Inject constructor(
             items.value = searchResult
             isLoading.value = false
         }
-    }
-
-    fun onClickLoadData() {
-        restartApp?.invoke()
     }
 
     fun onClickInfo() {

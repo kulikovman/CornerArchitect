@@ -11,6 +11,9 @@ interface INavigator {
     fun goBack()
 
     fun actionSplashToSearch()
+    fun actionSplashToError()
+    fun actionSplashToLogin()
+    fun actionLoginToSearch()
     fun actionSearchToDetail()
     fun actionSearchToIndoDialog()
 
@@ -34,6 +37,18 @@ class Navigator @Inject constructor(
 
     override fun actionSplashToSearch() {
         navController?.navigate(R.id.action_splashFragment_to_searchFragment)
+    }
+
+    override fun actionSplashToError() {
+        navController?.navigate(R.id.action_splashFragment_to_errorFragment)
+    }
+
+    override fun actionSplashToLogin() {
+        navController?.navigate(R.id.action_splashFragment_to_loginFragment)
+    }
+
+    override fun actionLoginToSearch() {
+        navController?.navigate(R.id.action_loginFragment_to_searchFragment)
     }
 
     override fun actionSearchToDetail() {

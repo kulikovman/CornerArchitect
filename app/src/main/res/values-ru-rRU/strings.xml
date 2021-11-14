@@ -3,8 +3,8 @@
 
     <string name="app_name">Архитектор</string>
     <string name="if_you_want_change_data">Если у вас есть какие либо вопросы / предложения или вы хотите добавить / изменить / удалить данные - обратитесь по адресу:</string>
-    <string name="missing_data">Отсутствуют данные</string>
-    <string name="download">Загрузить</string>
+    <string name="loading_error_text">Произошла ошибка во время загрузки данных</string>
+    <string name="try_again">Попробовать еще раз</string>
     <string name="nothing_found">Ничего не найдено</string>
     <string name="name">Имя</string>
     <string name="search_architect">Поиск архитектора</string>
@@ -16,5 +16,9 @@
     <string name="city">Город</string>
     <string name="unknown_error">Неизвестная ошибка</string>
     <string name="connection_error">Ошибка подключения</string>
+    <string name="wrong_login_or_password">Неверный логин или пароль</string>
+    <string name="username">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="sign_in">Войти</string>
 
 </resources>

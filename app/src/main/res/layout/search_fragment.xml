@@ -90,10 +90,10 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="@{(v) -> vm.onClickClearCity()}"
+                        android:onClick="@{(v) -> vm.onClickClearLocation()}"
                         android:padding="5dp"
                         android:src="@drawable/ic_baseline_clear_24"
-                        app:goneIfFalse="@{vm.isCityClearButtonVisibility}"
+                        app:goneIfFalse="@{vm.isLocationClearButtonVisibility}"
                         app:layout_constraintBottom_toBottomOf="@id/city_edittext"
                         app:layout_constraintEnd_toEndOf="@id/content_margin_end"
                         app:layout_constraintTop_toTopOf="@id/city_edittext" />
@@ -253,35 +253,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="@string/nothing_found" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    app:goneIfFalse="@{vm.isMissingData}"
-                    tools:visibility="gone">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_cloud_off_48" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/missing_data" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:onClick="@{(v) -> vm.onClickLoadData()}"
-                        android:text="@string/download" />
 
                 </LinearLayout>
 

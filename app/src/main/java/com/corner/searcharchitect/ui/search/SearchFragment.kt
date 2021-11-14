@@ -1,6 +1,5 @@
 package com.corner.searcharchitect.ui.search
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doAfterTextChanged
@@ -10,7 +9,6 @@ import com.corner.searcharchitect.R
 import com.corner.searcharchitect.base.BaseFragment
 import com.corner.searcharchitect.databinding.ItemSearchBinding
 import com.corner.searcharchitect.databinding.SearchFragmentBinding
-import com.corner.searcharchitect.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,8 +22,6 @@ class SearchFragment : BaseFragment<SearchFragmentBinding, SearchViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         initList()
         initSearch()
-
-        viewModel.restartApp = ::restartApp
     }
 
     private fun initList() {
@@ -53,14 +49,6 @@ class SearchFragment : BaseFragment<SearchFragmentBinding, SearchViewModel>() {
             nameEdittext.doAfterTextChanged {
                 viewModel.updateContactList()
             }
-        }
-    }
-
-    private fun restartApp() {
-        activity?.apply {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finishAffinity()
         }
     }
 

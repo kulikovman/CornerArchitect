@@ -16,6 +16,18 @@
             app:launchSingleTop="true"
             app:popUpTo="@+id/navigation_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_errorFragment"
+            app:destination="@id/errorFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/navigation_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/navigation_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -46,5 +58,26 @@
         android:name="com.corner.searcharchitect.ui.info.InfoDialogFragment"
         android:label="InfoDialogFragment"
         tools:layout="@layout/info_dialog_fragment" />
+
+    <fragment
+        android:id="@+id/errorFragment"
+        android:name="com.corner.searcharchitect.ui.error.ErrorFragment"
+        android:label="ErrorFragment"
+        tools:layout="@layout/error_fragment" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.corner.searcharchitect.ui.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_loginFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/navigation_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>
