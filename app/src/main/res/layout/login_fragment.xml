@@ -38,12 +38,13 @@
             android:text="@string/wrong_login_or_password"
             android:textColor="@color/red_500"
             android:textSize="16sp"
-            android:visibility="visible"
+            app:invisibleIfFalse="@{vm.isErrorVisibility}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/content_margin_end"
             app:layout_constraintStart_toStartOf="@id/content_margin_start"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25" />
+            app:layout_constraintVertical_bias="0.25"
+            tools:visibility="visible" />
 
         <EditText
             android:id="@+id/username_edittext"
@@ -103,6 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:enabled="@{vm.isSignInButtonEnabled}"
             android:backgroundTint="@color/white"
             android:onClick="@{(v) -> vm.onClickSignIn()}"
             android:text="@string/sign_in"

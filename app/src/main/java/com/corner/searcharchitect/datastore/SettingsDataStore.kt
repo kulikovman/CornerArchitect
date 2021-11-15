@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -12,6 +13,12 @@ interface ISettingsDataStore {
 
     suspend fun getCurrentDataVersion(): Int
     suspend fun updateDataVersion(version: Int)
+
+    suspend fun getLogin(): String?
+    suspend fun getPassword(): String?
+
+    suspend fun saveLogin(login: String)
+    suspend fun savePassword(password: String)
 
 }
 
@@ -47,8 +54,28 @@ class SettingsDataStore @Inject constructor(
     }
 
 
+    override suspend fun getLogin(): String? {
+        return readValue(LOGIN)
+    }
+
+    override suspend fun getPassword(): String? {
+        return readValue(PASSWORD)
+    }
+
+
+    override suspend fun saveLogin(login: String) {
+        storeValue(LOGIN, login)
+    }
+
+    override suspend fun savePassword(password: String) {
+        storeValue(PASSWORD, password)
+    }
+
+
     companion object {
         val DATA_VERSION = intPreferencesKey("data_version")
+        val LOGIN = stringPreferencesKey("login")
+        val PASSWORD = stringPreferencesKey("password")
     }
 
 }

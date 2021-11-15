@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.corner.searcharchitect.base.BaseViewModel
 import com.corner.searcharchitect.manager.IContactManager
+import com.corner.searcharchitect.model.Contact
 import com.corner.searcharchitect.navigation.INavigator
 import com.corner.searcharchitect.repositiry.INetworkRepository
 import com.corner.searcharchitect.retrofit.Failure
@@ -13,7 +14,6 @@ import com.corner.searcharchitect.utility.log
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.lang.IllegalStateException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -51,32 +51,65 @@ class SplashViewModel @Inject constructor(
                         isDataLoading.value = true
                         network.getContactList().either(::handleLoadDataFailure) { contacts ->
                             log("Contacts in google sheets: ${contacts.size}")
+                            isDataLoading.value = false
+
                             viewModelScope.launch {
-                                val domains = contacts.mapNotNull { it.vk }
-                                network.getVkProfileInfoList(domains).either { profileInfoList ->
-                                    log("Profile info list size: ${profileInfoList.size}")
-                                    viewModelScope.launch {
-                                        profileInfoList.forEach { profileInfo ->
-                                            contacts.find { it.vk == profileInfo.domain }?.apply {
-                                                previewLink = profileInfo.previewLink
-                                                photoLink = profileInfo.photoLink
-                                            }
-                                        }
-                                    }
-                                }
-
-                                log("Contacts with preview links: ${contacts.filter { it.previewLink != null }.size}")
-
+                                isPreparation.value = true
+                                loadAvatarLinks(contacts)
                                 contactManager.updateAppData(version, contacts)
-                                isDataLoading.value = false
 
-                                navigator.actionSplashToSearch()
+                                openNextScreen(contacts)
+                                isPreparation.value = true
                             }
                         }
                     } else getContactsFromDatabase()
                 }
             }
         }
+    }
+
+    private fun getContactsFromDatabase() {
+        viewModelScope.launch {
+            isPreparation.value = true
+            contactManager.loadContactsFromDatabase()
+
+            contactManager.getContacts().value?.let { contacts ->
+                if (contacts.isNotEmpty()) {
+                    viewModelScope.launch {
+                        loadAvatarLinks(contacts)
+                        openNextScreen(contacts)
+                    }
+                } else navigator.actionSplashToError()
+            }
+
+            isPreparation.value = false
+        }
+    }
+
+    private suspend fun openNextScreen(contacts: List<Contact>) {
+        contactManager.createPasswordMap(contacts)
+
+        when {
+            contactManager.isExistCorrectCredentials() -> navigator.actionSplashToSearch()
+            else -> navigator.actionSplashToLogin()
+        }
+    }
+
+    private suspend fun loadAvatarLinks(contacts: List<Contact>) {
+        val domains = contacts.mapNotNull { it.vk }
+        network.getVkProfileInfoList(domains).either(::handleAvatarLoadingFailure) { profileInfoList ->
+            log("Profile info list size: ${profileInfoList.size}")
+            viewModelScope.launch {
+                profileInfoList.forEach { profileInfo ->
+                    contacts.find { it.vk == profileInfo.domain }?.apply {
+                        previewLink = profileInfo.previewLink
+                        photoLink = profileInfo.photoLink
+                    }
+                }
+            }
+        }
+
+        log("Contacts with preview links: ${contacts.filter { it.previewLink != null }.size}")
     }
 
     private fun handleCheckUpdateFailure(failure: Failure) {
@@ -97,20 +130,16 @@ class SplashViewModel @Inject constructor(
         getContactsFromDatabase()
     }
 
+    private fun handleAvatarLoadingFailure(failure: Failure) {
+        log("Failure data loading: $failure")
+        FirebaseCrashlytics.getInstance().log("handleLoadDataFailure")
+        showErrorMessage(failure)
+    }
+
     private fun showErrorMessage(failure: Failure) {
         when (failure) {
             is Failure.ConnectionError -> toast.showLong(text.connectionError())
             is Failure.UnknownError -> toast.showLong(text.unknownError())
-        }
-    }
-
-    private fun getContactsFromDatabase() {
-        viewModelScope.launch {
-            isPreparation.value = true
-            contactManager.loadContactsFromDatabase()
-            isPreparation.value = false
-
-            navigator.actionSplashToSearch()
         }
     }
 

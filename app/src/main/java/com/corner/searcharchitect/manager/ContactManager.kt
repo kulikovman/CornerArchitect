@@ -27,6 +27,11 @@ interface IContactManager {
         name: String? = null
     ): List<ItemSearchUi>
 
+    fun createPasswordMap(contacts: List<Contact>)
+    suspend fun isExistCorrectCredentials(): Boolean
+    fun isCorrectCredentials(login: String, password: String): Boolean
+    suspend fun saveCredentials(login: String, password: String)
+
 }
 
 class ContactManager @Inject constructor(
@@ -39,6 +44,8 @@ class ContactManager @Inject constructor(
     private val allContacts = MutableLiveData(emptyList<Contact>())
 
     private var selectedContact = MutableLiveData<Contact>()
+
+    private val passwords = mutableMapOf<String, String>()
 
 
     override fun getContacts(): LiveData<List<Contact>> {
@@ -101,6 +108,37 @@ class ContactManager @Inject constructor(
         }
 
         return result?.sortedBy { it.name } ?: emptyList()
+    }
+
+    override fun createPasswordMap(contacts: List<Contact>) {
+        contacts.forEach { contact ->
+            passwords[contact.login] = contact.password
+        }
+
+        log("Passwords map size: ${passwords.size}")
+    }
+
+    override suspend fun isExistCorrectCredentials(): Boolean {
+        val login = datastore.getLogin()
+        val password = datastore.getPassword()
+
+        return login != null && password != null && isCorrectCredentials(login, password)
+    }
+
+    override fun isCorrectCredentials(login: String, password: String): Boolean {
+        log("isCorrectCredentials: $login / $password")
+
+        log("Passwords: $passwords")
+
+        return passwords.getOrDefault(login, null)?.let { passwordFromMap ->
+            log("passwordFromMap = $passwordFromMap")
+            passwordFromMap == password
+        } ?: false
+    }
+
+    override suspend fun saveCredentials(login: String, password: String) {
+        datastore.saveLogin(login)
+        datastore.savePassword(password)
     }
 
 }

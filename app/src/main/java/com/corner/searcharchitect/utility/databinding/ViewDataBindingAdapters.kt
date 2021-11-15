@@ -39,3 +39,8 @@ fun goneIfNotNull(view: View, any: Any?) {
 fun invisibleIfNull(view: View, any: Any?) {
     view.setVisibleOrInvisible(any != null)
 }
+
+@BindingAdapter("invisibleIfFalse")
+fun invisibleIfFalse(view: View, isVisible: Boolean?) {
+    view.setVisibleOrInvisible(isVisible ?: false)
+}

@@ -8,6 +8,12 @@ interface IDatastoreRepository {
     suspend fun getCurrentDataVersion(): Int
     suspend fun updateDataVersion(dataVersion: Int)
 
+    suspend fun getLogin(): String?
+    suspend fun getPassword(): String?
+
+    suspend fun saveLogin(login: String)
+    suspend fun savePassword(password: String)
+
 }
 
 class DatastoreRepository @Inject constructor(
@@ -20,6 +26,24 @@ class DatastoreRepository @Inject constructor(
 
     override suspend fun updateDataVersion(dataVersion: Int) {
         settings.updateDataVersion(dataVersion)
+    }
+
+
+    override suspend fun getLogin(): String? {
+        return settings.getLogin()
+    }
+
+    override suspend fun getPassword(): String? {
+        return settings.getPassword()
+    }
+
+
+    override suspend fun saveLogin(login: String) {
+        settings.saveLogin(login)
+    }
+
+    override suspend fun savePassword(password: String) {
+        settings.savePassword(password)
     }
 
 }
