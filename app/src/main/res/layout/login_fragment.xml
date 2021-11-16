@@ -11,108 +11,95 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/teal_400">
+        android:background="@color/gray_900"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/content_margin_start"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="30dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/content_margin_end"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="30dp" />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/app_logo" />
 
         <TextView
-            android:id="@+id/error_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:text="@string/wrong_login_or_password"
             android:textColor="@color/red_500"
             android:textSize="16sp"
             app:invisibleIfFalse="@{vm.isErrorVisibility}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-            app:layout_constraintStart_toStartOf="@id/content_margin_start"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25"
             tools:visibility="visible" />
 
-        <EditText
-            android:id="@+id/username_edittext"
-            style="@style/CommonEditText"
-            android:layout_width="0dp"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="@string/username"
-            android:imeOptions="actionDone"
-            android:maxLines="1"
-            android:paddingEnd="44dp"
-            android:text="@={vm.username}"
-            app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-            app:layout_constraintStart_toStartOf="@id/content_margin_start"
-            app:layout_constraintTop_toBottomOf="@id/error_text"
-            tools:ignore="RtlSymmetry" />
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{(v) -> vm.onClickClearUsername()}"
-            android:padding="5dp"
-            android:src="@drawable/ic_baseline_clear_24"
-            app:goneIfFalse="@{vm.isUsernameClearButtonVisibility}"
-            app:layout_constraintBottom_toBottomOf="@id/username_edittext"
-            app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-            app:layout_constraintTop_toTopOf="@id/username_edittext" />
+            <EditText
+                android:id="@+id/username_edittext"
+                style="@style/CommonEditText"
+                android:hint="@string/username"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:nextFocusDown="@id/password_edittext"
+                android:paddingEnd="48dp"
+                android:text="@={vm.username}"
+                tools:ignore="RtlSymmetry" />
 
-        <EditText
-            android:id="@+id/password_edittext"
-            style="@style/CommonEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:hint="@string/password"
-            android:imeOptions="actionDone"
-            android:maxLines="1"
-            android:paddingEnd="44dp"
-            android:text="@={vm.password}"
-            app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-            app:layout_constraintStart_toStartOf="@id/content_margin_start"
-            app:layout_constraintTop_toBottomOf="@id/username_edittext"
-            tools:ignore="RtlSymmetry" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:onClick="@{(v) -> vm.onClickClearUsername()}"
+                android:padding="7dp"
+                android:src="@drawable/ic_baseline_clear_24"
+                app:goneIfFalse="@{vm.isUsernameClearButtonVisibility}" />
 
-        <ImageView
-            android:layout_width="wrap_content"
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{(v) -> vm.onClickClearPassword()}"
-            android:padding="5dp"
-            android:src="@drawable/ic_baseline_clear_24"
-            app:goneIfFalse="@{vm.isPasswordClearButtonVisibility}"
-            app:layout_constraintBottom_toBottomOf="@id/password_edittext"
-            app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-            app:layout_constraintTop_toTopOf="@id/password_edittext" />
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="15dp">
+
+            <EditText
+                android:id="@+id/password_edittext"
+                style="@style/CommonEditText"
+                android:hint="@string/password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:nextFocusDown="@id/sign_in_button"
+                android:paddingEnd="48dp"
+                android:text="@={vm.password}"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:onClick="@{(v) -> vm.onClickClearPassword()}"
+                android:padding="7dp"
+                android:src="@drawable/ic_baseline_clear_24"
+                app:goneIfFalse="@{vm.isPasswordClearButtonVisibility}" />
+
+        </FrameLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/sign_in_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:backgroundTint="@color/sign_in_button_bg"
             android:enabled="@{vm.isSignInButtonEnabled}"
-            android:backgroundTint="@color/white"
             android:onClick="@{(v) -> vm.onClickSignIn()}"
-            android:text="@string/sign_in"
-            android:textColor="@color/blue_500"
-            app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-            app:layout_constraintStart_toStartOf="@id/content_margin_start"
-            app:layout_constraintTop_toBottomOf="@id/password_edittext" />
+            android:text="@string/sign_in" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>

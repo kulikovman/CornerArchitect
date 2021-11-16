@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -14,6 +15,7 @@ import com.corner.searcharchitect.BR
 import com.corner.searcharchitect.utility.databinding.DataBindingAdapter
 import com.corner.searcharchitect.utility.databinding.DataBindingRecyclerViewConfig
 import com.corner.searcharchitect.utility.extension.debounce
+import com.corner.searcharchitect.utility.extension.hideKeyboard
 
 abstract class BaseFragment<T : ViewDataBinding, S : BaseViewModel> : Fragment() {
 
@@ -66,6 +68,12 @@ abstract class BaseFragment<T : ViewDataBinding, S : BaseViewModel> : Fragment()
                 debounce(position)
             }
         )
+    }
+
+    fun hideKeyboard() {
+        if (isAdded) {
+            activity?.hideKeyboard()
+        }
     }
 
 }

@@ -18,6 +18,8 @@ class LoginViewModel @Inject constructor(
     private val contactManager: IContactManager
 ) : BaseViewModel() {
 
+    var hideKeyboard: (() -> Unit)? = null
+
     val username = MutableLiveData("")
 
     val password = MutableLiveData("")
@@ -44,8 +46,7 @@ class LoginViewModel @Inject constructor(
     fun onClickSignIn() {
         viewModelScope.launch {
             if (contactManager.isCorrectCredentials(username.value!!, password.value!!)) {
-                // todo Убрать клавиатуру
-
+                hideKeyboard?.invoke()
                 contactManager.saveCredentials(username.value!!, password.value!!)
                 navigator.actionLoginToSearch()
             } else {
