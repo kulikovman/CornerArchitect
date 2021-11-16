@@ -38,7 +38,7 @@ class SearchFragment : BaseFragment<SearchFragmentBinding, SearchViewModel>() {
 
     private fun initSearch() {
         binding.apply {
-            cityEdittext.doAfterTextChanged {
+            locationEdittext.doAfterTextChanged {
                 viewModel.updateContactList()
             }
 

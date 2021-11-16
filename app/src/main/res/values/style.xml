@@ -3,7 +3,7 @@
 
     <style name="CommonEditText" parent="Widget.AppCompat.EditText">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textColorHint">@color/gray_500</item>
         <item name="android:paddingStart">14dp</item>
