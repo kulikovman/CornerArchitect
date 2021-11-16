@@ -20,6 +20,7 @@ interface IContactManager {
     suspend fun isNewVersion(version: Int): Boolean
     suspend fun loadContactsFromDatabase()
     suspend fun updateAppData(version: Int, contacts: List<Contact>)
+    suspend fun getDataVersion(): String
 
     fun getFilteredContacts(
         city: String? = null,
@@ -77,6 +78,10 @@ class ContactManager @Inject constructor(
         database.addContacts(contacts)
         datastore.updateDataVersion(version)
         allContacts.value = contacts
+    }
+
+    override suspend fun getDataVersion(): String {
+        return datastore.getCurrentDataVersion().toString()
     }
 
 
