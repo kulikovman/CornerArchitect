@@ -58,7 +58,8 @@
                 android:onClick="@{(v) -> vm.onClickClearUsername()}"
                 android:padding="7dp"
                 android:src="@drawable/ic_baseline_clear_24"
-                app:goneIfFalse="@{vm.isUsernameClearButtonVisibility}" />
+                app:goneIfFalse="@{vm.isUsernameClearButtonVisibility}"
+                app:tint="@color/gray_500" />
 
         </FrameLayout>
 
@@ -86,7 +87,8 @@
                 android:onClick="@{(v) -> vm.onClickClearPassword()}"
                 android:padding="7dp"
                 android:src="@drawable/ic_baseline_clear_24"
-                app:goneIfFalse="@{vm.isPasswordClearButtonVisibility}" />
+                app:goneIfFalse="@{vm.isPasswordClearButtonVisibility}"
+                app:tint="@color/gray_500" />
 
         </FrameLayout>
 

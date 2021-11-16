@@ -95,7 +95,8 @@
                         app:goneIfFalse="@{vm.isLocationClearButtonVisibility}"
                         app:layout_constraintBottom_toBottomOf="@id/location_edittext"
                         app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-                        app:layout_constraintTop_toTopOf="@id/location_edittext" />
+                        app:layout_constraintTop_toTopOf="@id/location_edittext"
+                        app:tint="@color/gray_500" />
 
                     <ImageView
                         android:id="@+id/specialization_icon"
@@ -133,7 +134,8 @@
                         app:goneIfFalse="@{vm.isSpecializationClearButtonVisibility}"
                         app:layout_constraintBottom_toBottomOf="@id/specialization_edittext"
                         app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-                        app:layout_constraintTop_toTopOf="@id/specialization_edittext" />
+                        app:layout_constraintTop_toTopOf="@id/specialization_edittext"
+                        app:tint="@color/gray_500" />
 
                     <ImageView
                         android:id="@+id/name_icon"
@@ -171,7 +173,8 @@
                         app:goneIfFalse="@{vm.isNameClearButtonVisibility}"
                         app:layout_constraintBottom_toBottomOf="@id/name_edittext"
                         app:layout_constraintEnd_toEndOf="@id/content_margin_end"
-                        app:layout_constraintTop_toTopOf="@id/name_edittext" />
+                        app:layout_constraintTop_toTopOf="@id/name_edittext"
+                        app:tint="@color/gray_500" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
