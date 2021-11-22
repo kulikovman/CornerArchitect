@@ -7,6 +7,7 @@ import com.corner.searcharchitect.base.BaseViewModel
 import com.corner.searcharchitect.manager.IContactManager
 import com.corner.searcharchitect.navigation.INavigator
 import com.corner.searcharchitect.utility.extension.combine
+import com.corner.searcharchitect.utility.helper.ITextHelper
 import com.corner.searcharchitect.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,10 +16,13 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val navigator: INavigator,
-    private val contactManager: IContactManager
+    private val contactManager: IContactManager,
+    private val text: ITextHelper
 ) : BaseViewModel() {
 
     var hideKeyboard: (() -> Unit)? = null
+
+    var sendEmail: ((String) -> Unit)? = null
 
     val username = MutableLiveData("")
 
@@ -53,6 +57,10 @@ class LoginViewModel @Inject constructor(
                 isErrorVisibility.value = true
             }
         }
+    }
+
+    fun onClickEmail() {
+        sendEmail?.invoke(text.psthvEmail())
     }
 
 }

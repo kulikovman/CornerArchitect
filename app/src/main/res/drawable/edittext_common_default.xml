@@ -3,6 +3,9 @@
 
     <item>
         <shape android:shape="rectangle">
+            <stroke
+                android:width="2dp"
+                android:color="@color/edittext_common_border_default" />
             <solid android:color="@color/edittext_common_default_bg"/>
             <corners android:radius="@dimen/edittext_corner_radius" />
         </shape>

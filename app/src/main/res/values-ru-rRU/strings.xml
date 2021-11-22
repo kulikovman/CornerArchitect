@@ -21,5 +21,6 @@
     <string name="password">Пароль</string>
     <string name="sign_in">Войти</string>
     <string name="start_typing_search_query">Начните вводить поисковый запрос</string>
+    <string name="login_text">Если у вас нет доступа в приложение, но по каким то причинам вы считаете, что он должен быть - обратитесь по адресу:</string>
 
 </resources>

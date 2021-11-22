@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="login_logo_color">@color/black</color>
+    <color name="login_logo_color">@color/white</color>
 
     <color name="edittext_common_default_bg">@color/white</color>
     <color name="edittext_common_disabled_bg">@color/gray_200</color>

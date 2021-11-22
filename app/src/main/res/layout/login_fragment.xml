@@ -14,16 +14,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray_900"
         android:gravity="center_horizontal"
+        android:paddingHorizontal="30dp"
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="40dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/app_logo" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/login_logo_100"
+            app:tint="@color/login_logo_color" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,14 +31,13 @@
             android:text="@string/wrong_login_or_password"
             android:textColor="@color/red_500"
             android:textSize="16sp"
-            app:invisibleIfFalse="@{vm.isErrorVisibility}"
+            app:goneIfFalse="@{vm.isErrorVisibility}"
             tools:visibility="visible" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
 
             <EditText
                 android:id="@+id/username_edittext"
@@ -66,7 +65,6 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
             android:layout_marginTop="15dp">
 
             <EditText
@@ -96,11 +94,27 @@
             android:id="@+id/sign_in_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/sign_in_button_bg"
             android:enabled="@{vm.isSignInButtonEnabled}"
             android:onClick="@{(v) -> vm.onClickSignIn()}"
             android:text="@string/sign_in" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center_horizontal"
+            android:text="@string/login_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="@{(v) -> vm.onClickEmail()}"
+            android:text="@string/psthv_email"
+            android:textColor="@color/blue_500"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
