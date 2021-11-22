@@ -24,5 +24,6 @@
     <string name="password">Password</string>
     <string name="wrong_login_or_password">Wrong login or password</string>
     <string name="sign_in">Sign in</string>
+    <string name="start_typing_search_query">Start typing search query</string>
 
 </resources>

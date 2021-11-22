@@ -20,5 +20,6 @@
     <string name="username">Логин</string>
     <string name="password">Пароль</string>
     <string name="sign_in">Войти</string>
+    <string name="start_typing_search_query">Начните вводить поисковый запрос</string>
 
 </resources>

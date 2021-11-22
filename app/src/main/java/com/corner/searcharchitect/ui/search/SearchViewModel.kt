@@ -39,14 +39,21 @@ class SearchViewModel @Inject constructor(
     val isLoading = MutableLiveData(false)
 
     val isNothingFound = combine(
-        contactManager.getContacts(), items, isLoading
-    ) { contacts, items, isLoading ->
-        isLoading == false && contacts?.isNotEmpty() == true && items?.isEmpty() == true
+        location, specialization, name, items, isLoading
+    ) { location, specialization, name, items, isLoading ->
+        val isLocationQuery = location?.length ?: 0 >= SEARCH_QUERY_LENGTH
+        val isSpecializationQuery = specialization?.length ?: 0 >= SEARCH_QUERY_LENGTH
+        val isNameQuery = name?.length ?: 0 >= SEARCH_QUERY_LENGTH
+
+        isLoading == false && (isLocationQuery || isSpecializationQuery || isNameQuery)
+                && items?.isEmpty() == true
     }
 
-
-    init {
-        items.value = contactManager.getFilteredContacts()
+    val isEmptySearchQuery = combine(
+        location, specialization, name, items
+    ) { location, specialization, name, items ->
+        items?.isEmpty() == true && location?.isEmpty() == true
+                && specialization?.isEmpty() == true && name?.isEmpty() == true
     }
 
 
@@ -73,31 +80,46 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    var searchDeferred: Deferred<List<ItemSearchUi>>? = null
+    private var searchDeferred: Deferred<List<ItemSearchUi>>? = null
 
     fun updateContactList() {
-        searchDeferred?.cancel()
-        isLoading.value = true
+        val isLocationQuery = location.value?.length ?: 0 >= SEARCH_QUERY_LENGTH
+        val isSpecializationQuery = specialization.value?.length ?: 0 >= SEARCH_QUERY_LENGTH
+        val isNameQuery = name.value?.length ?: 0 >= SEARCH_QUERY_LENGTH
 
-        viewModelScope.launch {
-            searchDeferred = async {
-                contactManager.getFilteredContacts(
-                    city = location.value?.trim(),
-                    specialization = specialization.value?.trim(),
-                    name = name.value?.trim()
-                )
+        if (isLocationQuery || isSpecializationQuery || isNameQuery) {
+            searchDeferred?.cancel()
+            isLoading.value = true
+
+            viewModelScope.launch {
+                searchDeferred = async {
+                    contactManager.getFilteredContacts(
+                        city = location.value?.trim()
+                            .takeIf { it?.length ?: 0 >= SEARCH_QUERY_LENGTH },
+                        specialization = specialization.value?.trim()
+                            .takeIf { it?.length ?: 0 >= SEARCH_QUERY_LENGTH },
+                        name = name.value?.trim().takeIf { it?.length ?: 0 >= SEARCH_QUERY_LENGTH }
+                    )
+                }
+
+                val searchResult = searchDeferred!!.await()
+                log("Search result: ${searchResult.size} items")
+
+                items.value = searchResult
+                isLoading.value = false
             }
-
-            val searchResult = searchDeferred!!.await()
-            log("Search result: ${searchResult.size} items")
-
-            items.value = searchResult
-            isLoading.value = false
+        } else {
+            items.value = emptyList()
         }
     }
 
     fun onClickInfo() {
         navigator.actionSearchToIndoDialog()
+    }
+
+
+    companion object {
+        const val SEARCH_QUERY_LENGTH = 3
     }
 
 }
