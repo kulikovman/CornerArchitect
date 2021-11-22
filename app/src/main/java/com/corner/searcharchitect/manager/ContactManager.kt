@@ -131,14 +131,9 @@ class ContactManager @Inject constructor(
     }
 
     override fun isCorrectCredentials(login: String, password: String): Boolean {
-        log("isCorrectCredentials: $login / $password")
-
-        log("Passwords: $passwords")
-
-        return passwords.getOrDefault(login, null)?.let { passwordFromMap ->
-            log("passwordFromMap = $passwordFromMap")
-            passwordFromMap == password
-        } ?: false
+        return passwords[login]?.let { storedPassword ->
+                storedPassword == password
+            } ?: false
     }
 
     override suspend fun saveCredentials(login: String, password: String) {
