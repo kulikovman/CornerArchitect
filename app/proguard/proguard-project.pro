@@ -22,7 +22,7 @@
 ## --------------- Start Project specifics --------------- ##
 
 # Keep the BuildConfig
--keep class com.corner.searcharchitect.BuildConfig { *; }
+-keep class com.searcharchitect.one.BuildConfig { *; }
 
 # Keep the support library
 -keep class android.support.v4.** { *; }

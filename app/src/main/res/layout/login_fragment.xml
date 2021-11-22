@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.corner.searcharchitect.ui.login.LoginViewModel" />
+            type="com.searcharchitect.one.ui.login.LoginViewModel" />
 
     </data>
 

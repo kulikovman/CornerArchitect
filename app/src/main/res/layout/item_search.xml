@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.corner.searcharchitect.ui.search.ItemSearchUi" />
+            type="com.searcharchitect.one.ui.search.ItemSearchUi" />
 
     </data>
 

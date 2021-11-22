@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.corner.searcharchitect.ui.info.InfoViewModel" />
+            type="com.searcharchitect.one.ui.info.InfoViewModel" />
 
     </data>
 

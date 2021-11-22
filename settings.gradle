@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Search Architect"
 include ':app'
+include ':common'
