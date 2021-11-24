@@ -1,4 +1,4 @@
-package com.searcharchitect.common.utility.helper
+package com.searcharchitect.common.helper
 
 import android.content.Context
 import com.searcharchitect.common.R

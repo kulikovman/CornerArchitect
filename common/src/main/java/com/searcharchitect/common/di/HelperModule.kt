@@ -1,9 +1,9 @@
 package com.searcharchitect.common.di
 
-import com.searcharchitect.common.utility.helper.ITextHelper
-import com.searcharchitect.common.utility.helper.IToastHelper
-import com.searcharchitect.common.utility.helper.TextHelper
-import com.searcharchitect.common.utility.helper.ToastHelper
+import com.searcharchitect.common.helper.ITextHelper
+import com.searcharchitect.common.helper.IToastHelper
+import com.searcharchitect.common.helper.TextHelper
+import com.searcharchitect.common.helper.ToastHelper
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

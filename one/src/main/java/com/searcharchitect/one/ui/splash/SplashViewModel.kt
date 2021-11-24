@@ -7,8 +7,8 @@ import com.searcharchitect.common.manager.IContactManager
 import com.searcharchitect.common.model.Contact
 import com.searcharchitect.common.repositiry.INetworkRepository
 import com.searcharchitect.common.retrofit.Failure
-import com.searcharchitect.common.utility.helper.ITextHelper
-import com.searcharchitect.common.utility.helper.IToastHelper
+import com.searcharchitect.common.helper.ITextHelper
+import com.searcharchitect.common.helper.IToastHelper
 import com.searcharchitect.common.utility.log
 import com.searcharchitect.one.base.BaseViewModel
 import com.searcharchitect.one.navigation.INavigator

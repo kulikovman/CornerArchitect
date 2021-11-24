@@ -2,7 +2,7 @@ package com.searcharchitect.common.retrofit
 
 import com.searcharchitect.common.retrofit.api.IFacebookApi
 import com.searcharchitect.common.utility.Either
-import com.searcharchitect.common.utility.helper.ITextHelper
+import com.searcharchitect.common.helper.ITextHelper
 import com.searcharchitect.common.utility.log
 import javax.inject.Inject
 

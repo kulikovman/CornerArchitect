@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.searcharchitect.common.manager.IContactManager
 import com.searcharchitect.common.utility.extension.combine
-import com.searcharchitect.common.utility.helper.ITextHelper
+import com.searcharchitect.common.helper.ITextHelper
 import com.searcharchitect.one.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

@@ -4,7 +4,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.searcharchitect.common.model.Contact
 import com.searcharchitect.common.retrofit.api.IGoogleSheetsApi
 import com.searcharchitect.common.utility.Either
-import com.searcharchitect.common.utility.helper.ITextHelper
+import com.searcharchitect.common.helper.ITextHelper
 import javax.inject.Inject
 
 interface IGoogleSheetsRequest {
