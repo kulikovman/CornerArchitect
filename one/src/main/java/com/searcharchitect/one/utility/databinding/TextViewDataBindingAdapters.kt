@@ -4,7 +4,7 @@ import android.text.method.LinkMovementMethod
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
-import com.searcharchitect.one.utility.extension.containsLink
+import com.searcharchitect.common.utility.extension.containsLink
 
 @BindingAdapter(value = ["htmlText"])
 fun formatHtmlText(textView: TextView, htmlText: String?) {

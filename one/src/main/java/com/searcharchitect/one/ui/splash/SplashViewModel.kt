@@ -2,16 +2,16 @@ package com.searcharchitect.one.ui.splash
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.searcharchitect.one.base.BaseViewModel
-import com.searcharchitect.one.manager.IContactManager
-import com.searcharchitect.one.model.Contact
-import com.searcharchitect.one.navigation.INavigator
-import com.searcharchitect.one.repositiry.INetworkRepository
-import com.searcharchitect.one.retrofit.Failure
-import com.searcharchitect.one.utility.helper.ITextHelper
-import com.searcharchitect.one.utility.helper.IToastHelper
-import com.searcharchitect.one.utility.log
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.searcharchitect.common.manager.IContactManager
+import com.searcharchitect.common.model.Contact
+import com.searcharchitect.common.repositiry.INetworkRepository
+import com.searcharchitect.common.retrofit.Failure
+import com.searcharchitect.common.utility.helper.ITextHelper
+import com.searcharchitect.common.utility.helper.IToastHelper
+import com.searcharchitect.common.utility.log
+import com.searcharchitect.one.base.BaseViewModel
+import com.searcharchitect.one.navigation.INavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

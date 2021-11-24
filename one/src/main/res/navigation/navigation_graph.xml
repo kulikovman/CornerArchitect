@@ -55,7 +55,7 @@
 
     <dialog
         android:id="@+id/infoDialogFragment"
-        android:name="com.corner.searcharchitect.ui.info.InfoDialogFragment"
+        android:name="com.searcharchitect.one.ui.info.InfoDialogFragment"
         android:label="InfoDialogFragment"
         tools:layout="@layout/info_dialog_fragment" />
 

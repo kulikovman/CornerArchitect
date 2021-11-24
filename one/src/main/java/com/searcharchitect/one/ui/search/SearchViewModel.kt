@@ -3,11 +3,12 @@ package com.searcharchitect.one.ui.search
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import com.searcharchitect.common.manager.IContactManager
+import com.searcharchitect.common.model.ItemSearchUi
+import com.searcharchitect.common.utility.extension.combine
+import com.searcharchitect.common.utility.log
 import com.searcharchitect.one.base.BaseViewModel
-import com.searcharchitect.one.manager.IContactManager
 import com.searcharchitect.one.navigation.INavigator
-import com.searcharchitect.one.utility.extension.combine
-import com.searcharchitect.one.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async

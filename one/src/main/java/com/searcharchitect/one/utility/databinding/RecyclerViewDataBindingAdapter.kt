@@ -12,7 +12,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.searcharchitect.one.utility.log
+import com.searcharchitect.common.utility.log
 
 @BindingAdapter(value = ["rvItems", "rvConfig"])
 fun <ItemType, BindingType : ViewDataBinding> setupRecyclerView(

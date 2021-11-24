@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.searcharchitect.one.ui.search.ItemSearchUi" />
+            type="com.searcharchitect.common.model.ItemSearchUi" />
 
     </data>
 

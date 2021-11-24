@@ -10,11 +10,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.searcharchitect.common.utility.extension.debounce
+import com.searcharchitect.common.utility.extension.hideKeyboard
 import com.searcharchitect.one.BR
 import com.searcharchitect.one.utility.databinding.DataBindingAdapter
 import com.searcharchitect.one.utility.databinding.DataBindingRecyclerViewConfig
-import com.searcharchitect.one.utility.extension.debounce
-import com.searcharchitect.one.utility.extension.hideKeyboard
 
 abstract class BaseFragment<T : ViewDataBinding, S : BaseViewModel> : Fragment() {
 
@@ -54,7 +54,8 @@ abstract class BaseFragment<T : ViewDataBinding, S : BaseViewModel> : Fragment()
         return DataBindingRecyclerViewConfig(
             layoutId = layoutId,
             itemId = itemId,
-            realisation = object : DataBindingAdapter<T> {
+            realisation = object :
+                DataBindingAdapter<T> {
                 override fun onCreate(binding: T) {
                     onItemCreate?.invoke(binding)
                 }

@@ -4,19 +4,14 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'androidx.navigation.safeargs.kotlin'
 }
 
-apply from: '../functions.gradle'
-
 android {
-    compileSdk 31
+    compileSdkVersion buildVersions.compileSdk
 
     defaultConfig {
-        minSdk 21
-        targetSdk 31
-        versionCode 1
-        versionName "1.0"
+        minSdk buildVersions.minSdk
+        targetSdk buildVersions.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -28,10 +23,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }

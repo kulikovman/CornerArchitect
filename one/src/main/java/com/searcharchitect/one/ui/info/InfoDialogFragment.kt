@@ -10,7 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.searcharchitect.one.R
 import com.searcharchitect.one.databinding.InfoDialogFragmentBinding
-import com.searcharchitect.one.utility.extension.getAppVersion
+import com.searcharchitect.common.utility.extension.getAppVersion
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

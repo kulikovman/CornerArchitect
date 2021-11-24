@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
+import com.searcharchitect.common.model.ItemSearchUi
 import com.searcharchitect.one.BR
 import com.searcharchitect.one.R
 import com.searcharchitect.one.base.BaseFragment

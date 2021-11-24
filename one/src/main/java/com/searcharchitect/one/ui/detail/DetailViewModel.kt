@@ -1,23 +1,18 @@
 package com.searcharchitect.one.ui.detail
 
 import androidx.lifecycle.map
-import androidx.lifecycle.viewModelScope
+import com.searcharchitect.common.manager.IContactManager
+import com.searcharchitect.common.repositiry.INetworkRepository
 import com.searcharchitect.one.base.BaseViewModel
-import com.searcharchitect.one.manager.IContactManager
 import com.searcharchitect.one.navigation.INavigator
-import com.searcharchitect.one.repositiry.INetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val navigator: INavigator,
-    private val contactManager: IContactManager,
-    private val network: INetworkRepository
+    private val contactManager: IContactManager
 ) : BaseViewModel() {
-
-    //val facebookToken = contactManager.facebookToken
 
     var setProfilePhoto: ((String) -> Unit)? = null
 
@@ -36,7 +31,7 @@ class DetailViewModel @Inject constructor(
     var openLink: ((String) -> Unit)? = null
 
 
-    val contact = contactManager.getSelectedContact()
+    private val contact = contactManager.getSelectedContact()
 
     val name = contact.map {
         "${it.name}\n${it.surname}"
@@ -69,45 +64,6 @@ class DetailViewModel @Inject constructor(
     val note = contact.map { it.note }
 
     val photoLink = contact.map { it.photoLink }
-
-
-    init {
-        viewModelScope.launch {
-            //log("Before try get facebook profile info...")
-            //delay(100)
-
-            /*viewModelScope.launch {
-                delay(100)
-                network.getVkProfileInfo("valera_andreevna").either { link ->
-                    setProfilePhoto?.invoke(link)
-                }
-            }*/
-
-            /*contactManager.apply {
-                facebook.value?.let { userId ->
-                    log("Facebook user id: $userId")
-
-                    val params = Bundle()
-                    params.putString("fields", "full_picture,message")
-
-                    GraphRequest(
-                        accessToken = AccessToken.getCurrentAccessToken(),
-                        graphPath = "$userId/feed",
-                        parameters = params,
-                        httpMethod = HttpMethod.GET,
-                        callback = { response ->
-                            log("Response: $response")
-                        }
-                    ).executeAsync()
-
-                    facebookToken?.let { token ->
-                        log("Facebook token: $token")
-                        network.getFacebookProfileInfo(userId, token)
-                    }
-                }
-            }*/
-        }
-    }
 
 
     fun onClickBack() {
