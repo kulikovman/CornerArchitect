@@ -14,3 +14,6 @@
 .cxx
 local.properties
 /common/src/main/res/values/secrets.xml
+/common/google-services.json
+/one/google-services.json
+/two/google-services.json
