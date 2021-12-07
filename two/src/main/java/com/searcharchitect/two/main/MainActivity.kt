@@ -77,7 +77,7 @@ fun MessageCard(message: Message) {
                 .clip(CircleShape)
                 .border(width = 1.5.dp, color = MaterialTheme.colors.secondary, shape = CircleShape)
         )
-
+        
         Spacer(modifier = Modifier.width(8.dp))
 
         var isExpanded by remember { mutableStateOf(false) }

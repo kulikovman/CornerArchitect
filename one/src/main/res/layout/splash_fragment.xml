@@ -26,7 +26,7 @@
                 android:layout_gravity="center"
                 android:orientation="vertical"
                 app:goneIfFalse="@{vm.isUpdateChecking}"
-                tools:visibility="gone">
+                tools:visibility="visible">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                 android:layout_gravity="center"
                 android:orientation="vertical"
                 app:goneIfFalse="@{vm.isPreparation}"
-                tools:visibility="visible">
+                tools:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"

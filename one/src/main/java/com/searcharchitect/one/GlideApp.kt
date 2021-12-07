@@ -1,4 +1,4 @@
-package com.searcharchitect.common
+package com.searcharchitect.one
 
 import android.annotation.SuppressLint
 import android.content.Context
