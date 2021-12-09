@@ -8,7 +8,6 @@ import com.searcharchitect.two.screen.splash.view.SplashError
 import com.searcharchitect.two.screen.splash.view.SplashPreparation
 import com.searcharchitect.two.screen.splash.view.SplashUpdateChecking
 
-
 @Composable
 fun SplashScreen(
     navController: NavController,
