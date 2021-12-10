@@ -7,8 +7,8 @@ import javax.inject.Inject
 
 class SearchViewModel @Inject constructor() : ViewModel() {
 
-    private val _searchState = MutableLiveData<SearchState>(SearchState.Default)
-    val searchState: LiveData<SearchState> get() = _searchState
+    private val _state = MutableLiveData<SearchState>(SearchState.Default)
+    val state: LiveData<SearchState> get() = _state
 
 
 }

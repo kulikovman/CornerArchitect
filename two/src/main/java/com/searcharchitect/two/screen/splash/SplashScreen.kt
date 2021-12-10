@@ -13,7 +13,6 @@ fun SplashScreen(
     navController: NavController,
     splashViewModel: SplashViewModel
 ) {
-
     val viewState = splashViewModel.splashState.observeAsState()
 
     when (viewState.value) {
@@ -23,7 +22,8 @@ fun SplashScreen(
         SplashState.DataLoaded -> {
             // todo Переход на экран поиска
         }
-        SplashState.Error -> SplashError(splashViewModel::onClickTryAgain)
+        SplashState.Error -> SplashError(
+            onClickTryAgain = splashViewModel::onClickTryAgain
+        )
     }
-
 }

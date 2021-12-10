@@ -18,6 +18,7 @@ import com.searcharchitect.common.model.Contact
 import com.searcharchitect.two.R
 import com.searcharchitect.two.ui.theme.Gray300
 import com.searcharchitect.two.ui.theme.SearchArchitectTheme
+import com.searcharchitect.two.utility.SampleData
 
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
@@ -27,29 +28,7 @@ import com.searcharchitect.two.ui.theme.SearchArchitectTheme
 fun ItemSearchContactPreview() {
     SearchArchitectTheme {
         ItemSearchContact(
-            contact = Contact(
-                id = "001",
-                login = "35434",
-                password = "sbftb55tb",
-                surname = "Еловый",
-                name = "Иван",
-                patronymic = "",
-                region = "Челябинская область",
-                city = "Якутия",
-                specialization = "Дизайн городской среды",
-                work = "",
-                position = "",
-                email = "",
-                phone = "",
-                telegram = null,
-                instagram = null,
-                facebook = null,
-                vk = null,
-                link = null,
-                note = "",
-                previewLink = null,
-                photoLink = null
-            )
+            contact = SampleData.testContact
         )
     }
 }
