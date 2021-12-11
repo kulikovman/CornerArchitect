@@ -7,8 +7,8 @@ import javax.inject.Inject
 
 class SplashViewModel @Inject constructor() : ViewModel() {
 
-    private val _splashState = MutableLiveData<SplashState>(SplashState.UpdateChecking)
-    val splashState: LiveData<SplashState> get() = _splashState
+    private val _state = MutableLiveData<SplashState>(SplashState.UpdateChecking)
+    val splash: LiveData<SplashState> get() = _state
 
 
     fun onClickTryAgain() {

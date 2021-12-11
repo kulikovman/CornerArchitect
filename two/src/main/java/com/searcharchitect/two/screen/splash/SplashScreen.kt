@@ -13,7 +13,7 @@ fun SplashScreen(
     navController: NavController,
     splashViewModel: SplashViewModel
 ) {
-    val viewState = splashViewModel.splashState.observeAsState()
+    val viewState = splashViewModel.splash.observeAsState()
 
     when (viewState.value) {
         SplashState.UpdateChecking -> SplashUpdateChecking()

@@ -1,5 +1,6 @@
 package com.searcharchitect.two.main
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,6 +9,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -22,35 +24,48 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.searcharchitect.two.R
+import com.searcharchitect.two.navigation.nav_graph.SetupNavGraph
 import com.searcharchitect.two.ui.theme.SearchArchitectTheme
 import com.searcharchitect.two.utility.SampleData
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             SearchArchitectTheme {
-                Conversation(SampleData.conversationSample)
+                val navController = rememberNavController()
+                val systemUiController = rememberSystemUiController()
+                val isDarkTheme = isSystemInDarkTheme()
+
+                SetupNavGraph(navController)
+
+                // Set status bar color
+                /*SideEffect {
+                    systemUiController.setSystemBarsColor(
+                        color = Teal500,
+                        darkIcons = !isDarkTheme
+                    )
+                }*/
             }
         }
     }
 }
 
+
+// Test work
 @Preview(
-    showBackground = true,
-    name = "Light Mode"
-)
-/*@Preview(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
-    showBackground = true,
-    name = "Dark Mode"
-)*/
+    showBackground = true
+)
 @Composable
 fun DefaultPreview() {
     SearchArchitectTheme {
         Conversation(SampleData.conversationSample)
-
     }
 }
 
@@ -64,7 +79,6 @@ fun Conversation(messages: List<Message>) {
         }
     }
 }
-
 
 @Composable
 fun MessageCard(message: Message) {
