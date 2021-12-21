@@ -6,14 +6,18 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.searcharchitect.two.R
+import com.searcharchitect.two.screen.search.SearchState
 import com.searcharchitect.two.ui.theme.SearchArchitectTheme
 import com.searcharchitect.two.ui.theme.Teal400
 
@@ -25,7 +29,8 @@ import com.searcharchitect.two.ui.theme.Teal400
 fun SearchDefaultPreview() {
     SearchArchitectTheme {
         SearchDefault(
-            onClickInfo = {}
+            viewModelState = MutableLiveData(SearchState.StartSearch),
+            updateContactList = { l, s, n -> }
         )
     }
 }
@@ -33,8 +38,12 @@ fun SearchDefaultPreview() {
 
 @Composable
 fun SearchDefault(
-    onClickInfo: () -> Unit
+    viewModelState: LiveData<SearchState>,
+    updateContactList: (location: String, specialization: String, name: String) -> Unit
 ) {
+    val viewState = viewModelState.observeAsState()
+    val isShowInfoDialog = remember { mutableStateOf(false) }
+
     Column(modifier = Modifier.fillMaxSize()) {
         Surface(
             elevation = 4.dp,
@@ -54,7 +63,10 @@ fun SearchDefault(
 
                 TextField(
                     value = location,
-                    onValueChange = { location = it },
+                    onValueChange = {
+                        location = it
+                        updateContactList(location, specialization, name)
+                    },
                     label = { Text(stringResource(R.string.location)) },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -63,7 +75,10 @@ fun SearchDefault(
 
                 TextField(
                     value = specialization,
-                    onValueChange = { specialization = it },
+                    onValueChange = {
+                        specialization = it
+                        updateContactList(location, specialization, name)
+                    },
                     label = { Text(stringResource(R.string.specialization)) },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -72,7 +87,10 @@ fun SearchDefault(
 
                 TextField(
                     value = name,
-                    onValueChange = { name = it },
+                    onValueChange = {
+                        name = it
+                        updateContactList(location, specialization, name)
+                    },
                     label = { Text(stringResource(R.string.name)) },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -82,32 +100,26 @@ fun SearchDefault(
                 Icon(
                     imageVector = Icons.Filled.Info,
                     contentDescription = "Info icon",
-                    tint = MaterialTheme.colors.onSurface,
+                    tint = Color.White,
                     modifier = Modifier
-                        .clickable { onClickInfo.invoke() }
+                        .clickable { isShowInfoDialog.value = true }
                         .align(Alignment.End),
                 )
             }
         }
 
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.Search,
-                contentDescription = "Icon",
-                tint = MaterialTheme.colors.onSurface,
-                modifier = Modifier.size(48.dp)
-            )
+        when (val state = viewState.value) {
+            is SearchState.StartSearch -> StartTypingSearchQuery()
+            is SearchState.Loading -> SearchProgress()
+            is SearchState.Result -> SearchResult(state.contacts)
+            is SearchState.Empty -> NothingFound()
+        }
 
-            Spacer(modifier = Modifier.height(5.dp))
-
-            Text(
-                text = stringResource(R.string.start_typing_search_query),
-                color = MaterialTheme.colors.onSurface,
-                style = MaterialTheme.typography.body1
+        if (isShowInfoDialog.value) {
+            InfoDialog(
+                version = "v 2.1.5 / 3",
+                onClickEmail = {},
+                dismiss = { isShowInfoDialog.value = false }
             )
         }
     }

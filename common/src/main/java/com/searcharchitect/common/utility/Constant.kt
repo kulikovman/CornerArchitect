@@ -7,6 +7,7 @@ object Constant {
     const val VK_BASE_URL = "https://api.vk.com"
 
     const val DELIMITER = ", "
-    const val DELIMITER_LENGTH = 2
+
+    const val SEARCH_QUERY_LENGTH = 3
 
 }

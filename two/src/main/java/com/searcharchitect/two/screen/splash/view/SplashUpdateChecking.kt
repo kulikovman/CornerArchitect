@@ -9,14 +9,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.searcharchitect.two.R
 import com.searcharchitect.two.ui.theme.SearchArchitectTheme
 
 @Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    showBackground = true
+        uiMode = Configuration.UI_MODE_NIGHT_YES,
+        showBackground = true
 )
 @Composable
 fun SplashUpdateCheckingPreview() {
@@ -29,14 +30,22 @@ fun SplashUpdateCheckingPreview() {
 @Composable
 fun SplashUpdateChecking() {
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(R.string.check_update),
-            color = MaterialTheme.colors.onSurface,
-            style = MaterialTheme.typography.body1
+                text = "X.X",
+                color = MaterialTheme.colors.onSurface,
+                style = MaterialTheme.typography.h1
+        )
+
+        Spacer(modifier = Modifier.height(40.dp))
+
+        Text(
+                text = stringResource(R.string.check_update),
+                color = MaterialTheme.colors.onSurface,
+                style = MaterialTheme.typography.body1
         )
 
         Spacer(modifier = Modifier.height(20.dp))

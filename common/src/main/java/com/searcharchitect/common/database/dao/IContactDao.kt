@@ -16,7 +16,7 @@ interface IContactDao {
     fun insertContacts(contacts: List<Contact>)
 
     @Query("SELECT * FROM Contact")
-    fun getContacts(): List<Contact>
+    fun getContactList(): List<Contact>
 
     @Query("SELECT COUNT(*) FROM Contact")
     fun getNumberOfContacts(): Int

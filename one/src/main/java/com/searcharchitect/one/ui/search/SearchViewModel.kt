@@ -5,6 +5,7 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.searcharchitect.common.manager.IContactManager
 import com.searcharchitect.common.model.ItemSearchUi
+import com.searcharchitect.common.utility.Constant.SEARCH_QUERY_LENGTH
 import com.searcharchitect.common.utility.extension.combine
 import com.searcharchitect.common.utility.log
 import com.searcharchitect.one.base.BaseViewModel
@@ -95,7 +96,7 @@ class SearchViewModel @Inject constructor(
             viewModelScope.launch {
                 searchDeferred = async {
                     contactManager.getFilteredContacts(
-                        city = location.value?.trim()
+                        location = location.value?.trim()
                             .takeIf { it?.length ?: 0 >= SEARCH_QUERY_LENGTH },
                         specialization = specialization.value?.trim()
                             .takeIf { it?.length ?: 0 >= SEARCH_QUERY_LENGTH },
@@ -116,11 +117,6 @@ class SearchViewModel @Inject constructor(
 
     fun onClickInfo() {
         navigator.actionSearchToIndoDialog()
-    }
-
-
-    companion object {
-        const val SEARCH_QUERY_LENGTH = 3
     }
 
 }

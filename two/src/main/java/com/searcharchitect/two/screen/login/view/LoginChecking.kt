@@ -1,7 +1,6 @@
 package com.searcharchitect.two.screen.login.view
 
 import android.content.res.Configuration
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -24,15 +23,15 @@ import com.searcharchitect.two.ui.theme.SearchArchitectTheme
     showBackground = true
 )
 @Composable
-fun LoginLoadingPreview() {
+fun LoginCheckingPreview() {
     SearchArchitectTheme {
-        LoginLoading()
+        LoginChecking()
     }
 }
 
 
 @Composable
-fun LoginLoading() {
+fun LoginChecking() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier

@@ -23,10 +23,12 @@ interface IContactManager {
     suspend fun getDataVersion(): String
 
     fun getFilteredContacts(
-        city: String? = null,
+        location: String? = null,
         specialization: String? = null,
         name: String? = null
     ): List<ItemSearchUi>
+
+    fun getContactList(location: String?, specialization: String?, name: String?): List<Contact>
 
     fun createPasswordMap(contacts: List<Contact>)
     suspend fun isExistCorrectCredentials(): Boolean
@@ -67,7 +69,7 @@ class ContactManager @Inject constructor(
     }
 
     override suspend fun loadContactsFromDatabase() {
-        database.getContacts().let { contacts ->
+        database.getContactList().let { contacts ->
             log("Contacts in database: ${contacts.size}")
             allContacts.value = contacts
         }
@@ -86,7 +88,7 @@ class ContactManager @Inject constructor(
 
 
     override fun getFilteredContacts(
-        city: String?,
+        location: String?,
         specialization: String?,
         name: String?
     ): List<ItemSearchUi> {
@@ -100,8 +102,8 @@ class ContactManager @Inject constructor(
             )
         }
 
-        if (!city.isNullOrEmpty()) {
-            result = result?.filter { it.location.contains(city, true) }
+        if (!location.isNullOrEmpty()) {
+            result = result?.filter { it.location.contains(location, true) }
         }
 
         if (!specialization.isNullOrEmpty()) {
@@ -110,6 +112,36 @@ class ContactManager @Inject constructor(
 
         if (!name.isNullOrEmpty()) {
             result = result?.filter { it.name.contains(name, true) }
+        }
+
+        return result?.sortedBy { it.name } ?: emptyList()
+    }
+
+    override fun getContactList(
+        location: String?,
+        specialization: String?,
+        name: String?
+    ): List<Contact> {
+        var result = allContacts.value
+
+        location?.let {
+            result = result?.filter { contact ->
+                contact.city.contains(location, true)
+                        || contact.region.contains(location, true)
+            }
+        }
+
+        specialization?.let {
+            result = result?.filter { contact ->
+                contact.specialization.contains(specialization, true)
+            }
+        }
+
+        name?.let {
+            result = result?.filter { contact ->
+                contact.surname.contains(name, true)
+                        || contact.name.contains(name, true)
+            }
         }
 
         return result?.sortedBy { it.name } ?: emptyList()

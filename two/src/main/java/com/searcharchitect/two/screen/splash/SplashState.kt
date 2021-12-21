@@ -5,7 +5,9 @@ sealed class SplashState {
     object UpdateChecking : SplashState()
     object DataLoading : SplashState()
     object Preparation : SplashState()
-    object DataLoaded : SplashState()
     object Error : SplashState()
+
+    object OpenLoginScreen : SplashState()
+    object OpenSearchScreen : SplashState()
 
 }
