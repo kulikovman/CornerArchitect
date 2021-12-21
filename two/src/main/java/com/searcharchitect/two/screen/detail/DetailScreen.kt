@@ -18,9 +18,9 @@ fun DetailScreen(
 ) {
     val viewState = detailViewModel.state.observeAsState()
 
-    when (viewState.value) {
-        DetailState.Default -> DetailDefault(
-            contact = SampleData.testContact,
+    when (val state = viewState.value) {
+        is DetailState.Default -> DetailDefault(
+            contact = state.contact!!,
             onClickBack = navController::popBackStack,
             onClickPhone = {},
             onClickEmail = {},
