@@ -16,6 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.searcharchitect.common.model.Contact
 import com.searcharchitect.two.R
 import com.searcharchitect.two.screen.search.SearchState
 import com.searcharchitect.two.ui.theme.SearchArchitectTheme
@@ -30,7 +33,8 @@ fun SearchDefaultPreview() {
     SearchArchitectTheme {
         SearchDefault(
             viewModelState = MutableLiveData(SearchState.StartSearch),
-            updateContactList = { l, s, n -> }
+            updateContactList = { l, s, n -> },
+            openDetailScreen = {}
         )
     }
 }
@@ -39,7 +43,8 @@ fun SearchDefaultPreview() {
 @Composable
 fun SearchDefault(
     viewModelState: LiveData<SearchState>,
-    updateContactList: (location: String, specialization: String, name: String) -> Unit
+    updateContactList: (location: String, specialization: String, name: String) -> Unit,
+    openDetailScreen: (contact: Contact) -> Unit
 ) {
     val viewState = viewModelState.observeAsState()
     val isShowInfoDialog = remember { mutableStateOf(false) }
@@ -111,7 +116,10 @@ fun SearchDefault(
         when (val state = viewState.value) {
             is SearchState.StartSearch -> StartTypingSearchQuery()
             is SearchState.Loading -> SearchProgress()
-            is SearchState.Result -> SearchResult(state.contacts)
+            is SearchState.Result -> SearchResult(
+                contacts = state.contacts,
+                openDetailScreen = { openDetailScreen(it) }
+            )
             is SearchState.Empty -> NothingFound()
         }
 

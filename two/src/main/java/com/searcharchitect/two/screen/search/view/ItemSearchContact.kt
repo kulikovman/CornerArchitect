@@ -3,6 +3,7 @@ package com.searcharchitect.two.screen.search.view
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
@@ -13,8 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.searcharchitect.common.model.Contact
+import com.searcharchitect.common.utility.log
 import com.searcharchitect.two.R
 import com.searcharchitect.two.ui.theme.Gray300
 import com.searcharchitect.two.ui.theme.SearchArchitectTheme
@@ -28,7 +32,8 @@ import com.searcharchitect.two.utility.SampleData
 fun ItemSearchContactPreview() {
     SearchArchitectTheme {
         ItemSearchContact(
-            contact = SampleData.testContact
+            contact = SampleData.testContact,
+            openDetailScreen = {}
         )
     }
 }
@@ -36,13 +41,18 @@ fun ItemSearchContactPreview() {
 
 @Composable
 fun ItemSearchContact(
-    contact: Contact
+    contact: Contact,
+    openDetailScreen: (contact: Contact) -> Unit
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
             .padding(20.dp)
+            .clickable {
+                log("Click on ${contact.surname} ${contact.name}")
+                openDetailScreen(contact)
+            }
     ) {
         if (contact.previewLink != null) {
             Image(

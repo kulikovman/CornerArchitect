@@ -25,17 +25,6 @@ class SearchViewModel @Inject constructor(
     val state: LiveData<SearchState> get() = _state
 
 
-    /*fun onClickItemPosition(position: Int) {
-        items.value?.getOrNull(position)?.let { searchItems ->
-            contactManager.getContacts().value?.find { it.id == searchItems.id }?.let { contact ->
-                log("Selected contact: $contact")
-                contactManager.setSelectedContact(contact)
-
-                navigator.actionSearchToDetail()
-            }
-        }
-    }*/
-
     private var searchDeferred: Deferred<List<Contact>>? = null
 
     fun updateContactList(location: String, specialization: String, name: String) {
@@ -66,6 +55,10 @@ class SearchViewModel @Inject constructor(
         } else {
             changeState(SearchState.StartSearch)
         }
+    }
+
+    fun saveContact(contact: Contact) {
+        contactManager.setSelectedContact(contact)
     }
 
     private fun changeState(state: SearchState) {
