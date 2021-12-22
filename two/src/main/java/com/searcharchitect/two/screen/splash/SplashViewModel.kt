@@ -13,6 +13,7 @@ import com.searcharchitect.common.repositiry.INetworkRepository
 import com.searcharchitect.common.retrofit.Failure
 import com.searcharchitect.common.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

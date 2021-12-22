@@ -83,21 +83,21 @@ fun ItemSearchContact(
             Text(
                 text = "${contact.name} ${contact.surname}",
                 maxLines = 2,
-                color = MaterialTheme.colors.onSurface,
+                color = MaterialTheme.colors.onBackground,
                 style = MaterialTheme.typography.body1
             )
 
             Text(
                 text = contact.specialization,
                 maxLines = 3,
-                color = MaterialTheme.colors.onSurface,
+                color = MaterialTheme.colors.onBackground,
                 style = MaterialTheme.typography.body2
             )
 
             Text(
                 text = "${contact.city} / ${contact.region}",
                 maxLines = 2,
-                color = MaterialTheme.colors.onSurface,
+                color = MaterialTheme.colors.onBackground,
                 style = MaterialTheme.typography.body2
             )
         }

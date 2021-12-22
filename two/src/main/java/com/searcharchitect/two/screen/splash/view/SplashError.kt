@@ -41,6 +41,7 @@ fun SplashError(
         Icon(
             imageVector = Icons.Outlined.CloudOff,
             contentDescription = "Icon",
+            tint = MaterialTheme.colors.onBackground,
             modifier = Modifier.size(48.dp)
         )
 
