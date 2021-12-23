@@ -41,7 +41,7 @@ fun SearchResult(
     contacts: List<Contact>,
     openDetailScreen: (contact: Contact) -> Unit
 ) {
-    LazyColumn {
+    LazyColumn() {
         items(contacts) { contact ->
             ItemSearchContact(
                 contact = contact,

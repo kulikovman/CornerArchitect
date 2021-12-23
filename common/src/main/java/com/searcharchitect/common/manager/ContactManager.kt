@@ -61,7 +61,7 @@ class ContactManager @Inject constructor(
 
 
     override suspend fun isNewVersion(version: Int): Boolean {
-        return version > datastore.getCurrentDataVersion()
+        return version > datastore.getSavedDataVersion()
     }
 
     override suspend fun loadContactsFromDatabase() {
@@ -79,7 +79,7 @@ class ContactManager @Inject constructor(
     }
 
     override suspend fun getDataVersion(): String {
-        return datastore.getCurrentDataVersion().toString()
+        return datastore.getSavedDataVersion().toString()
     }
 
 
@@ -94,7 +94,7 @@ class ContactManager @Inject constructor(
                 name = "${contact.surname} ${contact.name} ${contact.patronymic.orEmpty()}".trim(),
                 location = "${contact.city} / ${contact.region}",
                 specialization = contact.specialization,
-                previewLink = contact.previewLink
+                previewLink = contact.photoPreviewLink
             )
         }
 

@@ -13,7 +13,6 @@ import com.searcharchitect.two.utility.SampleData
 
 @Composable
 fun DetailScreen(
-    navController: NavController,
     detailViewModel: DetailViewModel
 ) {
     val viewState = detailViewModel.state.observeAsState()
@@ -21,7 +20,6 @@ fun DetailScreen(
     when (val state = viewState.value) {
         is DetailState.Default -> DetailDefault(
             contact = state.contact!!,
-            onClickBack = navController::popBackStack,
             onClickPhone = {},
             onClickEmail = {},
             onClickLink = {},

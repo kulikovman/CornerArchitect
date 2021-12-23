@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.searcharchitect.common.manager.IContactManager
 import com.searcharchitect.common.model.Contact
+import com.searcharchitect.common.repositiry.IDatastoreRepository
 import com.searcharchitect.common.utility.Constant.SEARCH_QUERY_LENGTH
 import com.searcharchitect.common.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
+    private val datastore: IDatastoreRepository,
     private val contactManager: IContactManager
 ) : ViewModel() {
 
@@ -29,7 +31,7 @@ class SearchViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            dataVersion = contactManager.getDataVersion()
+            dataVersion = datastore.getSavedDataVersion().toString()
         }
     }
 

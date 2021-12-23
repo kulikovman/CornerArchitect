@@ -9,11 +9,11 @@ import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
     primary = LightBlue400,
-    primaryVariant = Amber500,
+    primaryVariant = LightBlue600,
     onPrimary = Color.White,
 
     secondary = Teal400,
-    secondaryVariant = Pink500,
+    secondaryVariant = Teal600,
     onSecondary = Color.White,
 
     background = Color(0xFF121212),
@@ -28,11 +28,11 @@ private val DarkColorPalette = darkColors(
 
 private val LightColorPalette = lightColors(
     primary = LightBlue400,
-    primaryVariant = Amber500,
+    primaryVariant = LightBlue600,
     onPrimary = Color.White,
 
     secondary = Teal400,
-    secondaryVariant = Pink500,
+    secondaryVariant = Teal600,
     onSecondary = Color.White,
 
     background = Color.White,

@@ -35,7 +35,6 @@ fun NavGraphBuilder.searchNavGraph(
         ) {
             val detailViewModel = hiltViewModel<DetailViewModel>()
             DetailScreen(
-                navController = navController,
                 detailViewModel = detailViewModel
             )
         }

@@ -25,6 +25,6 @@ data class Contact(
     val vk: String?,
     val link: String?,
     val note: String?,
-    var previewLink: String? = null,
-    var photoLink: String? = null
+    var photoPreviewLink: String? = null,
+    var photoMaxLink: String? = null
 )

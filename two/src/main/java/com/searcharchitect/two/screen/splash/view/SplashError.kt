@@ -53,14 +53,14 @@ fun SplashError(
             style = MaterialTheme.typography.body1
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(30.dp))
 
         Button(
             onClick = onClickTryAgain
         ) {
             Text(
                 text = stringResource(R.string.try_again),
-                color = MaterialTheme.colors.onSurface,
+                color = MaterialTheme.colors.onPrimary,
                 style = MaterialTheme.typography.body1
             )
         }

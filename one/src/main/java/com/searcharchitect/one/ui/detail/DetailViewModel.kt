@@ -2,7 +2,6 @@ package com.searcharchitect.one.ui.detail
 
 import androidx.lifecycle.map
 import com.searcharchitect.common.manager.IContactManager
-import com.searcharchitect.common.repositiry.INetworkRepository
 import com.searcharchitect.one.base.BaseViewModel
 import com.searcharchitect.one.navigation.INavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -63,7 +62,7 @@ class DetailViewModel @Inject constructor(
 
     val note = contact.map { it.note }
 
-    val photoLink = contact.map { it.photoLink }
+    val photoLink = contact.map { it.photoMaxLink }
 
 
     fun onClickBack() {

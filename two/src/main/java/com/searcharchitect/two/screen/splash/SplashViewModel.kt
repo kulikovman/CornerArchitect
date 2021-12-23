@@ -9,20 +9,21 @@ import com.searcharchitect.common.helper.ITextHelper
 import com.searcharchitect.common.helper.IToastHelper
 import com.searcharchitect.common.manager.IContactManager
 import com.searcharchitect.common.model.Contact
+import com.searcharchitect.common.repositiry.IDatastoreRepository
 import com.searcharchitect.common.repositiry.INetworkRepository
 import com.searcharchitect.common.retrofit.Failure
 import com.searcharchitect.common.utility.log
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-        private val contactManager: IContactManager,
-        private val network: INetworkRepository,
-        private val toast: IToastHelper,
-        private val text: ITextHelper
+    private val datastore: IDatastoreRepository,
+    private val contactManager: IContactManager,
+    private val network: INetworkRepository,
+    private val toast: IToastHelper,
+    private val text: ITextHelper
 ) : ViewModel() {
 
     private val _state = MutableLiveData<SplashState>(SplashState.UpdateChecking)
@@ -71,7 +72,10 @@ class SplashViewModel @Inject constructor(
                         loadAvatarLinks(contacts)
                         openNextScreen(contacts)
                     }
-                } else changeState(SplashState.Error)
+                } else {
+                    datastore.resetDataVersion()
+                    changeState(SplashState.Error)
+                }
             }
         }
     }
@@ -87,19 +91,21 @@ class SplashViewModel @Inject constructor(
 
     private suspend fun loadAvatarLinks(contacts: List<Contact>) {
         val domains = contacts.mapNotNull { it.vk }
-        network.getVkProfileInfoList(domains).either(::handleAvatarLoadingFailure) { profileInfoList ->
-            log("Profile info list size: ${profileInfoList.size}")
-            viewModelScope.launch {
-                profileInfoList.forEach { profileInfo ->
-                    contacts.find { it.vk == profileInfo.domain }?.apply {
-                        previewLink = profileInfo.previewLink
-                        photoLink = profileInfo.photoLink
+        network.getVkProfileInfoList(domains)
+            .either(::handleAvatarLoadingFailure) { profileInfoList ->
+                log("Profile info list size: ${profileInfoList.size}")
+                viewModelScope.launch {
+                    profileInfoList.forEach { profileInfo ->
+                        contacts.find { it.vk == profileInfo.domain }?.apply {
+                            log("Image link: ${profileInfo.photoSquarePreview} / ${profileInfo.photoSquareMax} / ${profileInfo.photoOriginal}")
+                            photoPreviewLink = profileInfo.photoSquarePreview
+                            photoMaxLink = profileInfo.photoOriginal
+                        }
                     }
                 }
             }
-        }
 
-        log("Contacts with preview links: ${contacts.filter { it.previewLink != null }.size}")
+        log("Contacts with preview links: ${contacts.filter { it.photoPreviewLink != null }.size}")
     }
 
     private fun handleCheckUpdateFailure(failure: Failure) {

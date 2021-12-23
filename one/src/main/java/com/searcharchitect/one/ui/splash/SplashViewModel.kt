@@ -102,14 +102,14 @@ class SplashViewModel @Inject constructor(
             viewModelScope.launch {
                 profileInfoList.forEach { profileInfo ->
                     contacts.find { it.vk == profileInfo.domain }?.apply {
-                        previewLink = profileInfo.previewLink
-                        photoLink = profileInfo.photoLink
+                        photoPreviewLink = profileInfo.photoSquarePreview
+                        photoMaxLink = profileInfo.photoSquareMax
                     }
                 }
             }
         }
 
-        log("Contacts with preview links: ${contacts.filter { it.previewLink != null }.size}")
+        log("Contacts with preview links: ${contacts.filter { it.photoPreviewLink != null }.size}")
     }
 
     private fun handleCheckUpdateFailure(failure: Failure) {

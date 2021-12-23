@@ -22,7 +22,7 @@ class VkRequest @Inject constructor(
         return try {
             val request = vkApi.getProfileInfo(
                 userIds = domains.joinToString(separator = ","),
-                fields = "domain,has_photo,photo_100,photo_max", // Описание полей в data классе
+                fields = "domain,has_photo,photo_100,photo_max,photo_max_orig", // Описание полей в data классе
                 accessToken = text.vkServiceKey(),
                 apiVersion = API_VERSION
             )

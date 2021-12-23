@@ -13,6 +13,7 @@ interface ISettingsDataStore {
 
     suspend fun getCurrentDataVersion(): Int
     suspend fun updateDataVersion(version: Int)
+    suspend fun resetDataVersion()
 
     suspend fun getLogin(): String?
     suspend fun getPassword(): String?
@@ -51,6 +52,10 @@ class SettingsDataStore @Inject constructor(
 
     override suspend fun updateDataVersion(version: Int) {
         storeValue(DATA_VERSION, version)
+    }
+
+    override suspend fun resetDataVersion() {
+        removeValue(DATA_VERSION)
     }
 
 
