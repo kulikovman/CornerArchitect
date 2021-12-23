@@ -2,7 +2,9 @@ package com.searcharchitect.two.screen.search
 
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
+import com.searcharchitect.common.utility.extension.getAppVersion
 import com.searcharchitect.two.navigation.Screen
 import com.searcharchitect.two.screen.search.view.SearchDefault
 
@@ -14,6 +16,8 @@ fun SearchScreen(
     SearchDefault(
         viewModelState = searchViewModel.state,
         updateContactList = searchViewModel::updateContactList,
+        appVersion = LocalContext.current.getAppVersion(true).orEmpty(),
+        dataVersion = searchViewModel.dataVersion,
         openDetailScreen = { contact ->
             searchViewModel.saveContact(contact)
             navController.navigate(Screen.Detail.route)

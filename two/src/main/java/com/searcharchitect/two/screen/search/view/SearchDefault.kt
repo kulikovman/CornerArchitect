@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.searcharchitect.common.model.Contact
+import com.searcharchitect.common.utility.extension.getAppVersion
 import com.searcharchitect.two.R
 import com.searcharchitect.two.screen.search.SearchState
 import com.searcharchitect.two.ui.common.CommonOutlinedTextField
@@ -39,6 +40,8 @@ fun SearchDefaultPreview() {
         SearchDefault(
             viewModelState = MutableLiveData(SearchState.StartSearch),
             updateContactList = { l, s, n -> },
+            appVersion = "2.1.5",
+            dataVersion = "3",
             openDetailScreen = {}
         )
     }
@@ -49,6 +52,8 @@ fun SearchDefaultPreview() {
 fun SearchDefault(
     viewModelState: LiveData<SearchState>,
     updateContactList: (location: String, specialization: String, name: String) -> Unit,
+    appVersion: String,
+    dataVersion: String,
     openDetailScreen: (contact: Contact) -> Unit
 ) {
     val viewState = viewModelState.observeAsState()
@@ -155,7 +160,7 @@ fun SearchDefault(
 
         if (isShowInfoDialog.value) {
             InfoDialog(
-                version = "v 2.1.5 / 3",
+                version = "v $appVersion / $dataVersion",
                 onClickEmail = {},
                 dismiss = { isShowInfoDialog.value = false }
             )

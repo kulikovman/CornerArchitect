@@ -8,6 +8,9 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
+// При обновлении версии нужно добавить такой же тег в последний коммит
+def prefixAppVersion = "1.0"
+
 android {
     compileSdkVersion buildVersions.compileSdk
 
@@ -15,8 +18,8 @@ android {
         applicationId "com.searcharchitect.two"
         minSdk buildVersions.minSdk
         targetSdk buildVersions.targetSdk
-        versionCode 1
-        versionName "1.0"
+        versionCode getCodeVersion()
+        versionName getNameVersion(prefixAppVersion)
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

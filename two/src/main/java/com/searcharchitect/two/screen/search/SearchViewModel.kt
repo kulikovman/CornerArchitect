@@ -24,6 +24,15 @@ class SearchViewModel @Inject constructor(
     private val _state = MutableLiveData(previousState)
     val state: LiveData<SearchState> get() = _state
 
+    var dataVersion = ""
+
+
+    init {
+        viewModelScope.launch {
+            dataVersion = contactManager.getDataVersion()
+        }
+    }
+
 
     private var searchDeferred: Deferred<List<Contact>>? = null
 

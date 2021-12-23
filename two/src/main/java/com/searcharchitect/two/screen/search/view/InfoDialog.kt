@@ -45,7 +45,9 @@ fun InfoDialog(
         onDismissRequest = { dismiss() },
         title = {
             Text(
-                text = version
+                text = version,
+                color = MaterialTheme.colors.onSurface,
+                style = MaterialTheme.typography.h6
             )
         },
         text = {
@@ -56,7 +58,7 @@ fun InfoDialog(
                     style = MaterialTheme.typography.body1
                 )
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
                     text = stringResource(R.string.psthv_email),
@@ -73,7 +75,7 @@ fun InfoDialog(
             ) {
                 Text(
                     text = stringResource(R.string.ok),
-                    color = MaterialTheme.colors.onSurface,
+                    color = MaterialTheme.colors.onPrimary,
                     style = MaterialTheme.typography.button
                 )
             }
