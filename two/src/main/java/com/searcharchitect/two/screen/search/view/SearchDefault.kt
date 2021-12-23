@@ -3,26 +3,31 @@ package com.searcharchitect.two.screen.search.view
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.LocationCity
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Work
+import androidx.compose.material.icons.outlined.Clear
+import androidx.compose.material.icons.outlined.LocationCity
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.searcharchitect.common.model.Contact
 import com.searcharchitect.two.R
 import com.searcharchitect.two.screen.search.SearchState
+import com.searcharchitect.two.ui.common.CommonOutlinedTextField
 import com.searcharchitect.two.ui.theme.SearchArchitectTheme
-import com.searcharchitect.two.ui.theme.Teal400
 
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
@@ -50,68 +55,93 @@ fun SearchDefault(
     val isShowInfoDialog = remember { mutableStateOf(false) }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Surface(
-            elevation = 4.dp,
-            color = Teal400,
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-
+                .padding(horizontal = 20.dp)
         ) {
-            Column(
+            Text(
+                text = stringResource(R.string.search_architect),
+                color = MaterialTheme.colors.onBackground,
+                style = MaterialTheme.typography.h5,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(20.dp)
-            ) {
-                var location by remember { mutableStateOf("") }
-                var specialization by remember { mutableStateOf("") }
-                var name by remember { mutableStateOf("") }
+                    .padding(top = 15.dp)
+            )
 
-                TextField(
-                    value = location,
-                    onValueChange = {
-                        location = it
-                        updateContactList(location, specialization, name)
-                    },
-                    label = { Text(stringResource(R.string.location)) },
-                    modifier = Modifier.fillMaxWidth()
-                )
+            Spacer(modifier = Modifier.width(15.dp))
 
-                Spacer(modifier = Modifier.height(20.dp))
-
-                TextField(
-                    value = specialization,
-                    onValueChange = {
-                        specialization = it
-                        updateContactList(location, specialization, name)
-                    },
-                    label = { Text(stringResource(R.string.specialization)) },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                TextField(
-                    value = name,
-                    onValueChange = {
-                        name = it
-                        updateContactList(location, specialization, name)
-                    },
-                    label = { Text(stringResource(R.string.name)) },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Icon(
-                    imageVector = Icons.Filled.Info,
-                    contentDescription = "Info icon",
-                    tint = Color.White,
-                    modifier = Modifier
-                        .clickable { isShowInfoDialog.value = true }
-                        .align(Alignment.End),
-                )
-            }
+            Icon(
+                imageVector = Icons.Filled.Info,
+                contentDescription = "Info icon",
+                tint = MaterialTheme.colors.onBackground,
+                modifier = Modifier
+                    .clickable { isShowInfoDialog.value = true }
+                    .padding(top = 20.dp)
+            )
         }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+        ) {
+            var location by remember { mutableStateOf("") }
+            var specialization by remember { mutableStateOf("") }
+            var name by remember { mutableStateOf("") }
+
+            CommonOutlinedTextField(
+                value = location,
+                onValueChange = {
+                    location = it
+                    updateContactList(location, specialization, name)
+                },
+                label = stringResource(R.string.location),
+                leadingIcon = Icons.Filled.LocationCity,
+                trailingIcon = Icons.Outlined.Clear,
+                onClickTrailingIcon = {
+                    location = ""
+                    updateContactList(location, specialization, name)
+                }
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            CommonOutlinedTextField(
+                value = specialization,
+                onValueChange = {
+                    specialization = it
+                    updateContactList(location, specialization, name)
+                },
+                label = stringResource(R.string.specialization),
+                leadingIcon = Icons.Filled.Work,
+                trailingIcon = Icons.Outlined.Clear,
+                onClickTrailingIcon = {
+                    specialization = ""
+                    updateContactList(location, specialization, name)
+                }
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            CommonOutlinedTextField(
+                value = name,
+                onValueChange = {
+                    name = it
+                    updateContactList(location, specialization, name)
+                },
+                label = stringResource(R.string.name),
+                leadingIcon = Icons.Filled.Person,
+                trailingIcon = Icons.Outlined.Clear,
+                onClickTrailingIcon = {
+                    name = ""
+                    updateContactList(location, specialization, name)
+                }
+            )
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
 
         when (val state = viewState.value) {
             is SearchState.StartSearch -> StartTypingSearchQuery()
