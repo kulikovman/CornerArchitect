@@ -2,15 +2,14 @@ package com.searcharchitect.one.ui.info
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import com.searcharchitect.common.utility.extension.getAppVersion
+import com.searcharchitect.common.utility.extension.sendEmail
 import com.searcharchitect.one.R
 import com.searcharchitect.one.databinding.InfoDialogFragmentBinding
-import com.searcharchitect.common.utility.extension.getAppVersion
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +27,7 @@ class InfoDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         viewModel.dismissDialog = ::dismiss
-        viewModel.sendEmail = ::sendEmail
+        viewModel.sendEmail = { email -> context?.sendEmail(email) }
 
         initAppVersion()
 
@@ -51,13 +50,6 @@ class InfoDialogFragment : DialogFragment() {
 
     private fun initAppVersion() {
         viewModel.appVersion.value = "v ${context?.getAppVersion(true)}"
-    }
-
-    private fun sendEmail(email: String) {
-        val uri = Uri.parse("mailto:$email")
-        val intent = Intent(Intent.ACTION_SENDTO, uri)
-
-        startActivity(Intent.createChooser(intent, null))
     }
 
 }

@@ -52,13 +52,13 @@ fun DetailDefaultPreview() {
 @Composable
 fun DetailDefault(
     contact: Contact,
-    onClickPhone: (String) -> Unit,
-    onClickEmail: (String) -> Unit,
-    onClickLink: (String) -> Unit,
-    onClickTelegram: (String) -> Unit,
-    onClickInstagram: (String) -> Unit,
-    onClickFacebook: (String) -> Unit,
-    onClickVk: (String) -> Unit
+    onClickPhone: (phone: String) -> Unit,
+    onClickEmail: (email: String) -> Unit,
+    onClickLink: (link: String) -> Unit,
+    onClickTelegram: (profileId: String) -> Unit,
+    onClickInstagram: (profileId: String) -> Unit,
+    onClickFacebook: (profileId: String) -> Unit,
+    onClickVk: (profileId: String) -> Unit
 ) {
     contact.apply {
         val scroll = rememberScrollState(0)

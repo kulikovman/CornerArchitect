@@ -42,6 +42,7 @@ fun SearchDefaultPreview() {
             updateContactList = { l, s, n -> },
             appVersion = "2.1.5",
             dataVersion = "3",
+            onClickEmail = {},
             openDetailScreen = {}
         )
     }
@@ -54,6 +55,7 @@ fun SearchDefault(
     updateContactList: (location: String, specialization: String, name: String) -> Unit,
     appVersion: String,
     dataVersion: String,
+    onClickEmail: () -> Unit,
     openDetailScreen: (contact: Contact) -> Unit
 ) {
     val viewState = viewModelState.observeAsState()
@@ -161,7 +163,7 @@ fun SearchDefault(
         if (isShowInfoDialog.value) {
             InfoDialog(
                 version = "v $appVersion / $dataVersion",
-                onClickEmail = {},
+                onClickEmail = { onClickEmail() },
                 dismiss = { isShowInfoDialog.value = false }
             )
         }

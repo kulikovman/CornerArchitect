@@ -30,9 +30,7 @@ import com.searcharchitect.two.ui.theme.SearchArchitectTheme
 fun LoginErrorPreview() {
     SearchArchitectTheme {
         LoginError(
-            onClickSignIn = { l, p ->
-
-            },
+            onClickSignIn = { l, p -> },
             onClickEmail = {}
         )
     }
@@ -42,7 +40,7 @@ fun LoginErrorPreview() {
 @Composable
 fun LoginError(
     onClickSignIn: (login: String, password: String) -> Unit,
-    onClickEmail: () -> Unit
+    onClickEmail: () -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

@@ -33,9 +33,7 @@ import com.searcharchitect.two.ui.theme.SearchArchitectTheme
 fun LoginDefaultPreview() {
     SearchArchitectTheme {
         LoginDefault(
-            onClickSignIn = { l, p ->
-
-            },
+            onClickSignIn = { l, p -> },
             onClickEmail = {}
         )
     }
@@ -45,7 +43,7 @@ fun LoginDefaultPreview() {
 @Composable
 fun LoginDefault(
     onClickSignIn: (login: String, password: String) -> Unit,
-    onClickEmail: () -> Unit
+    onClickEmail: () -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

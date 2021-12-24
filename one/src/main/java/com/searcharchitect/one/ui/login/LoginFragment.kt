@@ -1,10 +1,9 @@
 package com.searcharchitect.one.ui.login
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.searcharchitect.common.utility.extension.sendEmail
 import com.searcharchitect.one.R
 import com.searcharchitect.one.base.BaseFragment
 import com.searcharchitect.one.databinding.LoginFragmentBinding
@@ -21,14 +20,7 @@ class LoginFragment : BaseFragment<LoginFragmentBinding, LoginViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.hideKeyboard = ::hideKeyboard
-        viewModel.sendEmail = ::sendEmail
-    }
-
-    private fun sendEmail(email: String) {
-        val uri = Uri.parse("mailto:$email")
-        val intent = Intent(Intent.ACTION_SENDTO, uri)
-
-        startActivity(Intent.createChooser(intent, null))
+        viewModel.sendEmail = { email -> context?.sendEmail(email) }
     }
 
 }
