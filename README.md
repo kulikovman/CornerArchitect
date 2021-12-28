@@ -37,7 +37,7 @@ Hilt, Retrofit, Room, Datastore, Gson, Navigation, Databinding, LiveData, Compos
 ![search](https://github.com/kulikovman/CornerArchitect/blob/develop/two/screenshots/info.jpg)
 ![search](https://github.com/kulikovman/CornerArchitect/blob/develop/two/screenshots/update.jpg)
 
-Ссылка на страницу в маркете - https://play.google.com/store/apps/details?id=com.corner.searcharchitect
+Ссылка на страницу в маркете - https://play.google.com/store/apps/details?id=com.searcharchitect.two
 
 Для входа использовать:
 >user_105 / RdpgL8
