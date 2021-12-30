@@ -17,11 +17,11 @@ Hilt, Retrofit, Room, Datastore, Gson, Navigation, Databinding, LiveData, Compos
 ## Модуль ONE
 Модуль MVVM, в котором ViewModel предоставляет данные в xml макеты, через LiveData.
 
-![search](https://github.com/kulikovman/CornerArchitect/blob/develop/one/screenshots/login.jpg)
-![search](https://github.com/kulikovman/CornerArchitect/blob/develop/one/screenshots/search.jpg)
-![search](https://github.com/kulikovman/CornerArchitect/blob/develop/one/screenshots/detail.jpg)
+![search](https://github.com/kulikovman/SearchArchitect/blob/develop/one/screenshots/login.jpg)
+![search](https://github.com/kulikovman/SearchArchitect/blob/develop/one/screenshots/search.jpg)
+![search](https://github.com/kulikovman/SearchArchitect/blob/develop/one/screenshots/detail.jpg)
 
-Ссылка на страницу в маркете - https://play.google.com/store/apps/details?id=com.corner.searcharchitect
+Ссылка на apk - https://github.com/kulikovman/SearchArchitect/blob/develop/one/release/one-release.apk
 
 Для входа использовать:
 >user_105 / RdpgL8
@@ -29,11 +29,11 @@ Hilt, Retrofit, Room, Datastore, Gson, Navigation, Databinding, LiveData, Compos
 ## Модуль TWO
 Модуль MVI, в котором ViewModel предоставляет state для composoble функции, на основании которого делается отрисовка экрана.
 
-![search](https://github.com/kulikovman/CornerArchitect/blob/develop/two/screenshots/login.jpg)
-![search](https://github.com/kulikovman/CornerArchitect/blob/develop/two/screenshots/search.jpg)
-![search](https://github.com/kulikovman/CornerArchitect/blob/develop/two/screenshots/detail.jpg)
+![search](https://github.com/kulikovman/SearchArchitect/blob/develop/two/screenshots/login.jpg)
+![search](https://github.com/kulikovman/SearchArchitect/blob/develop/two/screenshots/search.jpg)
+![search](https://github.com/kulikovman/SearchArchitect/blob/develop/two/screenshots/detail.jpg)
 
-Ссылка на страницу в маркете - https://play.google.com/store/apps/details?id=com.searcharchitect.two
+Ссылка на apk - https://github.com/kulikovman/SearchArchitect/blob/develop/two/release/two-release.apk
 
 Для входа использовать:
 >user_105 / RdpgL8
