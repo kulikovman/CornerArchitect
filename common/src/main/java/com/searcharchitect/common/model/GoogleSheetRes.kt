@@ -1,17 +1,15 @@
 package com.searcharchitect.common.model
 
-import com.google.gson.annotations.SerializedName
 import com.searcharchitect.common.utility.extension.getIfExist
 import com.searcharchitect.common.utility.extension.getWithTrim
 import com.searcharchitect.common.utility.log
+import kotlinx.serialization.Serializable
 import java.util.*
 
+@Serializable
 data class GoogleSheetRes(
-    @SerializedName("range")
     var range: String,
-    @SerializedName("majorDimension")
     var majorDimension: String,
-    @SerializedName("values")
     var values: List<List<String>>
 ) {
 

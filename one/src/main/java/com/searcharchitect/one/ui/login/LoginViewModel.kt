@@ -3,9 +3,9 @@ package com.searcharchitect.one.ui.login
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import com.searcharchitect.common.utility.extension.combine
 import com.searcharchitect.common.helper.ITextHelper
 import com.searcharchitect.common.manager.ISettingsManager
+import com.searcharchitect.common.utility.extension.combine
 import com.searcharchitect.one.base.BaseViewModel
 import com.searcharchitect.one.navigation.INavigator
 import dagger.hilt.android.lifecycle.HiltViewModel

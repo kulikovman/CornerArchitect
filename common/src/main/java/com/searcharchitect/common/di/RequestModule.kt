@@ -1,6 +1,9 @@
 package com.searcharchitect.common.di
 
-import com.searcharchitect.common.retrofit.*
+import com.searcharchitect.common.retrofit.GoogleSheetsRequest
+import com.searcharchitect.common.retrofit.IGoogleSheetsRequest
+import com.searcharchitect.common.retrofit.IVkRequest
+import com.searcharchitect.common.retrofit.VkRequest
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,10 +17,6 @@ abstract class RequestModule {
     @Binds
     @ActivityRetainedScoped
     abstract fun bindGoogleSheetsRequest(googleSheetsRequest: GoogleSheetsRequest): IGoogleSheetsRequest
-
-    @Binds
-    @ActivityRetainedScoped
-    abstract fun bindFacebookRequest(facebookRequest: FacebookRequest): IFacebookRequest
 
     @Binds
     @ActivityRetainedScoped

@@ -1,7 +1,6 @@
 package com.searcharchitect.common.utility.extension
 
 import com.searcharchitect.common.utility.Constant
-import java.lang.IllegalArgumentException
 
 fun List<String>.getAsList(index: Int): List<String> {
     return get(index).trim().takeIf { it.isNotEmpty() }

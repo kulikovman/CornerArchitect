@@ -3,13 +3,13 @@ package com.searcharchitect.one.ui.splash
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.searcharchitect.common.helper.ITextHelper
+import com.searcharchitect.common.helper.IToastHelper
 import com.searcharchitect.common.manager.IArchitectsManager
+import com.searcharchitect.common.manager.ISettingsManager
 import com.searcharchitect.common.model.Contact
 import com.searcharchitect.common.repositiry.INetworkRepository
 import com.searcharchitect.common.retrofit.Failure
-import com.searcharchitect.common.helper.ITextHelper
-import com.searcharchitect.common.helper.IToastHelper
-import com.searcharchitect.common.manager.ISettingsManager
 import com.searcharchitect.common.utility.log
 import com.searcharchitect.one.base.BaseViewModel
 import com.searcharchitect.one.navigation.INavigator
@@ -58,7 +58,8 @@ class SplashViewModel @Inject constructor(
                             viewModelScope.launch {
                                 isPreparation.value = true
                                 loadAvatarLinks(contacts)
-                                architects.updateContacts(version, contacts)
+                                architects.updateContacts(contacts)
+                                settings.updateDataVersion(version)
 
                                 openNextScreen(contacts)
                                 isPreparation.value = true

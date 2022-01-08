@@ -51,7 +51,8 @@ class SplashViewModel @Inject constructor(
                             viewModelScope.launch {
                                 changeState(SplashState.Preparation)
                                 loadAvatarLinks(contacts)
-                                architects.updateContacts(version, contacts)
+                                architects.updateContacts(contacts)
+                                settings.updateDataVersion(version)
                                 openNextScreen(contacts)
                             }
                         }

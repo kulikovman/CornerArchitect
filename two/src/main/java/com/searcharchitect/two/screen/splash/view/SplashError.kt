@@ -2,9 +2,11 @@ package com.searcharchitect.two.screen.splash.view
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AccessTime
 import androidx.compose.material.icons.outlined.CloudOff
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment

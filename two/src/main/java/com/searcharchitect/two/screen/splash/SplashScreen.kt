@@ -1,9 +1,9 @@
 package com.searcharchitect.two.screen.splash
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.searcharchitect.two.navigation.Screen
 import com.searcharchitect.two.screen.splash.view.SplashDataLoading
 import com.searcharchitect.two.screen.splash.view.SplashError

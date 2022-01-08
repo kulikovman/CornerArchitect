@@ -1,31 +1,32 @@
 package com.searcharchitect.common.di
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.searcharchitect.common.BuildConfig
-import com.searcharchitect.common.di.qualifer.QFacebookRetrofit
 import com.searcharchitect.common.di.qualifer.QGoogleSheetsRetrofit
 import com.searcharchitect.common.di.qualifer.QVkRetrofit
-import com.searcharchitect.common.retrofit.api.IFacebookApi
 import com.searcharchitect.common.retrofit.api.IGoogleSheetsApi
 import com.searcharchitect.common.retrofit.api.IVkApi
-import com.searcharchitect.common.utility.Constant.FACEBOOK_BASE_URL
 import com.searcharchitect.common.utility.Constant.GOOGLE_SHEETS_BASE_URL
 import com.searcharchitect.common.utility.Constant.VK_BASE_URL
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+@ExperimentalSerializationApi
 @Module
 @InstallIn(SingletonComponent::class)
-object RetrofitModule {
+object NetworkModule {
 
     @Provides
     @Singleton
@@ -43,18 +44,20 @@ object RetrofitModule {
         return builder.build()
     }
 
-    //@ExperimentalSerializationApi
+
     @Provides
     @Singleton
     @QGoogleSheetsRetrofit
     fun provideGoogleSheetsRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        //val json = Json { ignoreUnknownKeys = true }
+        val jsonContentType = "application/json".toMediaType()
+        val json = Json {
+            ignoreUnknownKeys = true
+        }
 
         return Retrofit.Builder()
             .baseUrl(GOOGLE_SHEETS_BASE_URL)
             .client(okHttpClient)
-            //.addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(json.asConverterFactory(jsonContentType))
             .addConverterFactory(ScalarsConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
@@ -65,32 +68,20 @@ object RetrofitModule {
         return retrofit.create(IGoogleSheetsApi::class.java)
     }
 
-    @Provides
-    @Singleton
-    @QFacebookRetrofit
-    fun provideFacebookRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(FACEBOOK_BASE_URL)
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .build()
-    }
-
-    @Provides
-    fun provideFacebookApi(@QFacebookRetrofit retrofit: Retrofit): IFacebookApi {
-        return retrofit.create(IFacebookApi::class.java)
-    }
 
     @Provides
     @Singleton
     @QVkRetrofit
     fun provideVkRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        val jsonContentType = "application/json".toMediaType()
+        val json = Json {
+            ignoreUnknownKeys = true
+        }
+
         return Retrofit.Builder()
             .baseUrl(VK_BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(json.asConverterFactory(jsonContentType))
             .addConverterFactory(ScalarsConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()

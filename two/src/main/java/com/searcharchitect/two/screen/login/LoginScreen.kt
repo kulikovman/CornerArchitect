@@ -9,9 +9,9 @@ import androidx.navigation.NavController
 import com.searcharchitect.common.utility.extension.sendEmail
 import com.searcharchitect.two.R
 import com.searcharchitect.two.navigation.Screen
+import com.searcharchitect.two.screen.login.view.LoginChecking
 import com.searcharchitect.two.screen.login.view.LoginDefault
 import com.searcharchitect.two.screen.login.view.LoginError
-import com.searcharchitect.two.screen.login.view.LoginChecking
 
 @Composable
 fun LoginScreen(

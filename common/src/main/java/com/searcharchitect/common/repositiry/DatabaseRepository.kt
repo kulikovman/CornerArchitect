@@ -2,7 +2,6 @@ package com.searcharchitect.common.repositiry
 
 import com.searcharchitect.common.database.dao.IContactDao
 import com.searcharchitect.common.model.Contact
-import com.searcharchitect.common.model.ItemSearchUi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

@@ -3,7 +3,6 @@ package com.searcharchitect.common.manager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.searcharchitect.common.model.Contact
-import com.searcharchitect.common.model.ItemSearchUi
 import com.searcharchitect.common.repositiry.IDatabaseRepository
 import com.searcharchitect.common.utility.log
 import javax.inject.Inject
@@ -15,7 +14,7 @@ interface IArchitectsManager {
     fun setSelectedContact(contact: Contact)
 
     suspend fun loadContactsFromDatabase()
-    suspend fun updateContacts(version: Int, contacts: List<Contact>)
+    suspend fun updateContacts(contacts: List<Contact>)
 
     fun getFilteredContacts(
         location: String?,
@@ -54,7 +53,7 @@ class ArchitectsManager @Inject constructor(
         }
     }
 
-    override suspend fun updateContacts(version: Int, contacts: List<Contact>) {
+    override suspend fun updateContacts(contacts: List<Contact>) {
         database.removeAllContacts()
         database.addContacts(contacts)
         allContacts.value = contacts

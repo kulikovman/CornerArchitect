@@ -1,8 +1,8 @@
 package com.searcharchitect.common.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class VkContainerRes(
-    @SerializedName("response")
     var response: List<VkProfileInfoRes>
 )
