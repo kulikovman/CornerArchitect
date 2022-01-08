@@ -1,5 +1,6 @@
 package com.searcharchitect.two.screen.search
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,6 +27,15 @@ class SearchViewModel @Inject constructor(
     private val _state = MutableLiveData(previousState)
     val state: LiveData<SearchState> get() = _state
 
+    private val _location = mutableStateOf("")
+    val location = _location
+
+    private val _specialization = mutableStateOf("")
+    val specialization = _specialization
+
+    private val _name = mutableStateOf("")
+    val name = _name
+
     var dataVersion = ""
 
 
@@ -39,6 +49,8 @@ class SearchViewModel @Inject constructor(
     private var searchDeferred: Deferred<List<Contact>>? = null
 
     fun updateContactList(location: String, specialization: String, name: String) {
+        _location.value = location
+
         val isLocationQuery = location.length >= SEARCH_QUERY_LENGTH
         val isSpecializationQuery = specialization.length >= SEARCH_QUERY_LENGTH
         val isNameQuery = name.length >= SEARCH_QUERY_LENGTH
@@ -51,7 +63,8 @@ class SearchViewModel @Inject constructor(
                 searchDeferred = async {
                     contactManager.getContactList(
                         location = location.trim().takeIf { it.length >= SEARCH_QUERY_LENGTH },
-                        specialization = specialization.trim().takeIf { it.length >= SEARCH_QUERY_LENGTH },
+                        specialization = specialization.trim()
+                            .takeIf { it.length >= SEARCH_QUERY_LENGTH },
                         name = name.trim().takeIf { it.length >= SEARCH_QUERY_LENGTH }
                     )
                 }

@@ -15,19 +15,22 @@ import com.searcharchitect.two.screen.search.view.SearchDefault
 @Composable
 fun SearchScreen(
     navController: NavController,
-    searchViewModel: SearchViewModel = hiltViewModel()
+    viewModel: SearchViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
     val psthvEmail = stringResource(R.string.psthv_email)
 
     SearchDefault(
-        viewModelState = searchViewModel.state,
-        updateContactList = searchViewModel::updateContactList,
+        viewModelState = viewModel.state,
+        locationField = viewModel.location,
+        specializationField = viewModel.specialization,
+        nameField = viewModel.name,
+        updateContactList = viewModel::updateContactList,
         appVersion = context.getAppVersion(true).orEmpty(),
-        dataVersion = searchViewModel.dataVersion,
+        dataVersion = viewModel.dataVersion,
         onClickEmail = { context.sendEmail(psthvEmail) },
         openDetailScreen = { contact ->
-            searchViewModel.saveContact(contact)
+            viewModel.saveContact(contact)
             navController.navigate(Screen.Detail.route)
         }
     )

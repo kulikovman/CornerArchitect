@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.searcharchitect.common.helper.ITextHelper
 import com.searcharchitect.common.manager.IContactManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -12,8 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val contactManager: IContactManager,
-    private val text: ITextHelper
+    private val contactManager: IContactManager
 ) : ViewModel() {
 
     private var previousState: LoginState = LoginState.Default
@@ -34,10 +32,6 @@ class LoginViewModel @Inject constructor(
                 changeState(LoginState.OpenSearchScreen)
             } else changeState(LoginState.Error)
         }
-    }
-
-    fun onClickEmail() {
-
     }
 
     private fun changeState(state: LoginState) {
