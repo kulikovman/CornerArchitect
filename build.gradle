@@ -4,6 +4,12 @@ buildscript {
     apply from: 'versions.gradle'
     apply from: 'functions.gradle'
 
+    ext {
+        compose_version = '1.1.0-rc01'
+        kotlin_version = '1.5.21'
+        room_version = '2.4.0'
+    }
+
     repositories {
         google()
         mavenCentral()
@@ -11,9 +17,8 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.4'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21' // Compose work with this version
-        //classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0'
-        //classpath "org.jetbrains.kotlin:kotlin-serialization:1.5.31"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" // Compose work with this version
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
