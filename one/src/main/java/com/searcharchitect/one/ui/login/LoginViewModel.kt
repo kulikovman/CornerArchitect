@@ -3,9 +3,9 @@ package com.searcharchitect.one.ui.login
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import com.searcharchitect.common.manager.IContactManager
 import com.searcharchitect.common.utility.extension.combine
 import com.searcharchitect.common.helper.ITextHelper
+import com.searcharchitect.common.manager.ISettingsManager
 import com.searcharchitect.one.base.BaseViewModel
 import com.searcharchitect.one.navigation.INavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val navigator: INavigator,
-    private val contactManager: IContactManager,
+    private val settings: ISettingsManager,
     private val text: ITextHelper
 ) : BaseViewModel() {
 
@@ -51,9 +51,9 @@ class LoginViewModel @Inject constructor(
 
     fun onClickSignIn() {
         viewModelScope.launch {
-            if (contactManager.isCorrectCredentials(username.value!!, password.value!!)) {
+            if (settings.isCorrectCredentials(username.value!!, password.value!!)) {
                 hideKeyboard?.invoke()
-                contactManager.saveCredentials(username.value!!, password.value!!)
+                settings.saveCredentials(username.value!!, password.value!!)
                 navigator.actionLoginToSearch()
             } else {
                 isErrorVisibility.value = true

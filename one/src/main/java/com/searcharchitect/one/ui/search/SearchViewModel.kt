@@ -3,7 +3,7 @@ package com.searcharchitect.one.ui.search
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import com.searcharchitect.common.manager.IContactManager
+import com.searcharchitect.common.manager.IArchitectsManager
 import com.searcharchitect.common.model.ItemSearchUi
 import com.searcharchitect.common.utility.Constant.SEARCH_QUERY_LENGTH
 import com.searcharchitect.common.utility.extension.combine
@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val navigator: INavigator,
-    private val contactManager: IContactManager,
+    private val architects: IArchitectsManager,
 ) : BaseViewModel() {
 
     val location = MutableLiveData("")
@@ -36,7 +36,7 @@ class SearchViewModel @Inject constructor(
 
     val isNameClearButtonVisibility = name.map { it.isNotEmpty() }
 
-    val isSearchFieldsEnabled = contactManager.getContacts().map { it.isNotEmpty() }
+    val isSearchFieldsEnabled = architects.getContacts().map { it.isNotEmpty() }
 
     val isLoading = MutableLiveData(false)
 
@@ -73,9 +73,9 @@ class SearchViewModel @Inject constructor(
 
     fun onClickItemPosition(position: Int) {
         items.value?.getOrNull(position)?.let { searchItems ->
-            contactManager.getContacts().value?.find { it.id == searchItems.id }?.let { contact ->
+            architects.getContacts().value?.find { it.id == searchItems.id }?.let { contact ->
                 log("Selected contact: $contact")
-                contactManager.setSelectedContact(contact)
+                architects.setSelectedContact(contact)
 
                 navigator.actionSearchToDetail()
             }
@@ -95,13 +95,15 @@ class SearchViewModel @Inject constructor(
 
             viewModelScope.launch {
                 searchDeferred = async {
-                    contactManager.getFilteredContacts(
+                    architects.getFilteredContacts(
                         location = location.value?.trim()
                             .takeIf { it?.length ?: 0 >= SEARCH_QUERY_LENGTH },
                         specialization = specialization.value?.trim()
                             .takeIf { it?.length ?: 0 >= SEARCH_QUERY_LENGTH },
                         name = name.value?.trim().takeIf { it?.length ?: 0 >= SEARCH_QUERY_LENGTH }
-                    )
+                    ).map { contact ->
+                        contact.convertToItemSearchUi()
+                    }
                 }
 
                 val searchResult = searchDeferred!!.await()

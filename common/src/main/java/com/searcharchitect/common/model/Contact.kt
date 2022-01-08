@@ -27,4 +27,16 @@ data class Contact(
     val note: String?,
     var photoPreviewLink: String? = null,
     var photoMaxLink: String? = null
-)
+) {
+
+    fun convertToItemSearchUi(): ItemSearchUi {
+        return ItemSearchUi(
+            id = id,
+            name = "$surname $name ${patronymic.orEmpty()}".trim(),
+            location = "$city / $region",
+            specialization = specialization,
+            previewLink = photoPreviewLink
+        )
+    }
+
+}

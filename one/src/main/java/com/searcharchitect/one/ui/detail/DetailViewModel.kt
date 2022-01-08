@@ -1,7 +1,7 @@
 package com.searcharchitect.one.ui.detail
 
 import androidx.lifecycle.map
-import com.searcharchitect.common.manager.IContactManager
+import com.searcharchitect.common.manager.IArchitectsManager
 import com.searcharchitect.one.base.BaseViewModel
 import com.searcharchitect.one.navigation.INavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,7 +10,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val navigator: INavigator,
-    private val contactManager: IContactManager
+    private val architects: IArchitectsManager
 ) : BaseViewModel() {
 
     var setProfilePhoto: ((String) -> Unit)? = null
@@ -30,7 +30,7 @@ class DetailViewModel @Inject constructor(
     var openLink: ((String) -> Unit)? = null
 
 
-    private val contact = contactManager.getSelectedContact()
+    private val contact = architects.getSelectedContact()
 
     val name = contact.map {
         "${it.name}\n${it.surname}"

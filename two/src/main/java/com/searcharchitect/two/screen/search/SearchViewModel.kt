@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.searcharchitect.common.manager.IContactManager
+import com.searcharchitect.common.manager.IArchitectsManager
 import com.searcharchitect.common.model.Contact
 import com.searcharchitect.common.repositiry.IDatastoreRepository
 import com.searcharchitect.common.utility.Constant.SEARCH_QUERY_LENGTH
@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val datastore: IDatastoreRepository,
-    private val contactManager: IContactManager
+    private val architects: IArchitectsManager
 ) : ViewModel() {
 
     private var previousState: SearchState = SearchState.StartSearch
@@ -61,7 +61,7 @@ class SearchViewModel @Inject constructor(
 
             viewModelScope.launch {
                 searchDeferred = async {
-                    contactManager.getContactList(
+                    architects.getFilteredContacts(
                         location = location.trim().takeIf { it.length >= SEARCH_QUERY_LENGTH },
                         specialization = specialization.trim()
                             .takeIf { it.length >= SEARCH_QUERY_LENGTH },
@@ -82,7 +82,7 @@ class SearchViewModel @Inject constructor(
     }
 
     fun saveContact(contact: Contact) {
-        contactManager.setSelectedContact(contact)
+        architects.setSelectedContact(contact)
     }
 
     private fun changeState(state: SearchState) {

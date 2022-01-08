@@ -3,12 +3,13 @@ package com.searcharchitect.one.ui.splash
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.searcharchitect.common.manager.IContactManager
+import com.searcharchitect.common.manager.IArchitectsManager
 import com.searcharchitect.common.model.Contact
 import com.searcharchitect.common.repositiry.INetworkRepository
 import com.searcharchitect.common.retrofit.Failure
 import com.searcharchitect.common.helper.ITextHelper
 import com.searcharchitect.common.helper.IToastHelper
+import com.searcharchitect.common.manager.ISettingsManager
 import com.searcharchitect.common.utility.log
 import com.searcharchitect.one.base.BaseViewModel
 import com.searcharchitect.one.navigation.INavigator
@@ -19,7 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val navigator: INavigator,
-    private val contactManager: IContactManager,
+    private val architects: IArchitectsManager,
+    private val settings: ISettingsManager,
     private val network: INetworkRepository,
     private val toast: IToastHelper,
     private val text: ITextHelper
@@ -44,7 +46,7 @@ class SplashViewModel @Inject constructor(
             network.getDataVersion().either(::handleCheckUpdateFailure) { version ->
                 log("Data version from sheets: $version")
                 viewModelScope.launch {
-                    val isExistNewVersion = contactManager.isNewVersion(version)
+                    val isExistNewVersion = settings.isNewDataVersion(version)
                     isUpdateChecking.value = false
 
                     if (isExistNewVersion) {
@@ -56,7 +58,7 @@ class SplashViewModel @Inject constructor(
                             viewModelScope.launch {
                                 isPreparation.value = true
                                 loadAvatarLinks(contacts)
-                                contactManager.updateAppData(version, contacts)
+                                architects.updateContacts(version, contacts)
 
                                 openNextScreen(contacts)
                                 isPreparation.value = true
@@ -71,9 +73,9 @@ class SplashViewModel @Inject constructor(
     private fun getContactsFromDatabase() {
         viewModelScope.launch {
             isPreparation.value = true
-            contactManager.loadContactsFromDatabase()
+            architects.loadContactsFromDatabase()
 
-            contactManager.getContacts().value?.let { contacts ->
+            architects.getContacts().value?.let { contacts ->
                 if (contacts.isNotEmpty()) {
                     viewModelScope.launch {
                         loadAvatarLinks(contacts)
@@ -87,10 +89,10 @@ class SplashViewModel @Inject constructor(
     }
 
     private suspend fun openNextScreen(contacts: List<Contact>) {
-        contactManager.createPasswordMap(contacts)
+        settings.createPasswordMap(contacts)
 
         when {
-            contactManager.isExistCorrectCredentials() -> navigator.actionSplashToSearch()
+            settings.isExistCorrectCredentials() -> navigator.actionSplashToSearch()
             else -> navigator.actionSplashToLogin()
         }
     }
