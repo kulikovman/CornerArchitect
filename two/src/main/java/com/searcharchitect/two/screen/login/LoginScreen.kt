@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.searcharchitect.common.utility.extension.sendEmail
 import com.searcharchitect.two.R
@@ -15,7 +16,7 @@ import com.searcharchitect.two.screen.login.view.LoginChecking
 @Composable
 fun LoginScreen(
     navController: NavController,
-    loginViewModel: LoginViewModel
+    loginViewModel: LoginViewModel = hiltViewModel()
 ) {
     val viewState = loginViewModel.state.observeAsState()
 

@@ -3,6 +3,7 @@ package com.searcharchitect.two.screen.detail
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.searcharchitect.common.utility.extension.*
 import com.searcharchitect.two.screen.detail.view.DetailDefault
@@ -15,7 +16,7 @@ import com.searcharchitect.two.utility.SampleData
 
 @Composable
 fun DetailScreen(
-    detailViewModel: DetailViewModel
+    detailViewModel: DetailViewModel = hiltViewModel()
 ) {
     val viewState = detailViewModel.state.observeAsState()
 
